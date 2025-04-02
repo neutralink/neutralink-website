@@ -72,6 +72,56 @@ export default function HomePage() {
 
       </section>
 
+      {/* Nova seção: Por que escolher a NeutraLink */}
+<section className="bg-gray-100 py-20 px-6">
+  <div className="max-w-6xl mx-auto text-center">
+    <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+      Por que escolher a NeutraLink?
+    </h2>
+    <p className="text-gray-600 max-w-2xl mx-auto mb-12">
+      Somos a ponte entre sua geração solar e o mercado de créditos de carbono — com agilidade, transparência e inovação.
+    </p>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Benefício 1 */}
+      <div className="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition">
+        <div className="text-4xl mb-4">💸</div>
+        <h3 className="text-lg font-semibold text-gray-800 mb-2">Sem mensalidade</h3>
+        <p className="text-gray-600">
+          Você gera e vende seus créditos sem pagar assinatura ou taxas fixas.
+        </p>
+      </div>
+
+      {/* Benefício 2 */}
+      <div className="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition">
+        <div className="text-4xl mb-4">🔐</div>
+        <h3 className="text-lg font-semibold text-gray-800 mb-2">Transparência total</h3>
+        <p className="text-gray-600">
+          Dados verificados com IoT, validados por oráculo e registrados em blockchain.
+        </p>
+      </div>
+
+      {/* Benefício 3 */}
+      <div className="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition">
+        <div className="text-4xl mb-4">📱</div>
+        <h3 className="text-lg font-semibold text-gray-800 mb-2">Plataforma acessível</h3>
+        <p className="text-gray-600">
+          Acompanhe tudo pelo app ou web com interface simples e intuitiva.
+        </p>
+      </div>
+
+      {/* Benefício 4 */}
+      <div className="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition">
+        <div className="text-4xl mb-4">🧾</div>
+        <h3 className="text-lg font-semibold text-gray-800 mb-2">Certificação real</h3>
+        <p className="text-gray-600">
+          Créditos com rastreabilidade completa e validação por empresas reconhecidas.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
       {/* Footer */}
       <footer className="bg-neutral-900 text-white py-6 px-4 text-sm">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
