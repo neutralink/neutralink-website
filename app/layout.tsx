@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Create Ganhe Dinheiro com Créditos de Carbono Usando Sua Energia Solar | NeutraLinkNext App",
+  title: "Ganhe Dinheiro com Créditos de Carbono Usando Sua Energia Solar | NeutraLinkNext App",
 description: "Tem painel solar? Descubra como transformar sua energia gerada em créditos de carbono e ainda ganhar dinheiro ajudando o planeta. Acesse agora e conheça a NeutraLink!",
 };
 
