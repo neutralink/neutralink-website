@@ -77,7 +77,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <span>© 2025 NeutraLink. Todos os direitos reservados.</span>
           <div className="flex gap-4">
-            <a href="https://github.com/neutralinkeco" target="_blank" className="hover:underline">GitHub</a>
+            <a href="https://github.com/neutralink" target="_blank" className="hover:underline">GitHub</a>
             <a href="mailto:contact@neutralinkeco.com" className="hover:underline">Email</a>
             <a href="/termos" className="hover:underline">Termos</a>
           </div>
