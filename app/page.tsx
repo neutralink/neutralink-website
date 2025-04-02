@@ -122,6 +122,32 @@ export default function HomePage() {
   </div>
 </section>
 
+<section className="bg-neutral-900 text-white py-20 px-6">
+  <div className="max-w-4xl mx-auto text-center">
+    <h2 className="text-3xl md:text-4xl font-bold mb-6">
+      Nossa missão é tornar a sustentabilidade acessível e descentralizada.
+    </h2>
+    
+    <p className="text-lg text-gray-300 mb-8">
+      A NeutraLink nasceu para dar poder aos pequenos geradores de energia.  
+      Se você impacta positivamente o planeta, deve ser recompensado por isso.
+    </p>
+
+    <blockquote className="italic text-green-400 mb-8">
+      “Criamos a NeutraLink porque pequenos geradores também merecem acesso à certificação e ao mercado de carbono.”  
+      <span className="block text-sm mt-2 text-gray-400">— Pedro Soares, Fundador</span>
+    </blockquote>
+
+    <a
+      href="#"
+      className="inline-block bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg shadow-lg transition"
+    >
+      Comece Agora
+    </a>
+  </div>
+</section>
+
+
       {/* Footer */}
       <footer className="bg-neutral-900 text-white py-6 px-4 text-sm">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
