@@ -2,13 +2,16 @@ export default function HomePage() {
   return (
     <main className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="w-full bg-white shadow-md sticky top-0 z-50">
+      <header className="w-full bg-black shadow-md sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-xl font-bold text-green-700">NeutraLink</h1>
+          <a href="/" className="flex items-center">
+            <img src="/logo.png" alt="NeutraLink Logo" className="h-10 w-auto mr-2" />
+        
+          </a>
           <nav className="space-x-4">
-            <a href="#sobre" className="text-gray-700 hover:text-green-600">Sobre</a>
-            <a href="#como-funciona" className="text-gray-700 hover:text-green-600">Como Funciona</a>
-            <a href="#contato" className="text-gray-700 hover:text-green-600">Contato</a>
+            <a href="#sobre" className="text-white hover:text-blue-500">Sobre</a>
+            <a href="#como-funciona" className="text-white hover:text-blue-500">Como Funciona</a>
+            <a href="#contato" className="text-white hover:text-blue-500">Contato</a>
           </nav>
         </div>
       </header>
