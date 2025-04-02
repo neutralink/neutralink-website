@@ -17,15 +17,58 @@ export default function HomePage() {
 
       {/* Hero */}
       <section className="flex-1 bg-gradient-to-br from-green-100 to-white flex flex-col justify-center items-center text-center px-6 py-24">
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-          Web3 para um planeta mais limpo 🌱
-        </h2>
-        <p className="text-lg text-gray-600 max-w-2xl mb-6">
-          Tokenize sua geração solar com segurança, transparência e certificação real.
+        <div className="flex flex-col items-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+            Web3 para um planeta mais limpo 🌱
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mb-8">
+            Tokenize sua geração solar com segurança, transparência e certificação real.
+          </p>
+          <a href="#" className="bg-green-600 text-white px-6 py-3 rounded-lg shadow hover:bg-green-700 transition">
+            Comece Agora
+          </a>
+        </div>
+
+        <section id="como-funciona" className="bg-white py-20 px-6">
+  <div className="max-w-6xl mx-auto text-center">
+    <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+      Como funciona a NeutraLink
+    </h2>
+    <p className="text-gray-600 max-w-2xl mx-auto mb-12">
+      De forma simples, segura e automatizada, você transforma sua geração solar em créditos de carbono com valor real.
+    </p>
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {/* Passo 1 */}
+      <div className="bg-gray-50 rounded-xl shadow-md p-6 flex flex-col items-center text-center hover:shadow-lg transition">
+        <div className="text-4xl mb-4">🔌</div>
+        <h3 className="text-lg font-semibold text-gray-800 mb-2">Conecte seu sistema</h3>
+        <p className="text-gray-600">
+          Instale o NeutraConect para monitorar sua geração solar com segurança.
         </p>
-        <a href="#" className="bg-green-600 text-white px-6 py-3 rounded-lg shadow hover:bg-green-700 transition">
-          Comece Agora
-        </a>
+      </div>
+
+      {/* Passo 2 */}
+      <div className="bg-gray-50 rounded-xl shadow-md p-6 flex flex-col items-center text-center hover:shadow-lg transition">
+        <div className="text-4xl mb-4">🛰️</div>
+        <h3 className="text-lg font-semibold text-gray-800 mb-2">Valide os dados</h3>
+        <p className="text-gray-600">
+          Um oráculo cruza os dados com fontes externas (como irradiância) e confirma a autenticidade.
+        </p>
+      </div>
+
+      {/* Passo 3 */}
+      <div className="bg-gray-50 rounded-xl shadow-md p-6 flex flex-col items-center text-center hover:shadow-lg transition">
+        <div className="text-4xl mb-4">🌱</div>
+        <h3 className="text-lg font-semibold text-gray-800 mb-2">Receba seus créditos</h3>
+        <p className="text-gray-600">
+          Após a validação, seus créditos (NTL) são tokenizados e podem ser vendidos ou usados.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
       </section>
 
       {/* Footer */}
