@@ -19,10 +19,11 @@ export default function HomePage() {
       <section className="flex-1 bg-gradient-to-br from-green-100 to-white flex flex-col justify-center items-center text-center px-6 py-24">
         <div className="flex flex-col items-center">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-            Web3 para um planeta mais limpo 🌱
+          Você tem painel solar? Sabia que pode ganhar dinheiro com créditos de carbono?
+
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mb-8">
-            Tokenize sua geração solar com segurança, transparência e certificação real.
+          Com a NeutraLink, a energia que você já gera pode ser convertida em impacto positivo para o planeta — e em benefícios para o seu bolso.
           </p>
           <a href="#" className="bg-green-600 text-white px-6 py-3 rounded-lg shadow hover:bg-green-700 transition">
             Comece Agora
