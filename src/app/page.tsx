@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 
+
 import {
   Card,
   CardHeader,
@@ -82,129 +83,91 @@ export default function Home() {
         )}
       </header>
 
-      {/* HERO ROTATIVO COM IMAGEM DE FUNDO */}
-      <section
-        className="w-full relative h-[480px] flex items-center justify-center text-center text-white px-6 mt-16 transition-all duration-1000 ease-in-out"
-        style={{
-          backgroundImage: `url(${currentHero.image})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
+{/* HERO ROTATIVO COM IMAGEM DE FUNDO */}
+<motion.section
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 1 }}
+  className="w-full relative h-[480px] flex items-center justify-center text-center text-white px-6 mt-16"
+  style={{
+    backgroundImage: `url(${currentHero.image})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  }}
+>
+  <div className="absolute inset-0 bg-black/60 z-0" />
+  <motion.div
+    initial={{ y: 40, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ duration: 0.8, delay: 0.3 }}
+    className="relative z-10 max-w-3xl"
+  >
+    <h2 className="text-3xl sm:text-5xl font-bold mb-4">{currentHero.title}</h2>
+    <p className="text-lg text-neutral-200 mb-8">{currentHero.subtitle}</p>
+    <motion.a
+      href="#cadastro"
+      initial={{ scale: 0.95, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ duration: 0.6, delay: 0.6 }}
+      className="inline-block bg-[#00C37A] hover:bg-[#007B55] text-white font-medium px-6 py-3 rounded-lg transition"
+    >
+      {currentHero.buttonText}
+    </motion.a>
+  </motion.div>
+</motion.section>
+
+
+<section id="como-funciona" className="w-full px-6 py-20 bg-gray-50">
+  <h3 className="text-3xl font-bold text-[#007B55] text-center mb-12">Como Funciona</h3>
+  <div className="flex flex-col gap-8 max-w-5xl mx-auto">
+
+    {[
+      {
+        img: "/cards/conecte.jpg",
+        etapa: "Etapa 1",
+        titulo: "Conecte seu Inversor",
+        texto: "Instale o NeutraConect em sua usina solar. O pareamento via QR Code leva menos de 1 minuto e inicia o monitoramento automático da geração.",
+      },
+      {
+        img: "/cards/gere.jpg",
+        etapa: "Etapa 2",
+        titulo: "Gere Créditos",
+        texto: "A energia solar gerada é convertida em créditos de carbono pré-certificados com base em dados reais, validados e prontos para venda ou certificação.",
+      },
+      {
+        img: "/cards/acompanhe.jpg",
+        etapa: "Etapa 3",
+        titulo: "Acompanhe Dados",
+        texto: "Veja em tempo real o total de créditos gerados, o CO₂ evitado, o impacto ambiental e acompanhe o desempenho da sua usina pelo painel da NeutraLink.",
+      },
+      {
+        img: "/cards/venda.jpg",
+        etapa: "Etapa 4",
+        titulo: "Venda ou Certifique",
+        texto: "Você pode vender seus créditos diretamente no nosso marketplace ou optar por submetê-los à certificação internacional em pools auditáveis.",
+      },
+    ].map((card, index) => (
+      <motion.div
+        key={index}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: index * 0.15 }}
+        viewport={{ once: true }}
+        className="flex flex-col md:flex-row bg-white shadow-md rounded-lg overflow-hidden"
       >
-        <div className="absolute inset-0 bg-black/60 z-0 transition-opacity duration-1000" />
-        <div className="relative z-10 max-w-3xl transition-opacity duration-1000 ease-in-out">
-          <h2 className="text-3xl sm:text-5xl font-bold mb-4">{currentHero.title}</h2>
-          <p className="text-lg text-neutral-200 mb-8">{currentHero.subtitle}</p>
-          <a
-            href="#cadastro"
-            className="inline-block bg-[#00C37A] hover:bg-[#007B55] text-white font-medium px-6 py-3 rounded-lg transition"
-          >
-            {currentHero.buttonText}
-          </a>
+        <div className="md:w-2/5 w-full">
+          <img src={card.img} alt={card.titulo} className="h-full w-full object-cover" />
         </div>
-      </section>
-
-                   {/* COMO FUNCIONA */}
-      <section id="como-funciona" className="w-full px-6 py-20 bg-gray-50">
-        <h3 className="text-3xl font-bold text-[#007B55] text-center mb-12">Como Funciona</h3>
-        <div className="flex flex-col gap-8 max-w-5xl mx-auto">
-
-          {/* CARD 1 */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <Card className="flex flex-col md:flex-row h-full w-full">
-              <CardHeader floated={false} className="m-0 h-full w-2/5 shrink-0 rounded-r-none">
-                <img
-                  src="/cards/conecte.jpg"
-                  alt="Conecte"
-                  className="h-full w-full object-cover"
-                />
-              </CardHeader>
-              <CardBody className="p-6 md:w-3/5 w-full flex flex-col justify-center">
-                <Typography variant="small" className="mb-2 font-bold uppercase text-[#00C37A]">Etapa 1</Typography>
-                <Typography variant="h5" className="mb-2">Conecte seu Inversor</Typography>
-                <Typography className="text-neutral-600">Instale o NeutraConect em sua usina solar. O pareamento via QR Code leva menos de 1 minuto e inicia o monitoramento automático da geração.</Typography>
-              </CardBody>
-            </Card>
-          </motion.div>
-
-          {/* CARD 2 */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            <Card className="flex flex-col md:flex-row h-full w-full">
-              <CardHeader floated={false} className="m-0 h-full w-2/5 shrink-0 rounded-r-none">
-                <img
-                  src="/cards/gere.jpg"
-                  alt="Gere Créditos"
-                  className="h-full w-full object-cover"
-                />
-              </CardHeader>
-              <CardBody className="p-6 md:w-3/5 w-full flex flex-col justify-center">
-                <Typography variant="small" className="mb-2 font-bold uppercase text-[#00C37A]">Etapa 2</Typography>
-                <Typography variant="h5" className="mb-2">Gere Créditos</Typography>
-                <Typography className="text-neutral-600">A energia solar gerada é convertida em créditos de carbono pré-certificados com base em dados reais, validados e prontos para venda ou certificação.</Typography>
-              </CardBody>
-            </Card>
-          </motion.div>
-
-          {/* CARD 3 */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <Card className="flex flex-col md:flex-row h-full w-full">
-              <CardHeader floated={false} className="m-0 h-full w-2/5 shrink-0 rounded-r-none">
-                <img
-                  src="/cards/acompanhe.jpg"
-                  alt="Acompanhe Dados"
-                  className="h-full w-full object-cover"
-                />
-              </CardHeader>
-              <CardBody className="p-6 md:w-3/5 w-full flex flex-col justify-center">
-                <Typography variant="small" className="mb-2 font-bold uppercase text-[#00C37A]">Etapa 3</Typography>
-                <Typography variant="h5" className="mb-2">Acompanhe Dados</Typography>
-                <Typography className="text-neutral-600">Veja em tempo real o total de créditos gerados, o CO₂ evitado, o impacto ambiental e acompanhe o desempenho da sua usina pelo painel da NeutraLink.</Typography>
-              </CardBody>
-            </Card>
-          </motion.div>
-
-          {/* CARD 4 */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-          >
-            <Card className="flex flex-col md:flex-row h-full w-full">
-              <CardHeader floated={false} className="m-0 h-full w-2/5 shrink-0 rounded-r-none">
-                <img
-                  src="/cards/venda.jpg"
-                  alt="Venda ou Certifique"
-                  className="h-full w-full object-cover"
-                />
-              </CardHeader>
-              <CardBody className="p-6 md:w-3/5 w-full flex flex-col justify-center">
-                <Typography variant="small" className="mb-2 font-bold uppercase text-[#00C37A]">Etapa 4</Typography>
-                <Typography variant="h5" className="mb-2">Venda ou Certifique</Typography>
-                <Typography className="text-neutral-600">Você pode vender seus créditos diretamente no nosso marketplace ou optar por submetê-los à certificação internacional em pools auditáveis.</Typography>
-              </CardBody>
-            </Card>
-          </motion.div>
-
+        <div className="p-6 md:w-3/5 w-full flex flex-col justify-center">
+          <p className="text-sm font-bold uppercase text-[#00C37A] mb-2">{card.etapa}</p>
+          <h4 className="text-xl font-semibold mb-2">{card.titulo}</h4>
+          <p className="text-neutral-600">{card.texto}</p>
         </div>
-      </section>
+      </motion.div>
+    ))}
 
-
+  </div>
+</section>
 
 
 {/* CRÉDITOS DISPONÍVEIS */}
