@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { Card, CardHeader, CardBody, Typography } from "@material-tailwind/react";
+import { Card, Typography } from "@material-tailwind/react";
 
 
 export default function Home() {
