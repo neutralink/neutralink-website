@@ -120,7 +120,6 @@ export default function Home() {
 <section id="como-funciona" className="w-full px-6 py-20 bg-gray-50">
   <h3 className="text-3xl font-bold text-[#007B55] text-center mb-12">Como Funciona</h3>
   <div className="flex flex-col gap-8 max-w-5xl mx-auto">
-
     {[
       {
         img: "/cards/conecte.jpg",
@@ -165,10 +164,8 @@ export default function Home() {
         </div>
       </motion.div>
     ))}
-
   </div>
 </section>
-
 
 {/* CRÉDITOS DISPONÍVEIS */}
 <section id="creditos" className="w-full px-6 py-20 bg-white text-center">
