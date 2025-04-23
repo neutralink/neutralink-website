@@ -2,6 +2,9 @@
 
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
+import { Button } from "@material-tailwind/react";
+import { Card, CardHeader, CardBody, Typography } from "@material-tailwind/react";
+
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false)
@@ -93,61 +96,167 @@ export default function Home() {
         </div>
       </section>
 
-      {/* COMO FUNCIONA? */}
-      <section id="como-funciona" className="w-full px-6 py-20 bg-gray-50 text-center">
-  <h3 className="text-3xl font-bold text-[#007B55] mb-12">Como Funciona</h3>
-  <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
-    
-    {/* Card 1 */}
-    <div className="relative flex flex-col bg-white shadow-md rounded-lg overflow-hidden">
-      <div className="h-40 w-full overflow-hidden">
-        <Image src="/cards/conecte.jpg" alt="Conecte" width={500} height={160} className="object-cover w-full h-full" />
+                      {/* COMO FUNCIONA */}
+      <section id="como-funciona" className="w-full px-6 py-20 bg-gray-50">
+        <h3 className="text-3xl font-bold text-[#007B55] text-center mb-12">Como Funciona</h3>
+        <div className="flex flex-col gap-8 max-w-5xl mx-auto">
+
+          {/* CARD 1 */}
+          <Card className="flex flex-col md:flex-row h-full w-full">
+            <div className="md:w-2/5 w-full">
+              <img
+                src="/cards/conecte.jpg"
+                alt="Conecte"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="p-6 md:w-3/5 w-full flex flex-col justify-center">
+              <Typography variant="small" className="mb-2 font-bold uppercase text-[#00C37A]">Etapa 1</Typography>
+              <Typography variant="h5" className="mb-2">Conecte seu Inversor</Typography>
+              <Typography className="text-neutral-600">Instale o NeutraConect em sua usina solar. O pareamento via QR Code leva menos de 1 minuto e inicia o monitoramento automático da geração.</Typography>
+            </div>
+          </Card>
+
+          {/* CARD 2 */}
+          <Card className="flex flex-col md:flex-row h-full w-full">
+            <div className="md:w-2/5 w-full">
+              <img
+                src="/cards/gere.jpg"
+                alt="Gere Créditos"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="p-6 md:w-3/5 w-full flex flex-col justify-center">
+              <Typography variant="small" className="mb-2 font-bold uppercase text-[#00C37A]">Etapa 2</Typography>
+              <Typography variant="h5" className="mb-2">Gere Créditos</Typography>
+              <Typography className="text-neutral-600">A energia solar gerada é convertida em créditos de carbono pré-certificados com base em dados reais, validados e prontos para venda ou certificação.</Typography>
+            </div>
+          </Card>
+
+          {/* CARD 3 */}
+          <Card className="flex flex-col md:flex-row h-full w-full">
+            <div className="md:w-2/5 w-full">
+              <img
+                src="/cards/acompanhe.jpg"
+                alt="Acompanhe Dados"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="p-6 md:w-3/5 w-full flex flex-col justify-center">
+              <Typography variant="small" className="mb-2 font-bold uppercase text-[#00C37A]">Etapa 3</Typography>
+              <Typography variant="h5" className="mb-2">Acompanhe Dados</Typography>
+              <Typography className="text-neutral-600">Veja em tempo real o total de créditos gerados, o CO₂ evitado, o impacto ambiental e acompanhe o desempenho da sua usina pelo painel da NeutraLink.</Typography>
+            </div>
+          </Card>
+
+          {/* CARD 4 */}
+          <Card className="flex flex-col md:flex-row h-full w-full">
+            <div className="md:w-2/5 w-full">
+              <img
+                src="/cards/venda.jpg"
+                alt="Venda ou Certifique"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="p-6 md:w-3/5 w-full flex flex-col justify-center">
+              <Typography variant="small" className="mb-2 font-bold uppercase text-[#00C37A]">Etapa 4</Typography>
+              <Typography variant="h5" className="mb-2">Venda ou Certifique</Typography>
+              <Typography className="text-neutral-600">Você pode vender seus créditos diretamente no nosso marketplace ou optar por submetê-los à certificação internacional em pools auditáveis.</Typography>
+            </div>
+          </Card>
+
+        </div>
+      </section>
+
+
+
+{/* CRÉDITOS DISPONÍVEIS */}
+<section id="creditos" className="w-full px-6 py-20 bg-white text-center">
+  <h3 className="text-3xl font-bold text-[#007B55] mb-12">Créditos Disponíveis</h3>
+
+  <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2 max-w-7xl mx-auto">
+    {/* Card 1 - Palmas */}
+    <div className="flex bg-white shadow-md rounded-lg overflow-hidden">
+      <div className="w-40 h-40 flex-shrink-0">
+        <Image src="/cards/palmas.jpg" alt="Palmas" width={160} height={160} className="object-cover w-full h-full" />
       </div>
-      <div className="p-4 text-left">
-        <h5 className="text-xl font-semibold text-neutral-800 mb-2">Conecte seu Inversor</h5>
-        <p className="text-sm text-neutral-600 mb-4">Instale o NeutraConect na sua usina solar. O pareamento via QR Code leva menos de 1 minuto e inicia o monitoramento automático da geração.</p>
-        <a href="#cadastro" className="inline-block text-sm text-white bg-[#00C37A] hover:bg-[#007B55] px-4 py-2 rounded transition">Saiba mais</a>
+      <div className="flex flex-col justify-between p-4 flex-1 text-left">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">Certificado</span>
+          <Image src="/flags/br.svg" alt="Brasil" width={20} height={14} />
+        </div>
+        <p className="text-sm text-neutral-600">Verra • Palmas, Tocantins, Brasil</p>
+        <p className="text-sm text-neutral-500 mt-1">10 tCO₂e</p>
+        <p className="text-xl font-semibold text-neutral-900 mt-2">R$ 24,90 <span className="text-sm text-neutral-500">/tonelada</span></p>
+        <div className="flex gap-2 mt-4">
+          <a href="#comprar" className="bg-[#22C55E] text-white text-sm px-4 py-2 rounded hover:bg-[#16a34a] transition">Comprar</a>
+          <a href="/projeto/palmas" className="bg-white border border-[#22C55E] text-[#22C55E] text-sm px-4 py-2 rounded hover:bg-[#f0fdf4] transition">Ver Detalhes</a>
+        </div>
       </div>
     </div>
 
-    {/* Card 2 */}
-    <div className="relative flex flex-col bg-white shadow-md rounded-lg overflow-hidden">
-      <div className="h-40 w-full overflow-hidden">
-        <Image src="/cards/gere.jpg" alt="Gere créditos" width={500} height={160} className="object-cover w-full h-full" />
+    {/* Card 2 - Lisboa */}
+    <div className="flex bg-white shadow-md rounded-lg overflow-hidden">
+      <div className="w-40 h-40 flex-shrink-0">
+        <Image src="/cards/lisboa.jpg" alt="Lisboa" width={160} height={160} className="object-cover w-full h-full" />
       </div>
-      <div className="p-4 text-left">
-        <h5 className="text-xl font-semibold text-neutral-800 mb-2">Gere Créditos</h5>
-        <p className="text-sm text-neutral-600 mb-4">A energia solar gerada é convertida em créditos de carbono pré-certificados com base em dados reais, validados e prontos para venda ou certificação.</p>
-        <a href="#cadastro" className="inline-block text-sm text-white bg-[#00C37A] hover:bg-[#007B55] px-4 py-2 rounded transition">Simular</a>
-      </div>
-    </div>
-
-    {/* Card 3 */}
-    <div className="relative flex flex-col bg-white shadow-md rounded-lg overflow-hidden">
-      <div className="h-40 w-full overflow-hidden">
-        <Image src="/cards/acompanhe.jpg" alt="Acompanhe" width={500} height={160} className="object-cover w-full h-full" />
-      </div>
-      <div className="p-4 text-left">
-        <h5 className="text-xl font-semibold text-neutral-800 mb-2">Acompanhe Dados</h5>
-        <p className="text-sm text-neutral-600 mb-4">Veja em tempo real o total de créditos gerados, o CO₂ evitado, o impacto ambiental e acompanhe o desempenho da sua usina pelo painel da NeutraLink.</p>
-        <a href="#painel" className="inline-block text-sm text-white bg-[#00C37A] hover:bg-[#007B55] px-4 py-2 rounded transition">Ver painel</a>
+      <div className="flex flex-col justify-between p-4 flex-1 text-left">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">Certificado</span>
+          <Image src="/flags/pt.svg" alt="Portugal" width={20} height={14} />
+        </div>
+        <p className="text-sm text-neutral-600">Gold Standard • Lisboa, Portugal</p>
+        <p className="text-sm text-neutral-500 mt-1">8 tCO₂e</p>
+        <p className="text-xl font-semibold text-neutral-900 mt-2">€ 21,00 <span className="text-sm text-neutral-500">/tonelada</span></p>
+        <div className="flex gap-2 mt-4">
+          <a href="#comprar" className="bg-[#22C55E] text-white text-sm px-4 py-2 rounded hover:bg-[#16a34a] transition">Comprar</a>
+          <a href="/projeto/lisboa" className="bg-white border border-[#22C55E] text-[#22C55E] text-sm px-4 py-2 rounded hover:bg-[#f0fdf4] transition">Ver Detalhes</a>
+        </div>
       </div>
     </div>
 
-    {/* Card 4 */}
-    <div className="relative flex flex-col bg-white shadow-md rounded-lg overflow-hidden">
-      <div className="h-40 w-full overflow-hidden">
-        <Image src="/cards/venda.jpg" alt="Venda ou certifique" width={500} height={160} className="object-cover w-full h-full" />
+    {/* Card 3 - Luanda */}
+    <div className="flex bg-white shadow-md rounded-lg overflow-hidden">
+      <div className="w-40 h-40 flex-shrink-0">
+        <Image src="/cards/luanda.jpg" alt="Luanda" width={160} height={160} className="object-cover w-full h-full" />
       </div>
-      <div className="p-4 text-left">
-        <h5 className="text-xl font-semibold text-neutral-800 mb-2">Venda ou Certifique</h5>
-        <p className="text-sm text-neutral-600 mb-4">Você pode vender seus créditos diretamente no nosso marketplace ou optar por submetê-los à certificação internacional em pools auditáveis.</p>
-        <a href="#marketplace" className="inline-block text-sm text-white bg-[#00C37A] hover:bg-[#007B55] px-4 py-2 rounded transition">Acessar</a>
+      <div className="flex flex-col justify-between p-4 flex-1 text-left">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="bg-yellow-400 text-black text-xs font-semibold px-2 py-1 rounded">Pré-certificado</span>
+          <Image src="/flags/ao.svg" alt="Angola" width={20} height={14} />
+        </div>
+        <p className="text-sm text-neutral-600">Verra • Luanda, Angola</p>
+        <p className="text-sm text-neutral-500 mt-1">12 tCO₂e</p>
+        <p className="text-xl font-semibold text-neutral-900 mt-2">USD 17,90 <span className="text-sm text-neutral-500">/tonelada</span></p>
+        <div className="flex gap-2 mt-4">
+          <a href="#comprar" className="bg-[#22C55E] text-white text-sm px-4 py-2 rounded hover:bg-[#16a34a] transition">Comprar</a>
+          <a href="/projeto/luanda" className="bg-white border border-[#22C55E] text-[#22C55E] text-sm px-4 py-2 rounded hover:bg-[#f0fdf4] transition">Ver Detalhes</a>
+        </div>
       </div>
     </div>
 
+    {/* Card 4 - Toronto */}
+    <div className="flex bg-white shadow-md rounded-lg overflow-hidden">
+      <div className="w-40 h-40 flex-shrink-0">
+        <Image src="/cards/toronto.jpg" alt="Toronto" width={160} height={160} className="object-cover w-full h-full" />
+      </div>
+      <div className="flex flex-col justify-between p-4 flex-1 text-left">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">Certificado</span>
+          <Image src="/flags/ca.svg" alt="Canadá" width={20} height={14} />
+        </div>
+        <p className="text-sm text-neutral-600">Gold Standard • Toronto, Canadá</p>
+        <p className="text-sm text-neutral-500 mt-1">15 tCO₂e</p>
+        <p className="text-xl font-semibold text-neutral-900 mt-2">CA$ 26,75 <span className="text-sm text-neutral-500">/tonelada</span></p>
+        <div className="flex gap-2 mt-4">
+          <a href="#comprar" className="bg-[#22C55E] text-white text-sm px-4 py-2 rounded hover:bg-[#16a34a] transition">Comprar</a>
+          <a href="/projeto/toronto" className="bg-white border border-[#22C55E] text-[#22C55E] text-sm px-4 py-2 rounded hover:bg-[#f0fdf4] transition">Ver Detalhes</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+
 
       {/* RODAPÉ */}
       <footer className="w-full bg-neutral-900 text-white pt-12 px-6 mt-12">
