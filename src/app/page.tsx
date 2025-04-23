@@ -2,7 +2,6 @@
 
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { Button } from "@material-tailwind/react";
 import { Card, CardHeader, CardBody, Typography } from "@material-tailwind/react";
 
 
