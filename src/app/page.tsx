@@ -2,18 +2,7 @@
 
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-
-
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Typography
-} from "@material-tailwind/react";
-
-import { motion } from 'framer-motion';
-
-
+import { motion } from 'framer-motion'
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false)
@@ -58,7 +47,7 @@ export default function Home() {
       setMessageIndex((prev) => (prev + 1) % heroMessages.length)
     }, 6000)
     return () => clearInterval(interval)
-  }, [])
+  }, [heroMessages.length])
 
   const currentHero = heroMessages[messageIndex]
 
@@ -83,89 +72,34 @@ export default function Home() {
         )}
       </header>
 
-{/* HERO ROTATIVO COM IMAGEM DE FUNDO */}
-<motion.section
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ duration: 1 }}
-  className="w-full relative h-[480px] flex items-center justify-center text-center text-white px-6 mt-16"
-  style={{
-    backgroundImage: `url(${currentHero.image})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center'
-  }}
->
-  <div className="absolute inset-0 bg-black/60 z-0" />
-  <motion.div
-    initial={{ y: 40, opacity: 0 }}
-    animate={{ y: 0, opacity: 1 }}
-    transition={{ duration: 0.8, delay: 0.3 }}
-    className="relative z-10 max-w-3xl"
-  >
-    <h2 className="text-3xl sm:text-5xl font-bold mb-4">{currentHero.title}</h2>
-    <p className="text-lg text-neutral-200 mb-8">{currentHero.subtitle}</p>
-    <motion.a
-      href="#cadastro"
-      initial={{ scale: 0.95, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{ duration: 0.6, delay: 0.6 }}
-      className="inline-block bg-[#00C37A] hover:bg-[#007B55] text-white font-medium px-6 py-3 rounded-lg transition"
-    >
-      {currentHero.buttonText}
-    </motion.a>
-  </motion.div>
-</motion.section>
-
-
-<section id="como-funciona" className="w-full px-6 py-20 bg-gray-50">
-  <h3 className="text-3xl font-bold text-[#007B55] text-center mb-12">Como Funciona</h3>
-  <div className="flex flex-col gap-8 max-w-5xl mx-auto">
-    {[
-      {
-        img: "/cards/conecte.jpg",
-        etapa: "Etapa 1",
-        titulo: "Conecte seu Inversor",
-        texto: "Instale o NeutraConect em sua usina solar. O pareamento via QR Code leva menos de 1 minuto e inicia o monitoramento automático da geração.",
-      },
-      {
-        img: "/cards/gere.jpg",
-        etapa: "Etapa 2",
-        titulo: "Gere Créditos",
-        texto: "A energia solar gerada é convertida em créditos de carbono pré-certificados com base em dados reais, validados e prontos para venda ou certificação.",
-      },
-      {
-        img: "/cards/acompanhe.jpg",
-        etapa: "Etapa 3",
-        titulo: "Acompanhe Dados",
-        texto: "Veja em tempo real o total de créditos gerados, o CO₂ evitado, o impacto ambiental e acompanhe o desempenho da sua usina pelo painel da NeutraLink.",
-      },
-      {
-        img: "/cards/venda.jpg",
-        etapa: "Etapa 4",
-        titulo: "Venda ou Certifique",
-        texto: "Você pode vender seus créditos diretamente no nosso marketplace ou optar por submetê-los à certificação internacional em pools auditáveis.",
-      },
-    ].map((card, index) => (
-      <motion.div
-        key={index}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: index * 0.15 }}
-        viewport={{ once: true }}
-        className="flex flex-col md:flex-row bg-white shadow-md rounded-lg overflow-hidden"
+      {/* HERO */}
+      <motion.section
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="w-full relative h-[480px] flex items-center justify-center text-center text-white px-6 mt-16"
+        style={{ backgroundImage: `url(${currentHero.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
-        <div className="md:w-2/5 w-full">
-          <img src={card.img} alt={card.titulo} className="h-full w-full object-cover" />
-        </div>
-        <div className="p-6 md:w-3/5 w-full flex flex-col justify-center">
-          <p className="text-sm font-bold uppercase text-[#00C37A] mb-2">{card.etapa}</p>
-          <h4 className="text-xl font-semibold mb-2">{card.titulo}</h4>
-          <p className="text-neutral-600">{card.texto}</p>
-        </div>
-      </motion.div>
-    ))}
-  </div>
-</section>
+        <div className="absolute inset-0 bg-black/60 z-0" />
+        <motion.div
+          initial={{ y: 40, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="relative z-10 max-w-3xl"
+        >
+          <h2 className="text-3xl sm:text-5xl font-bold mb-4">{currentHero.title}</h2>
+          <p className="text-lg text-neutral-200 mb-8">{currentHero.subtitle}</p>
+          <motion.a
+            href="#cadastro"
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="inline-block bg-[#00C37A] hover:bg-[#007B55] text-white font-medium px-6 py-3 rounded-lg transition"
+          >
+            {currentHero.buttonText}
+          </motion.a>
+        </motion.div>
+      </motion.section>
 
 {/* CRÉDITOS DISPONÍVEIS */}
 <section id="creditos" className="w-full px-6 py-20 bg-white text-center">
@@ -331,6 +265,6 @@ export default function Home() {
   </div>
 </footer>
     </main>
-  )
-}
+  ) 
+}  
 
