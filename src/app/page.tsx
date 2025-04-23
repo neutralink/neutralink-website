@@ -2,7 +2,16 @@
 
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { Card, Typography } from "@material-tailwind/react";
+
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Typography
+} from "@material-tailwind/react";
+
+import { motion } from 'framer-motion';
+
 
 
 export default function Home() {
@@ -95,77 +104,106 @@ export default function Home() {
         </div>
       </section>
 
-                      {/* COMO FUNCIONA */}
+                   {/* COMO FUNCIONA */}
       <section id="como-funciona" className="w-full px-6 py-20 bg-gray-50">
         <h3 className="text-3xl font-bold text-[#007B55] text-center mb-12">Como Funciona</h3>
         <div className="flex flex-col gap-8 max-w-5xl mx-auto">
 
           {/* CARD 1 */}
-          <Card className="flex flex-col md:flex-row h-full w-full">
-            <div className="md:w-2/5 w-full">
-              <img
-                src="/cards/conecte.jpg"
-                alt="Conecte"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="p-6 md:w-3/5 w-full flex flex-col justify-center">
-              <Typography variant="small" className="mb-2 font-bold uppercase text-[#00C37A]">Etapa 1</Typography>
-              <Typography variant="h5" className="mb-2">Conecte seu Inversor</Typography>
-              <Typography className="text-neutral-600">Instale o NeutraConect em sua usina solar. O pareamento via QR Code leva menos de 1 minuto e inicia o monitoramento automático da geração.</Typography>
-            </div>
-          </Card>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <Card className="flex flex-col md:flex-row h-full w-full">
+              <CardHeader floated={false} className="m-0 h-full w-2/5 shrink-0 rounded-r-none">
+                <img
+                  src="/cards/conecte.jpg"
+                  alt="Conecte"
+                  className="h-full w-full object-cover"
+                />
+              </CardHeader>
+              <CardBody className="p-6 md:w-3/5 w-full flex flex-col justify-center">
+                <Typography variant="small" className="mb-2 font-bold uppercase text-[#00C37A]">Etapa 1</Typography>
+                <Typography variant="h5" className="mb-2">Conecte seu Inversor</Typography>
+                <Typography className="text-neutral-600">Instale o NeutraConect em sua usina solar. O pareamento via QR Code leva menos de 1 minuto e inicia o monitoramento automático da geração.</Typography>
+              </CardBody>
+            </Card>
+          </motion.div>
 
           {/* CARD 2 */}
-          <Card className="flex flex-col md:flex-row h-full w-full">
-            <div className="md:w-2/5 w-full">
-              <img
-                src="/cards/gere.jpg"
-                alt="Gere Créditos"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="p-6 md:w-3/5 w-full flex flex-col justify-center">
-              <Typography variant="small" className="mb-2 font-bold uppercase text-[#00C37A]">Etapa 2</Typography>
-              <Typography variant="h5" className="mb-2">Gere Créditos</Typography>
-              <Typography className="text-neutral-600">A energia solar gerada é convertida em créditos de carbono pré-certificados com base em dados reais, validados e prontos para venda ou certificação.</Typography>
-            </div>
-          </Card>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <Card className="flex flex-col md:flex-row h-full w-full">
+              <CardHeader floated={false} className="m-0 h-full w-2/5 shrink-0 rounded-r-none">
+                <img
+                  src="/cards/gere.jpg"
+                  alt="Gere Créditos"
+                  className="h-full w-full object-cover"
+                />
+              </CardHeader>
+              <CardBody className="p-6 md:w-3/5 w-full flex flex-col justify-center">
+                <Typography variant="small" className="mb-2 font-bold uppercase text-[#00C37A]">Etapa 2</Typography>
+                <Typography variant="h5" className="mb-2">Gere Créditos</Typography>
+                <Typography className="text-neutral-600">A energia solar gerada é convertida em créditos de carbono pré-certificados com base em dados reais, validados e prontos para venda ou certificação.</Typography>
+              </CardBody>
+            </Card>
+          </motion.div>
 
           {/* CARD 3 */}
-          <Card className="flex flex-col md:flex-row h-full w-full">
-            <div className="md:w-2/5 w-full">
-              <img
-                src="/cards/acompanhe.jpg"
-                alt="Acompanhe Dados"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="p-6 md:w-3/5 w-full flex flex-col justify-center">
-              <Typography variant="small" className="mb-2 font-bold uppercase text-[#00C37A]">Etapa 3</Typography>
-              <Typography variant="h5" className="mb-2">Acompanhe Dados</Typography>
-              <Typography className="text-neutral-600">Veja em tempo real o total de créditos gerados, o CO₂ evitado, o impacto ambiental e acompanhe o desempenho da sua usina pelo painel da NeutraLink.</Typography>
-            </div>
-          </Card>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <Card className="flex flex-col md:flex-row h-full w-full">
+              <CardHeader floated={false} className="m-0 h-full w-2/5 shrink-0 rounded-r-none">
+                <img
+                  src="/cards/acompanhe.jpg"
+                  alt="Acompanhe Dados"
+                  className="h-full w-full object-cover"
+                />
+              </CardHeader>
+              <CardBody className="p-6 md:w-3/5 w-full flex flex-col justify-center">
+                <Typography variant="small" className="mb-2 font-bold uppercase text-[#00C37A]">Etapa 3</Typography>
+                <Typography variant="h5" className="mb-2">Acompanhe Dados</Typography>
+                <Typography className="text-neutral-600">Veja em tempo real o total de créditos gerados, o CO₂ evitado, o impacto ambiental e acompanhe o desempenho da sua usina pelo painel da NeutraLink.</Typography>
+              </CardBody>
+            </Card>
+          </motion.div>
 
           {/* CARD 4 */}
-          <Card className="flex flex-col md:flex-row h-full w-full">
-            <div className="md:w-2/5 w-full">
-              <img
-                src="/cards/venda.jpg"
-                alt="Venda ou Certifique"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="p-6 md:w-3/5 w-full flex flex-col justify-center">
-              <Typography variant="small" className="mb-2 font-bold uppercase text-[#00C37A]">Etapa 4</Typography>
-              <Typography variant="h5" className="mb-2">Venda ou Certifique</Typography>
-              <Typography className="text-neutral-600">Você pode vender seus créditos diretamente no nosso marketplace ou optar por submetê-los à certificação internacional em pools auditáveis.</Typography>
-            </div>
-          </Card>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            <Card className="flex flex-col md:flex-row h-full w-full">
+              <CardHeader floated={false} className="m-0 h-full w-2/5 shrink-0 rounded-r-none">
+                <img
+                  src="/cards/venda.jpg"
+                  alt="Venda ou Certifique"
+                  className="h-full w-full object-cover"
+                />
+              </CardHeader>
+              <CardBody className="p-6 md:w-3/5 w-full flex flex-col justify-center">
+                <Typography variant="small" className="mb-2 font-bold uppercase text-[#00C37A]">Etapa 4</Typography>
+                <Typography variant="h5" className="mb-2">Venda ou Certifique</Typography>
+                <Typography className="text-neutral-600">Você pode vender seus créditos diretamente no nosso marketplace ou optar por submetê-los à certificação internacional em pools auditáveis.</Typography>
+              </CardBody>
+            </Card>
+          </motion.div>
 
         </div>
       </section>
+
 
 
 
