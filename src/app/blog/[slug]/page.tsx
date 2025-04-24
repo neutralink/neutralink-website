@@ -1,21 +1,20 @@
 // src/app/blog/[slug]/page.tsx
-'use client'
 
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import { POSTS, Post } from '../posts'
 import { Metadata } from 'next'
+import { POSTS, Post } from '../posts'
 
 interface Params {
   params: { slug: string }
 }
 
-// Gera as rotas estáticas /blog/iot-credits, /blog/carbon-trends-2025, etc.
+// 1) Gera todas as páginas estáticas /blog/slug
 export function generateStaticParams(): { slug: string }[] {
   return POSTS.map((p) => ({ slug: p.slug }))
 }
 
-// Metadata dinâmica para cada post
+// 2) Metadata dinâmica por post
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const post = POSTS.find((p) => p.slug === params.slug)
   if (!post) return { title: 'Post não encontrado' }
@@ -25,6 +24,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   }
 }
 
+// 3) Componente principal (Server Component)
 export default function PostPage({ params }: Params) {
   const post = POSTS.find((p) => p.slug === params.slug)
   if (!post) return notFound()
@@ -43,6 +43,7 @@ export default function PostPage({ params }: Params) {
         className="rounded-lg"
       />
       <div className="prose prose-neutral">
+        {/* Se tiver HTML pronto */}
         <p>{post.excerpt}</p>
       </div>
     </article>
