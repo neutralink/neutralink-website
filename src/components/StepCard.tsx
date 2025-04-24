@@ -1,23 +1,45 @@
+// src/components/StepCard.tsx
 'use client'
+
 import Image from 'next/image'
 
 interface StepCardProps {
   image: string
-  etapa: string
-  titulo: string
-  texto: string
+  step: string
+  title: string
+  description: string
+  reverse?: boolean  // se true, inverte ordem imagem/conteúdo
 }
 
-export function StepCard({ image, etapa, titulo, texto }: StepCardProps) {
+export function StepCard({
+  image,
+  step,
+  title,
+  description,
+  reverse = false,
+}: StepCardProps) {
+  // classes para inverter o flex-row se `reverse` for true
+  const containerClasses = reverse
+    ? 'lg:flex-row-reverse'
+    : 'lg:flex-row'
+
   return (
-    <div className="flex flex-col md:flex-row bg-white shadow-md rounded-lg overflow-hidden">
-      <div className="md:w-2/5 w-full">
-        <Image src={image} alt={titulo} width={640} height={480} className="h-full w-full object-cover" />
+    <div className={`max-w-full lg:max-w-4xl w-full rounded overflow-hidden shadow-lg flex flex-col ${containerClasses}`}>
+      <div className="lg:w-48 w-full h-48 lg:h-auto flex-none bg-cover">
+        <Image
+          src={image}
+          alt={title}
+          width={192}
+          height={192}
+          className="object-cover w-full h-full"
+        />
       </div>
-      <div className="p-6 md:w-3/5 w-full flex flex-col justify-center">
-        <p className="text-sm font-bold uppercase text-[#00C37A] mb-2">{etapa}</p>
-        <h4 className="text-xl font-semibold mb-2">{titulo}</h4>
-        <p className="text-neutral-600">{texto}</p>
+      <div className="border border-gray-200 lg:border-l-0 lg:border-r px-6 py-4 flex flex-col justify-between">
+        <div>
+          <p className="text-sm font-bold text-gray-600 mb-1">{step}</p>
+          <h4 className="font-bold text-xl text-gray-900 mb-2">{title}</h4>
+          <p className="text-gray-700 text-base">{description}</p>
+        </div>
       </div>
     </div>
   )
