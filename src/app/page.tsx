@@ -3,6 +3,8 @@
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { CreditCard } from '@/components/CreditCard'
+
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false)
@@ -100,6 +102,35 @@ export default function Home() {
           </motion.a>
         </motion.div>
       </motion.section>
+
+      {/* DESTAQUES DO MARKETPLACE */}
+<section className="w-full px-6 py-20 bg-gray-100 text-center">
+  <h3 className="text-3xl font-bold text-[#007B55] mb-12">Destaques do Marketplace</h3>
+
+  <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2 max-w-7xl mx-auto">
+    <CreditCard
+      title="Projeto Solar Minas"
+      location="MG, Brasil"
+      flag="/flags/br.svg"
+      image="/cards/minas.jpg"
+      volume="5 tCO₂e"
+      price="R$ 19,90"
+      certified
+      detailsUrl="/projeto/minas"
+    />
+    <CreditCard
+      title="EcoAndes"
+      location="Quito, Equador"
+      flag="/flags/ec.svg"
+      image="/cards/andes.jpg"
+      volume="6 tCO₂e"
+      price="USD 14,50"
+      certified={false}
+      detailsUrl="/projeto/andes"
+    />
+  </div>
+</section>
+
 
 {/* CRÉDITOS DISPONÍVEIS */}
 <section id="creditos" className="w-full px-6 py-20 bg-white text-center">
