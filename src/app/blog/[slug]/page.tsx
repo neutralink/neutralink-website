@@ -1,46 +1,19 @@
 // src/app/blog/[slug]/page.tsx
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import type { Metadata } from 'next'
-import { POSTS, type Post } from '../posts'  // certifique-se de ter esse arquivo
+import Link from 'next/link'
+import type { Post } from '../posts'
+import { POSTS } from '../posts'
 
 type Params = { slug: string }
 
-// 1) Gera as rotas estáticas /blog/:slug
+// 1) Gera todas as rotas estáticas /blog/:slug
 export function generateStaticParams(): Params[] {
   return POSTS.map((post) => ({ slug: post.slug }))
 }
 
-// 2) Gera o <head> dinâmico para cada post
-export async function generateMetadata({
-  params,
-}: {
-  params: Params
-}): Promise<Metadata> {
-  const post = POSTS.find((p) => p.slug === params.slug)
-  if (!post) {
-    return {
-      title: '404 • Blog NeutraLink',
-      description: 'Post não encontrado',
-    }
-  }
-  return {
-    title: `${post.title} • Blog NeutraLink`,
-    description: post.excerpt,
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      images: [post.coverImage],
-    },
-  }
-}
-
-// 3) Página do post
-export default function BlogPostPage({
-  params,
-}: {
-  params: Params
-}) {
+// 2) A página em si
+export default function Page({ params }: { params: Params }) {
   const post: Post | undefined = POSTS.find((p) => p.slug === params.slug)
   if (!post) {
     notFound()
@@ -48,13 +21,10 @@ export default function BlogPostPage({
 
   return (
     <article className="min-h-screen bg-white text-neutral-900 px-6 py-16 max-w-3xl mx-auto">
-      {/* Título e data */}
+      {/* Header do post */}
       <header className="mb-8">
         <h1 className="text-4xl font-bold mb-2">{post.title}</h1>
-        <time
-          dateTime={post.date}
-          className="text-sm text-neutral-500"
-        >
+        <time dateTime={post.date} className="text-sm text-neutral-500">
           {new Date(post.date).toLocaleDateString('pt-BR')}
         </time>
       </header>
@@ -69,11 +39,18 @@ export default function BlogPostPage({
         priority
       />
 
-      {/* Conteúdo do post */}
-      <div className="prose prose-neutral">
-        {/* Se quiser conteúdo HTML rico, use post.excerptHtml */}
+      {/* Excerpt */}
+      <div className="prose prose-neutral mb-12">
         <p>{post.excerpt}</p>
       </div>
+
+      {/* Link de volta ao index do blog */}
+      <Link
+        href="/blog"
+        className="inline-block text-green-600 hover:underline font-medium"
+      >
+        ← Voltar ao Blog
+      </Link>
     </article>
   )
 }

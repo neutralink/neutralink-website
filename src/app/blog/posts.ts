@@ -4,7 +4,6 @@ export interface Post {
   slug: string
   title: string
   excerpt: string
-  excerptHtml?: string
   coverImage: string
   date: string
 }
