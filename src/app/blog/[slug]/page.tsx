@@ -2,52 +2,52 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import { POSTS } from '../posts'
+import { POSTS, type Post } from '../posts'
 
-type Params = { slug: string }
+interface Params {
+  slug: string
+}
 
-// Gera as rotas estáticas /blog/:slug
+// Gera todas as rotas estáticas /blog/:slug
 export function generateStaticParams(): Params[] {
   return POSTS.map((post) => ({ slug: post.slug }))
 }
 
-// A própria página, marcada como async para casar com a tipagem do Next.js
-export default async function Page({ params }: { params: Params }) {
+// Componente de página (Server Component — NÃO coloca "use client" aqui)
+export default function BlogPostPage({ params }: { params: Params }) {
+  // Busca o post pelo slug  
   const post = POSTS.find((p) => p.slug === params.slug)
-  if (!post) notFound()
+  if (!post) {
+    // Se não achar, lança 404  
+    notFound()
+  }
 
   return (
-    <article className="min-h-screen bg-white text-neutral-900 px-6 py-16 max-w-3xl mx-auto">
-      {/* Título e data */}
-      <header className="mb-8">
-        <h1 className="text-4xl font-bold mb-2">{post.title}</h1>
-        <time dateTime={post.date} className="text-sm text-neutral-500">
-          {new Date(post.date).toLocaleDateString('pt-BR')}
-        </time>
-      </header>
-
-      {/* Imagem de capa */}
+    <article className="prose mx-auto my-12 px-6">
+      <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
       <Image
         src={post.coverImage}
         alt={post.title}
         width={800}
         height={400}
-        className="w-full rounded-lg mb-8 object-cover"
-        priority
+        className="w-full rounded-md mb-4"
       />
-
-      {/* Trecho / conteúdo */}
-      <div className="prose prose-neutral mb-12">
-        <p>{post.excerpt}</p>
+      <time className="text-sm text-neutral-500 block mb-6">
+        {new Date(post.date).toLocaleDateString('pt-BR', {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+        })}
+      </time>
+      <p className="leading-relaxed">{post.excerpt}</p>
+      <div className="mt-8">
+        <Link
+          href="/blog"
+          className="text-[#00C37A] hover:underline"
+        >
+          ← Voltar ao blog
+        </Link>
       </div>
-
-      {/* Link de volta */}
-      <Link
-        href="/blog"
-        className="inline-block text-green-600 hover:underline font-medium"
-      >
-        ← Voltar ao Blog
-      </Link>
     </article>
   )
 }
