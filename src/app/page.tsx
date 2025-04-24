@@ -203,6 +203,42 @@ export default function Home() {
 
       {/* RECURSOS E VANTAGENS */}
       <FeaturesSection />
+      
+      {/* CALL TO ACTION */}
+<section
+  id="cta"
+  className="relative w-full h-64 sm:h-80 bg-cover bg-center"
+  style={{
+    backgroundImage:
+      "url('https://images.unsplash.com/photo-1567667026108-33531d4258a0?auto=format&fit=crop&w=1350&q=80')",
+  }}
+>
+  {/* overlay escuro */}
+  <div className="absolute inset-0 bg-black/100" />
+  <div className="relative z-10 max-w-3xl mx-auto h-full flex flex-col items-center justify-center text-center px-4">
+    <h2 className="text-2xl sm:text-4xl font-extrabold text-white mb-4">
+      Pronto para transformar sua energia em valor real?
+    </h2>
+    <p className="text-white/90 mb-6">
+      Cadastre-se Gratuitamente ou Solicite uma Demonstração.
+    </p>
+    <div className="flex flex-col sm:flex-row gap-4">
+      <a
+        href="/cadastro"
+        className="bg-[#00C37A] hover:bg-[#007B55] text-white font-medium px-6 py-3 rounded-lg transition"
+      >
+        Cadastre-se Gratuitamente
+      </a>
+      <a
+        href="/demo"
+        className="border border-white hover:bg-white hover:text-black text-white font-medium px-6 py-3 rounded-lg transition"
+      >
+        Solicitar Demonstração
+      </a>
+    </div>
+  </div>
+</section>
+
 
       {/* RODAPÉ */}
       <footer className="bg-neutral-900 text-white pt-12 px-6">
