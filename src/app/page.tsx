@@ -65,15 +65,20 @@ export default function Home() {
           alt="NeutraLink"
           width={180}
           height={54}
-          quality={100}
           className="h-12 w-auto"
           priority
         />
         {!isMobile ? (
           <nav className="space-x-6 text-sm">
-            <a href="#como-funciona" className="hover:text-[#00C37A]">Como Funciona</a>
-            <a href="#marketplace" className="hover:text-[#00C37A]">Marketplace</a>
-            <a href="#contato" className="hover:text-[#00C37A]">Contato</a>
+            <a href="#como-funciona" className="hover:text-[#00C37A]">
+              Como Funciona
+            </a>
+            <a href="#marketplace" className="hover:text-[#00C37A]">
+              Marketplace
+            </a>
+            <a href="#contato" className="hover:text-[#00C37A]">
+              Contato
+            </a>
           </nav>
         ) : (
           <a
@@ -90,18 +95,22 @@ export default function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="mt-16 h-[480px] w-full flex items-center justify-center text-white px-6 relative bg-cover bg-center"
+        className="mt-0 h-[480px] w-full flex items-center justify-center text-white px-6 relative bg-cover bg-center"
         style={{ backgroundImage: `url(${currentHero.image})` }}
       >
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-black/30" />
         <motion.div
           className="relative z-10 text-center max-w-3xl"
           initial={{ y: 40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <h1 className="text-3xl sm:text-5xl font-bold mb-4">{currentHero.title}</h1>
-          <p className="text-lg text-neutral-200 mb-8">{currentHero.subtitle}</p>
+          <h1 className="text-3xl sm:text-5xl font-bold mb-4">
+            {currentHero.title}
+          </h1>
+          <p className="text-lg text-neutral-200 mb-8">
+            {currentHero.subtitle}
+          </p>
           <motion.a
             href="#cadastro"
             className="inline-block bg-[#00C37A] hover:bg-[#007B55] px-6 py-3 rounded-lg text-white font-medium"
@@ -203,92 +212,40 @@ export default function Home() {
 
       {/* RECURSOS E VANTAGENS */}
       <FeaturesSection />
-      
+
       {/* CALL TO ACTION */}
-<section
-  id="cta"
-  className="relative w-full h-64 sm:h-80 bg-cover bg-center"
-  style={{
-    backgroundImage:
-      "url('https://images.unsplash.com/photo-1567667026108-33531d4258a0?auto=format&fit=crop&w=1350&q=80')",
-  }}
->
-  {/* overlay escuro */}
-  <div className="absolute inset-0 bg-black/100" />
-  <div className="relative z-10 max-w-3xl mx-auto h-full flex flex-col items-center justify-center text-center px-4">
-    <h2 className="text-2xl sm:text-4xl font-extrabold text-white mb-4">
-      Pronto para transformar sua energia em valor real?
-    </h2>
-    <p className="text-white/90 mb-6">
-      Cadastre-se Gratuitamente ou Solicite uma Demonstração.
-    </p>
-    <div className="flex flex-col sm:flex-row gap-4">
-      <a
-        href="/cadastro"
-        className="bg-[#00C37A] hover:bg-[#007B55] text-white font-medium px-6 py-3 rounded-lg transition"
+      <section
+        id="cta"
+        className="relative w-full h-64 sm:h-80 bg-cover bg-center"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1567667026108-33531d4258a0?auto=format&fit=crop&w=1350&q=80')",
+        }}
       >
-        Cadastre-se Gratuitamente
-      </a>
-      <a
-        href="/demo"
-        className="border border-white hover:bg-white hover:text-black text-white font-medium px-6 py-3 rounded-lg transition"
-      >
-        Solicitar Demonstração
-      </a>
-    </div>
-  </div>
-</section>
-
-
-      {/* RODAPÉ */}
-      <footer className="bg-neutral-900 text-white pt-12 px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
-          <div>
-            <Image src="/logo-footer.svg" alt="NeutraLink" width={160} height={48} className="mb-4" />
-            <p className="text-sm text-neutral-400">
-              Democratizamos o mercado voluntário de carbono com tecnologia, segurança e rastreabilidade.
-            </p>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-4">Navegação</h4>
-            <ul className="space-y-2 text-sm text-neutral-300">
-              <li><a href="#como-funciona" className="hover:text-[#00C37A]">Como Funciona</a></li>
-              <li><a href="#marketplace" className="hover:text-[#00C37A]">Marketplace</a></li>
-              <li><a href="#contato" className="hover:text-[#00C37A]">Contato</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-4">Conformidade</h4>
-            <ul className="space-y-2 text-sm text-neutral-300">
-              <li>LGPD</li>
-              <li>GHG Protocol</li>
-              <li>Verra & Gold Standard</li>
-              <li><a href="/termos" className="hover:text-[#00C37A]">Termos de Uso</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-4">Marketplace</h4>
-            <ul className="space-y-2 text-sm text-neutral-300">
-              <li><a href="/marketplace" className="hover:text-[#00C37A]">Ver Créditos</a></li>
-              <li><a href="/simulador" className="hover:text-[#00C37A]">Simular Compra</a></li>
-              <li><a href="/vender" className="hover:text-[#00C37A]">Vender Créditos</a></li>
-            </ul>
+        <div className="absolute inset-0 bg-black/90" />
+        <div className="relative z-10 max-w-3xl mx-auto h-full flex flex-col items-center justify-center text-center px-4">
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-white mb-4">
+            Pronto para transformar sua energia em valor real?
+          </h2>
+          <p className="text-white/90 mb-6">
+            Cadastre-se Gratuitamente ou Solicite uma Demonstração.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a
+              href="/cadastro"
+              className="bg-[#00C37A] hover:bg-[#007B55] text-white font-medium px-6 py-3 rounded-lg transition"
+            >
+              Cadastre-se Gratuitamente
+            </a>
+            <a
+              href="/demo"
+              className="border border-white hover:bg-white hover:text-black text-white font-medium px-6 py-3 rounded-lg transition"
+            >
+              Solicitar Demonstração
+            </a>
           </div>
         </div>
-        <div className="mt-12 border-t border-neutral-800 pt-8 text-center">
-          <h5 className="text-sm text-neutral-400 mb-4">Formas de Pagamento</h5>
-          <div className="flex justify-center items-center gap-6">
-            <Image src="/icons/visa.svg" alt="Visa" width={40} height={40} />
-            <Image src="/icons/mastercard.svg" alt="Mastercard" width={40} height={40} />
-            <Image src="/icons/pix.svg" alt="Pix" width={40} height={40} />
-            <Image src="/icons/paypal.svg" alt="PayPal" width={40} height={40} />
-          </div>
-        </div>
-        <div className="mt-6 text-center text-xs text-neutral-500 border-t border-neutral-800 pt-6">
-          NeutraLink S.A. • CNPJ 00.000.000/0001-00 • Palmas – TO, Brasil<br />
-          © {new Date().getFullYear()} Todos os direitos reservados.
-        </div>
-      </footer>
+      </section>
     </main>
   )
 }
