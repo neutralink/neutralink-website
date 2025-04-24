@@ -7,7 +7,7 @@ import { POSTS } from '../posts'
 
 type Params = { slug: string }
 
-// 1) Gera todas as rotas estáticas /blog/:slug
+// 1) Gera todas as rotas estáticas /blog/:slug kji
 export function generateStaticParams(): Params[] {
   return POSTS.map((post) => ({ slug: post.slug }))
 }
