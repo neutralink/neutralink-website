@@ -1,14 +1,14 @@
 // src/app/blog/page.tsx
 import Link from 'next/link'
 import Image from 'next/image'
-import { POSTS, Post } from './posts'
+import { POSTS } from './posts'
 
 export default function BlogIndexPage() {
   return (
     <>
       <h1 className="text-4xl font-extrabold mb-12">Blog NeutraLink</h1>
       <div className="grid gap-8 md:grid-cols-2">
-        {POSTS.map((post: Post) => (
+        {POSTS.map((post) => (
           <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
