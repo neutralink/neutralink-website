@@ -4,7 +4,13 @@ import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { CreditCard } from '@/components/CreditCard'
+import { StepCard } from '@/components/StepCard'
 
+const steps = [
+  { image: '/cards/conecte.jpg', etapa: 'Etapa 1', titulo: 'Conecte seu Inversor', texto: '…' },
+  { image: '/cards/gere.jpg',    etapa: 'Etapa 2', titulo: 'Gere Créditos',        texto: '…' },
+  // …
+]
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false)
@@ -103,31 +109,88 @@ export default function Home() {
         </motion.div>
       </motion.section>
 
+
+{/* ============================
+   SEÇÃO “COMO FUNCIONA” ATUALIZADA
+============================ */}
+<section id="como-funciona" className="w-full px-6 py-20 bg-gray-50">
+  <h3 className="text-3xl font-bold text-[#007B55] text-center mb-12">
+    Como Funciona
+  </h3>
+
+  <div className="flex flex-col gap-8 max-w-5xl mx-auto">
+    {[
+      {
+        image: "/cards/conecte.jpg",
+        etapa: "Etapa 1",
+        titulo: "Conecte seu Inversor",
+        texto:
+          "Instale o NeutraConect em sua usina solar. O pareamento via QR Code leva menos de 1 minuto e inicia o monitoramento automático da geração.",
+      },
+      {
+        image: "/cards/gere.jpg",
+        etapa: "Etapa 2",
+        titulo: "Gere Créditos",
+        texto:
+          "A energia solar gerada é convertida em créditos de carbono pré-certificados com base em dados reais, validados e prontos para venda ou certificação.",
+      },
+      {
+        image: "/cards/acompanhe.jpg",
+        etapa: "Etapa 3",
+        titulo: "Acompanhe Dados",
+        texto:
+          "Veja em tempo real o total de créditos gerados, o CO₂ evitado, o impacto ambiental e acompanhe o desempenho da sua usina pelo painel da NeutraLink.",
+      },
+      {
+        image: "/cards/venda.jpg",
+        etapa: "Etapa 4",
+        titulo: "Venda ou Certifique",
+        texto:
+          "Você pode vender seus créditos diretamente no nosso marketplace ou optar por submetê-los à certificação internacional em pools auditáveis.",
+      },
+    ].map((step, index) => (
+      <StepCard
+        key={index}
+        image={step.image}
+        etapa={step.etapa}
+        titulo={step.titulo}
+        texto={step.texto}
+      />
+    ))}
+  </div>
+</section>
+
       {/* DESTAQUES DO MARKETPLACE */}
 <section className="w-full px-6 py-20 bg-gray-100 text-center">
   <h3 className="text-3xl font-bold text-[#007B55] mb-12">Destaques do Marketplace</h3>
 
   <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2 max-w-7xl mx-auto">
-    <CreditCard
-      title="Projeto Solar Minas"
-      location="MG, Brasil"
-      flag="/flags/br.svg"
-      image="/cards/minas.jpg"
-      volume="5 tCO₂e"
-      price="R$ 19,90"
-      certified
-      detailsUrl="/projeto/minas"
-    />
-    <CreditCard
-      title="EcoAndes"
-      location="Quito, Equador"
-      flag="/flags/ec.svg"
-      image="/cards/andes.jpg"
-      volume="6 tCO₂e"
-      price="USD 14,50"
-      certified={false}
-      detailsUrl="/projeto/andes"
-    />
+  <CreditCard
+  image="/cards/minas.jpg"
+  location="MG, Brasil"
+  certifier="Projeto Solar Minas"
+  flag="/flags/br.svg"
+  amount={5}
+  currency="R$"
+  price="19,90"
+  badge="Certificado"
+  badgeColor="bg-green-500"
+  href="/projeto/minas"
+/>
+
+<CreditCard
+  image="/cards/minas.jpg"
+  location="MG, Brasil"
+  certifier="Projeto Solar Minas"
+  flag="/flags/br.svg"
+  amount={5}
+  currency="R$"
+  price="19,90"
+  badge="Certificado"
+  badgeColor="bg-green-500"
+  href="/projeto/minas"
+/>
+
   </div>
 </section>
 
