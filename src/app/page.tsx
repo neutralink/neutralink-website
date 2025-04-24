@@ -58,7 +58,16 @@ export default function Home() {
       {/* HEADER */}
       <header className="w-full flex justify-between items-center px-6 py-4 bg-black text-white fixed top-0 left-0 z-50 h-16">
         <div className="flex items-center gap-2">
-          <Image src="/logo.svg" alt="NeutraLink logo" width={160} height={48} className="h-12 w-auto" priority />
+        <Image
+  src="/logo.svg"
+  alt="NeutraLink logo"
+  width={200}
+  height={60}
+  priority
+  className="h-16 w-auto md:h-12"
+  quality={100}       // pra PNG/JPG, não faz nada em SVG, mas não atrapalha
+/>
+
         </div>
         {!isMobile ? (
           <nav className="space-x-6 text-sm tracking-wide">
