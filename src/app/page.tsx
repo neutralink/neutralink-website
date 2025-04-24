@@ -244,7 +244,7 @@ export default function Home() {
       <footer className="bg-neutral-900 text-white pt-12 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
           <div>
-            <Image src="/logo.svg" alt="NeutraLink" width={160} height={48} className="mb-4" />
+            <Image src="/logo-footer.svg" alt="NeutraLink" width={160} height={48} className="mb-4" />
             <p className="text-sm text-neutral-400">
               Democratizamos o mercado voluntário de carbono com tecnologia, segurança e rastreabilidade.
             </p>
