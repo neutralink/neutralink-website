@@ -6,12 +6,6 @@ import { motion } from 'framer-motion'
 import { CreditCard } from '@/components/CreditCard'
 import { StepCard } from '@/components/StepCard'
 
-const steps = [
-  { image: '/cards/conecte.jpg', etapa: 'Etapa 1', titulo: 'Conecte seu Inversor', texto: '…' },
-  { image: '/cards/gere.jpg',    etapa: 'Etapa 2', titulo: 'Gere Créditos',        texto: '…' },
-  // …
-]
-
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false)
   const [messageIndex, setMessageIndex] = useState(0)
