@@ -159,34 +159,36 @@ export default function Home() {
   <h3 className="text-3xl font-bold text-[#007B55] mb-12">Destaques do Marketplace</h3>
 
   <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2 max-w-7xl mx-auto">
-  <CreditCard
-  image="/cards/minas.jpg"
-  location="MG, Brasil"
-  certifier="Projeto Solar Minas"
-  flag="/flags/br.svg"
-  amount={5}
-  currency="R$"
-  price="19,90"
-  badge="Certificado"
-  badgeColor="bg-green-500"
-  href="/projeto/minas"
-/>
+    {/* Card 1: Projeto Solar Minas */}
+    <CreditCard
+      image="/cards/minas.jpg"
+      location="MG, Brasil"
+      certifier="Projeto Solar Minas"
+      flag="/flags/br.svg"
+      amount={5}
+      currency="R$"
+      price="19,90"
+      badge="Certificado"
+      badgeColor="bg-green-500"
+      href="/projeto/minas"
+    />
 
-<CreditCard
-  image="/cards/minas.jpg"
-  location="MG, Brasil"
-  certifier="Projeto Solar Minas"
-  flag="/flags/br.svg"
-  amount={5}
-  currency="R$"
-  price="19,90"
-  badge="Certificado"
-  badgeColor="bg-green-500"
-  href="/projeto/minas"
-/>
-
+    {/* Card 2: EcoAndes */}
+    <CreditCard
+      image="/cards/andes.jpg"
+      location="Quito, Equador"
+      certifier="EcoAndes"
+      flag="/flags/ec.svg"
+      amount={6}
+      currency="USD"
+      price="14,50"
+      badge="Pré-certificado"
+      badgeColor="bg-yellow-400"
+      href="/projeto/andes"
+    />
   </div>
 </section>
+
 
 
 {/* CRÉDITOS DISPONÍVEIS */}
