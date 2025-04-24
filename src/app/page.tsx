@@ -61,12 +61,13 @@ export default function Home() {
         <Image
   src="/logo.svg"
   alt="NeutraLink logo"
-  width={200}
-  height={60}
+  width={240}              // aumenta resolução “base”
+  height={72}              // mantém proporção
+  quality={100}            // força qualidade máxima
+  className="h-16 sm:h-12 w-auto"
   priority
-  className="h-16 w-auto md:h-12"
-  quality={100}       // pra PNG/JPG, não faz nada em SVG, mas não atrapalha
 />
+
 
         </div>
         {!isMobile ? (
