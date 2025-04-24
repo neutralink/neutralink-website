@@ -1,50 +1,68 @@
 // src/app/blog/[slug]/page.tsx
-
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import { Metadata } from 'next'
-import { POSTS, Post } from '../posts'
+import { POSTS } from '../posts'          // só importamos POSTS, não o tipo Post
 
-interface Params {
-  params: { slug: string }
-}
-
-// 1) Gera todas as páginas estáticas /blog/slug
-export function generateStaticParams(): { slug: string }[] {
+export function generateStaticParams() {
   return POSTS.map((p) => ({ slug: p.slug }))
 }
 
-// 2) Metadata dinâmica por post
-export async function generateMetadata({ params }: Params): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string }
+}): Promise<Metadata> {
   const post = POSTS.find((p) => p.slug === params.slug)
-  if (!post) return { title: 'Post não encontrado' }
+  if (!post) {
+    return { title: '404 • NeutraLink' }
+  }
   return {
-    title: `${post.title} • NeutraLink`,
+    title: `${post.title} • Blog NeutraLink`,
     description: post.excerpt,
+    openGraph: {
+      title: `${post.title} • Blog NeutraLink`,
+      description: post.excerpt,
+      images: [post.coverImage],
+    },
   }
 }
 
-// 3) Componente principal (Server Component)
-export default function PostPage({ params }: Params) {
+export default function BlogPostPage({
+  params,
+}: {
+  params: { slug: string }
+}) {
   const post = POSTS.find((p) => p.slug === params.slug)
-  if (!post) return notFound()
+  if (!post) notFound()
 
   return (
-    <article className="bg-white text-neutral-900 max-w-3xl mx-auto p-6 space-y-6">
-      <h1 className="text-4xl font-bold">{post.title}</h1>
-      <p className="text-sm text-neutral-500">
-        {new Date(post.date).toLocaleDateString()}
-      </p>
+    <article className="min-h-screen bg-white text-neutral-900 px-6 py-16">
+      <header className="max-w-3xl mx-auto mb-8">
+        <h1 className="text-4xl font-bold mb-2">{post.title}</h1>
+        <time
+          dateTime={post.date}
+          className="text-sm text-neutral-500"
+        >
+          {new Date(post.date).toLocaleDateString('pt-BR')}
+        </time>
+      </header>
+
       <Image
         src={post.coverImage}
         alt={post.title}
         width={800}
         height={400}
-        className="rounded-lg"
+        className="w-full rounded-lg mb-8 object-cover"
       />
-      <div className="prose prose-neutral">
-        {/* Se tiver HTML pronto */}
-        <p>{post.excerpt}</p>
+
+      <div className="prose prose-neutral max-w-3xl mx-auto">
+        {/* se tiver HTML gerado, use excerptHtml; senão simples <p> */}
+        {post.excerptHtml ? (
+          <div dangerouslySetInnerHTML={{ __html: post.excerptHtml }} />
+        ) : (
+          <p>{post.excerpt}</p>
+        )}
       </div>
     </article>
   )
