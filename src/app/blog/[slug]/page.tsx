@@ -1,56 +1,34 @@
 // src/app/blog/[slug]/page.tsx
-
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import { Metadata } from 'next'
 import { POSTS, Post } from '../posts'
+import { Metadata } from 'next'
 
-type Params = {
-  params: {
-    slug: string
-  }
+interface Params {
+  params: { slug: string }
 }
 
-// Gera as rotas estáticas: /blog/iot-credits, /blog/carbon-trends-2025 etc.
 export function generateStaticParams(): { slug: string }[] {
-  return POSTS.map((post) => ({ slug: post.slug }))
+  return POSTS.map((p) => ({ slug: p.slug }))
 }
 
-// Seta o <head> dinamicamente com title e description de cada post
-export function generateMetadata({ params }: Params): Metadata {
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const post = POSTS.find((p) => p.slug === params.slug)
-  if (!post) {
-    return {
-      title: '404 • Blog NeutraLink',
-    }
-  }
+  if (!post) return { title: 'Post não encontrado' }
   return {
-    title: `${post.title} • Blog NeutraLink`,
+    title: `${post.title} • NeutraLink`,
     description: post.excerpt,
-    openGraph: {
-      title: `${post.title} • Blog NeutraLink`,
-      description: post.excerpt,
-      images: [
-        {
-          url: post.coverImage,
-          width: 800,
-          height: 400,
-          alt: post.title,
-        },
-      ],
-    },
   }
 }
 
-// Componente principal da página de post
-export default function BlogPostPage({ params }: Params) {
+export default function PostPage({ params }: Params) {
   const post = POSTS.find((p) => p.slug === params.slug)
   if (!post) return notFound()
 
   return (
-    <article className="prose prose-neutral max-w-3xl mx-auto py-16">
-      <h1 className="mb-4">{post.title}</h1>
-      <p className="text-sm text-neutral-500 mb-6">
+    <article className="bg-white text-neutral-900 max-w-3xl mx-auto p-6 space-y-6">
+      <h1 className="text-4xl font-bold">{post.title}</h1>
+      <p className="text-sm text-neutral-500">
         {new Date(post.date).toLocaleDateString()}
       </p>
       <Image
@@ -58,13 +36,15 @@ export default function BlogPostPage({ params }: Params) {
         alt={post.title}
         width={800}
         height={400}
-        className="rounded-lg mb-8"
-        priority
+        className="rounded-lg"
       />
-      <div
-        // supondo que você tenha convertido Markdown → HTML em post.contentHtml
-        dangerouslySetInnerHTML={{ __html: post.excerptHtml ?? post.excerpt }}
-      />
+      <div className="prose prose-neutral">
+        {post.excerptHtml ? (
+          <div dangerouslySetInnerHTML={{ __html: post.excerptHtml }} />
+        ) : (
+          <p>{post.excerpt}</p>
+        )}
+      </div>
     </article>
   )
 }

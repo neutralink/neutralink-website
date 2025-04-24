@@ -4,9 +4,9 @@ export interface Post {
   slug: string
   title: string
   excerpt: string
-  excerptHtml?: string   // caso você tenha HTML pronto, senão pode ignorar
+  excerptHtml?: string
   coverImage: string
-  date: string            // yyyy-MM-dd
+  date: string
 }
 
 export const POSTS: Post[] = [

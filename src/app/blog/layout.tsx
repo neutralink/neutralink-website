@@ -1,45 +1,41 @@
 // src/app/blog/layout.tsx
 import Link from 'next/link'
 import Image from 'next/image'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 
 export const metadata = {
   title: 'Blog • NeutraLink',
   description: 'Notícias e artigos sobre NeutraLink e mercado de créditos de carbono',
-  openGraph: {
-    title: 'Blog • NeutraLink',
-    description: 'Notícias e artigos sobre NeutraLink e mercado de créditos de carbono',
-  },
 }
 
 export default function BlogLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen bg-white text-neutral-900 flex flex-col">
-      {/* HEADER compartilhado */}
-      <header className="fixed top-0 left-0 w-full z-50 bg-black text-white flex items-center justify-between px-6 h-16">
+    <main className="min-h-screen flex flex-col bg-white text-neutral-900">
+      {/* HEADER compartilha o mesmo do site */}
+      <header className="fixed top-0 left-0 w-full z-50 bg-black text-white px-6 py-4 flex items-center justify-between">
         <Link href="/">
           <Image
-            src="/logo.svg"
-            alt="NeutraLink"
-            width={180}
-            height={54}
-            className="h-12 w-auto"
-            priority
-          />
+                        src="/logo.svg"
+                        alt="NeutraLink"
+                        width={180}
+                        height={54}
+                        className="h-12 w-auto"
+                        priority
+                      />
         </Link>
-        <nav className="space-x-6 text-sm">
-          <Link href="/" className="hover:text-[#00C37A]">Início</Link>
-          <Link href="/blog" className="hover:text-[#00C37A]">Blog</Link>
-          <Link href="#contato" className="hover:text-[#00C37A]">Contato</Link>
+        <nav className="space-x-4 text-sm">
+          <Link href="/">Início</Link>
+          <Link href="/blog">Blog</Link>
+          <Link href="/contato">Contato</Link>
         </nav>
       </header>
 
-      {/* CONTEÚDO */}
-      <main className="pt-20 flex-1 max-w-7xl mx-auto px-6 py-16">
+      {/* Espaço para o conteúdo do blog */}
+      <section className="pt-20 flex-1 max-w-7xl mx-auto px-6 py-16">
         {children}
-      </main>
+      </section>
 
-      {/* RODAPÉ compartilhado */}
+      {/* FOOTER compartilhado */}
       <footer className="bg-neutral-900 text-white pt-12 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
           <div>
@@ -51,9 +47,9 @@ export default function BlogLayout({ children }: { children: ReactNode }) {
           <div>
             <h4 className="font-semibold mb-4">Navegação</h4>
             <ul className="space-y-2 text-sm text-neutral-300">
-              <li><Link href="#como-funciona" className="hover:text-[#00C37A]">Como Funciona</Link></li>
-              <li><Link href="#marketplace" className="hover:text-[#00C37A]">Marketplace</Link></li>
-              <li><Link href="#contato" className="hover:text-[#00C37A]">Contato</Link></li>
+              <li><Link href="/#como-funciona" className="hover:text-[#00C37A]">Como Funciona</Link></li>
+              <li><Link href="/marketplace" className="hover:text-[#00C37A]">Marketplace</Link></li>
+              <li><Link href="/#contato" className="hover:text-[#00C37A]">Contato</Link></li>
             </ul>
           </div>
           <div>
@@ -88,6 +84,6 @@ export default function BlogLayout({ children }: { children: ReactNode }) {
           © {new Date().getFullYear()} Todos os direitos reservados.
         </div>
       </footer>
-    </div>
+    </main>
   )
 }
