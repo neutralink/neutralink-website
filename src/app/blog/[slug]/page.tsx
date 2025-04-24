@@ -2,26 +2,23 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import type { Post } from '../posts'
 import { POSTS } from '../posts'
 
 type Params = { slug: string }
 
-// 1) Gera todas as rotas estáticas /blog/:slug kji
+// Gera as rotas estáticas /blog/:slug
 export function generateStaticParams(): Params[] {
   return POSTS.map((post) => ({ slug: post.slug }))
 }
 
-// 2) A página em si — agora marcada como async
+// A própria página, marcada como async para casar com a tipagem do Next.js
 export default async function Page({ params }: { params: Params }) {
   const post = POSTS.find((p) => p.slug === params.slug)
-  if (!post) {
-    notFound()
-  }
+  if (!post) notFound()
 
   return (
     <article className="min-h-screen bg-white text-neutral-900 px-6 py-16 max-w-3xl mx-auto">
-      {/* Cabeçalho */}
+      {/* Título e data */}
       <header className="mb-8">
         <h1 className="text-4xl font-bold mb-2">{post.title}</h1>
         <time dateTime={post.date} className="text-sm text-neutral-500">
@@ -39,12 +36,12 @@ export default async function Page({ params }: { params: Params }) {
         priority
       />
 
-      {/* Trecho */}
+      {/* Trecho / conteúdo */}
       <div className="prose prose-neutral mb-12">
         <p>{post.excerpt}</p>
       </div>
 
-      {/* Voltar */}
+      {/* Link de volta */}
       <Link
         href="/blog"
         className="inline-block text-green-600 hover:underline font-medium"
