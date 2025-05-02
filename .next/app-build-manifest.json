@@ -21,15 +21,25 @@
       "static/chunks/main-app.js",
       "static/chunks/app/blog/[slug]/page.js"
     ],
+    "/blog/categoria/[slug]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/blog/categoria/[slug]/page.js"
+    ],
+    "/blog/categoria/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/blog/categoria/page.js"
+    ],
     "/marketplace/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/marketplace/page.js"
     ],
-    "/blog/categoria/[slug]/page": [
+    "/login/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/blog/categoria/[slug]/page.js"
+      "static/chunks/app/login/page.js"
     ]
   }
 }

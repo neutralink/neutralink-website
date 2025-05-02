@@ -87,16 +87,8 @@ export default function BlogPage() {
                       {post.category && (
                         <Link
                           href={`/blog/categoria/${post.category.toLowerCase()}`}
-                          className={`inline-block text-sm font-medium px-3 py-1 rounded-full mb-3 transition ${
-                            {
-                              ESG: 'bg-green-100 text-green-800',
-                              Tecnologia: 'bg-blue-100 text-blue-800',
-                              Regulação: 'bg-yellow-100 text-yellow-800',
-                              Mercado: 'bg-purple-100 text-purple-800',
-                              Sustentabilidade: 'bg-emerald-100 text-emerald-800',
-                              Cases: 'bg-pink-100 text-pink-800',
-                            }[post.category] ?? 'bg-neutral-100 text-neutral-600'
-                          }`}
+                          className={`inline-block text-sm font-medium px-3 py-1 rounded-full mb-3 transition ${getCategoryBadgeColor(post.category)}`}
+
                         >
                           {post.category}
                         </Link>
