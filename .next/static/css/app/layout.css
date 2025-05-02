@@ -1011,6 +1011,23 @@ video {
   --tw-prose-th-borders: var(--tw-prose-invert-th-borders);
   --tw-prose-td-borders: var(--tw-prose-invert-td-borders);
 }
+.aspect-h-9 {
+  --tw-aspect-h: 9;
+}
+.aspect-w-16 {
+  position: relative;
+  padding-bottom: calc(var(--tw-aspect-h) / var(--tw-aspect-w) * 100%);
+  --tw-aspect-w: 16;
+}
+.aspect-w-16 > * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
 .pointer-events-none {
   pointer-events: none;
 }
@@ -1382,6 +1399,12 @@ video {
 .h-screen {
   height: 100vh;
 }
+.h-64 {
+  height: 16rem;
+}
+.h-80 {
+  height: 20rem;
+}
 .max-h-96 {
   max-height: 24rem;
 }
@@ -1524,6 +1547,9 @@ video {
 .max-w-3xl {
   max-width: 48rem;
 }
+.max-w-6xl {
+  max-width: 72rem;
+}
 .max-w-7xl {
   max-width: 80rem;
 }
@@ -1562,6 +1588,12 @@ video {
 }
 .max-w-xl {
   max-width: 36rem;
+}
+.max-w-5xl {
+  max-width: 64rem;
+}
+.max-w-4xl {
+  max-width: 56rem;
 }
 .flex-1 {
   flex: 1 1 0%;
@@ -1723,6 +1755,9 @@ video {
 }
 .gap-8 {
   gap: 2rem;
+}
+.gap-10 {
+  gap: 2.5rem;
 }
 .space-x-4 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -2376,6 +2411,15 @@ video {
 .bg-yellow-500\/20 {
   background-color: rgb(255 235 59 / 0.2);
 }
+.bg-black\/20 {
+  background-color: rgb(0 0 0 / 0.2);
+}
+.bg-black\/5 {
+  background-color: rgb(0 0 0 / 0.05);
+}
+.bg-black\/50 {
+  background-color: rgb(0 0 0 / 0.5);
+}
 .bg-opacity-60 {
   --tw-bg-opacity: 0.6;
 }
@@ -2563,6 +2607,10 @@ video {
 }
 .bg-center {
   background-position: center;
+}
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .object-cover {
   -o-object-fit: cover;
@@ -4424,6 +4472,11 @@ html {
 .hover\:shadow-xl:hover {
   --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.hover\:shadow-md:hover {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 .hover\:shadow-amber-500\/40:hover {

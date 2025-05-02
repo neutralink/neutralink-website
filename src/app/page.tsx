@@ -5,16 +5,15 @@ import FinalCTA from '@/components/FinalCTA';
 import HeroSection from '@/components/HeroSection';
 import HowItWorks from '@/components/HowItWorks';
 import LatestNews from '@/components/LatestNews';
-import LatestNewsSlider from '@/components/LatestNewsSlider';
 import MarketplaceHighlight from '@/components/MarketplaceHighlight';
-
+import VideoShowcase from '@/components/VideoShowcase';
 
 export default function HomePage() {
   return (
     <div className="flex flex-col">
       <HeroSection />
-      
       <HowItWorks />
+      <VideoShowcase />
       <MarketplaceHighlight />
       <Benefits />
       <CreditOwnership />

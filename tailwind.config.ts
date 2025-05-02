@@ -35,5 +35,6 @@ export default withMT({
   },
   plugins: [
     require('@tailwindcss/typography'),
+    require('@tailwindcss/aspect-ratio'),
   ],
 } satisfies Config);
