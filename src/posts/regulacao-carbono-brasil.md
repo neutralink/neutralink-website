@@ -3,6 +3,7 @@ title: "Regulação de créditos de carbono no Brasil: onde estamos e para onde 
 date: "2025-04-29T21:00:00"
 excerpt: "Entenda o avanço do marco legal do carbono no Brasil, os impactos para o mercado voluntário e como a NeutraLink já atua de forma alinhada às diretrizes de rastreabilidade e transparência."
 coverImage: "/posts/regulacao-carbono-brasil.jpg"
+category: "ESG"
 ---
 
 ## O Brasil e o mercado de carbono: um novo capítulo

@@ -1,0 +1,127 @@
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import Link from 'next/link';
+import Image from 'next/image';
+
+interface Post {
+  slug: string;
+  title: string;
+  date: string;
+  excerpt: string;
+  coverImage?: string;
+  category?: string;
+}
+
+export default function CategoriaIndexPage() {
+  const postsDir = path.join(process.cwd(), 'src', 'posts');
+  const filenames = fs.readdirSync(postsDir);
+
+  const allPosts: Post[] = filenames
+    .map((filename) => {
+      const slug = filename.replace(/\.md$/, '');
+      const content = fs.readFileSync(path.join(postsDir, filename), 'utf8');
+      const { data } = matter(content);
+
+      return {
+        slug,
+        title: data.title,
+        date: data.date,
+        excerpt: data.excerpt,
+        coverImage: data.coverImage,
+        category: data.category || 'Outros',
+      };
+    })
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  const groupedByCategory: Record<string, Post[]> = {};
+  for (const post of allPosts) {
+    const category = post.category || 'Outros';
+    if (!groupedByCategory[category]) groupedByCategory[category] = [];
+    groupedByCategory[category].push(post);
+  }
+
+  const categories = Object.keys(groupedByCategory).sort();
+
+  return (
+    <section className="bg-white text-black min-h-screen py-24 px-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+        {/* Sidebar esquerda */}
+        <aside className="md:col-span-1">
+          <h2 className="text-xl font-bold mb-6">Categorias</h2>
+          <ul className="space-y-3">
+            {categories.map((cat) => (
+              <li key={cat}>
+                <a
+                  href={`#${cat.toLowerCase()}`}
+                  className="text-primary hover:underline block"
+                >
+                  {cat}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+
+        {/* Conteúdo principal */}
+        <div className="md:col-span-3 space-y-24">
+          {categories.map((cat) => (
+            <div key={cat} id={cat.toLowerCase()}>
+              <h2 className="text-2xl font-bold mb-6 border-b border-neutral-200 pb-2">
+                {cat}
+              </h2>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {groupedByCategory[cat].map((post) => (
+                  <div
+                    key={post.slug}
+                    className="border border-neutral-200 rounded-lg overflow-hidden shadow hover:shadow-lg transition bg-white"
+                  >
+                    <div className="relative w-full h-48">
+                      <Image
+                        src={post.coverImage ?? '/posts/default.jpg'}
+                        alt={post.title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+
+                    <div className="p-6">
+                      <Link
+                        href={`/blog/categoria/${cat.toLowerCase()}`}
+                        className={`inline-block text-sm font-medium px-3 py-1 rounded-full mb-3 transition ${
+                          {
+                            ESG: 'bg-green-100 text-green-800',
+                            Tecnologia: 'bg-blue-100 text-blue-800',
+                            Regulação: 'bg-yellow-100 text-yellow-800',
+                            Mercado: 'bg-purple-100 text-purple-800',
+                            Sustentabilidade: 'bg-emerald-100 text-emerald-800',
+                            Cases: 'bg-pink-100 text-pink-800',
+                          }[cat] ?? 'bg-neutral-100 text-neutral-600'
+                        }`}
+                      >
+                        {cat}
+                      </Link>
+
+                      <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
+                      <p className="text-sm text-neutral-500 mb-4">
+                        {new Date(post.date).toLocaleDateString('pt-BR')}
+                      </p>
+                      <p className="text-neutral-700 mb-4">{post.excerpt}</p>
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="text-primary font-medium hover:underline"
+                      >
+                        Ler mais →
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

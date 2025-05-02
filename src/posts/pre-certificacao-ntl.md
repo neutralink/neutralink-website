@@ -3,6 +3,7 @@ title: "O diferencial da pré-certificação: como a NeutraLink democratiza o me
 date: "2025-04-29T18:00:00"
 excerpt: "A NeutraLink permite que pequenos geradores vendam créditos reais antes da certificação oficial — com segurança, rastreabilidade e impacto imediato."
 coverImage: "/posts/pre-certificacao.jpg"
+category: "ESG"
 ---
 
 ## A grande barreira do mercado de carbono
