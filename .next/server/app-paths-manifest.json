@@ -1,9 +1,7 @@
 {
-  "/blog/page": "app/blog/page.js",
-  "/blog/categoria/page": "app/blog/categoria/page.js",
+  "/marketplace/page": "app/marketplace/page.js",
   "/blog/categoria/[slug]/page": "app/blog/categoria/[slug]/page.js",
-  "/login/page": "app/login/page.js",
-  "/blog/[slug]/page": "app/blog/[slug]/page.js",
   "/page": "app/page.js",
-  "/marketplace/page": "app/marketplace/page.js"
+  "/blog/page": "app/blog/page.js",
+  "/blog/[slug]/page": "app/blog/[slug]/page.js"
 }

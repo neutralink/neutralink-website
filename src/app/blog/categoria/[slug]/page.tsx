@@ -4,6 +4,7 @@ import matter from 'gray-matter';
 import BlogBanner from '@/components/BlogBanner';
 import Link from 'next/link';
 import Image from 'next/image';
+import { getCategoryBadgeColor } from '@/lib/getCategoryBadgeColor';
 
 interface Post {
   slug: string;
