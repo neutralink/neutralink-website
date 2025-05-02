@@ -34,7 +34,7 @@ export default function BlogPage() {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   const latestPost = posts[0];
-  const otherPosts = posts.slice(1);
+  const otherPosts = posts.slice(1, 7); // Mostra apenas os 6 seguintes
 
   return (
     <section className="bg-white text-black min-h-screen py-24 px-6">
@@ -84,6 +84,18 @@ export default function BlogPage() {
             </div>
           ))}
         </div>
+
+        {/* Link opcional para mais notícias */}
+        {posts.length > 7 && (
+          <div className="text-center mt-12">
+            <Link
+              href="/blog?page=2"
+              className="text-primary hover:underline font-medium text-base"
+            >
+              Ver mais notícias →
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );
