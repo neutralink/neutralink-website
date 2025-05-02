@@ -3,12 +3,14 @@ import path from 'path';
 import matter from 'gray-matter';
 import BlogBanner from '@/components/BlogBanner';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface Post {
   slug: string;
   title: string;
   date: string;
   excerpt: string;
+  coverImage?: string;
 }
 
 export default function BlogPage() {
@@ -26,6 +28,7 @@ export default function BlogPage() {
         title: data.title,
         date: data.date,
         excerpt: data.excerpt,
+        coverImage: data.coverImage,
       };
     })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -43,28 +46,41 @@ export default function BlogPage() {
         {/* Banner com a última notícia */}
         <BlogBanner post={latestPost} />
 
-        {/* Lista dos demais artigos */}
+        {/* Lista dos demais artigos com imagem */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
           {otherPosts.map((post) => (
             <div
               key={post.slug}
-              className="border border-neutral-300 rounded-lg p-6 shadow hover:shadow-lg transition"
+              className="border border-neutral-200 rounded-lg overflow-hidden shadow hover:shadow-lg transition bg-white"
             >
-              <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
-              <p className="text-sm text-neutral-500 mb-4">
-                {new Date(post.date).toLocaleDateString('pt-BR', {
-                  day: '2-digit',
-                  month: 'long',
-                  year: 'numeric',
-                })}
-              </p>
-              <p className="text-neutral-700 mb-4">{post.excerpt}</p>
-              <Link
-                href={`/blog/${post.slug}`}
-                className="text-primary font-medium hover:underline"
-              >
-                Ler mais →
-              </Link>
+              {/* Imagem de capa do post */}
+              <div className="relative w-full h-48">
+                <Image
+                  src={post.coverImage ?? '/posts/default.jpg'}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+
+              {/* Conteúdo do card */}
+              <div className="p-6">
+                <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
+                <p className="text-sm text-neutral-500 mb-4">
+                  {new Date(post.date).toLocaleDateString('pt-BR', {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                </p>
+                <p className="text-neutral-700 mb-4">{post.excerpt}</p>
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="text-primary font-medium hover:underline"
+                >
+                  Ler mais →
+                </Link>
+              </div>
             </div>
           ))}
         </div>

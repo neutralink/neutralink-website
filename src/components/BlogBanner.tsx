@@ -22,8 +22,8 @@ export default function BlogBanner({ post }: BlogBannerProps) {
 
   return (
     <div className="relative rounded-xl overflow-hidden bg-black text-white shadow-lg">
-      {/* Imagem de capa simulada */}
-      <div className="relative w-full h-64 md:h-96">
+      {/* Imagem de capa responsiva */}
+      <div className="relative w-full h-[400px] sm:h-[480px] md:h-[520px] lg:h-[600px]">
         <Image
           src="/posts/iot-credits.jpg"
           alt={post.title}
@@ -33,8 +33,8 @@ export default function BlogBanner({ post }: BlogBannerProps) {
         <div className="absolute inset-0 bg-black/60 z-10" />
       </div>
 
-      {/* Conteúdo sobre a imagem */}
-      <div className="absolute inset-0 z-20 flex flex-col justify-end p-6 md:p-12">
+      {/* Conteúdo posicionado com segurança */}
+      <div className="absolute inset-0 z-20 flex flex-col justify-end p-6 sm:p-10 lg:p-16">
         <p className="text-sm text-neutral-300 mb-2">
           {new Date(post.date).toLocaleDateString('pt-BR', {
             day: '2-digit',
