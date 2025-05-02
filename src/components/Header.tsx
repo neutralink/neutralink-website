@@ -28,7 +28,7 @@ export default function Header() {
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-6 items-center">
           <Link href="#como-funciona" className="hover:text-primary">Como Funciona</Link>
-          <Link href="#marketplace" className="hover:text-primary">Marketplace</Link>
+          <Link href="marketplace" className="hover:text-primary">Marketplace</Link>
           <Link href="/blog" className="hover:text-primary">Blog</Link>
           <div className="flex space-x-4 ml-6">
             <Link href="/register" className="bg-primary text-black px-4 py-2 rounded-lg font-semibold hover:opacity-90">
