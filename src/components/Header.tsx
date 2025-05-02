@@ -27,9 +27,9 @@ export default function Header() {
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-6 items-center">
-          <Link href="#como-funciona" className="hover:text-primary">Como Funciona</Link>
+          <Link href="/vender-creditos" className="hover:text-primary">Vender Creditos</Link>
           <Link href="marketplace" className="hover:text-primary">Marketplace</Link>
-          <Link href="/blog" className="hover:text-primary">Blog</Link>
+          <Link href="/neutraconect" className="hover:text-primary">NeutraConect</Link>
           <div className="flex space-x-4 ml-6">
             <Link href="/register" className="bg-primary text-black px-4 py-2 rounded-lg font-semibold hover:opacity-90">
               Registre-se
@@ -51,9 +51,9 @@ export default function Header() {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden bg-black text-white flex flex-col space-y-4 px-6 py-4">
-          <Link href="#como-funciona" onClick={() => setMenuOpen(false)} className="hover:text-primary">Como Funciona</Link>
+          <Link href="/vender-creditos" onClick={() => setMenuOpen(false)} className="hover:text-primary">Vender Creditos</Link>
           <Link href="marketplace" onClick={() => setMenuOpen(false)} className="hover:text-primary">Marketplace</Link>
-          <Link href="/blog" onClick={() => setMenuOpen(false)} className="hover:text-primary">Blog</Link>
+          <Link href="/neutraconect" onClick={() => setMenuOpen(false)} className="hover:text-primary">NeutraConect</Link>
           <Link href="/register" onClick={() => setMenuOpen(false)} className="bg-primary text-black px-4 py-2 rounded-lg font-semibold text-center">
             Registre-se
           </Link>
