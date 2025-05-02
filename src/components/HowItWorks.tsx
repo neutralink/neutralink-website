@@ -1,78 +1,60 @@
-// src/components/HowItWorks.tsx
-'use client'
-import { Wifi, HardDrive, Cpu, DollarSign, Monitor } from 'lucide-react'
+'use client';
 
-export function HowItWorks() {
-  const steps = [
-    {
-      icon: <Wifi className="w-8 h-8 text-[#00C37A]" />,
-      title: 'Conecte seu Dispositivo',
-      lines: [
-        'Instale o NeutraConect ao seu inversor solar.',
-        'Configure em minutos via browser (RS485, Hoymiles ou sensor de corrente).'
-      ]
-    },
-    {
-      icon: <HardDrive className="w-8 h-8 text-[#00C37A]" />,
-      title: 'Gere e Registre Dados',
-      lines: [
-        'Firmware assinatura digital em cada leitura.',
-        'Backend valida e tokeniza cada tonelada de CO₂ evitada.'
-      ]
-    },
-    {
-      icon: <Cpu className="w-8 h-8 text-[#00C37A]" />,
-      title: 'Tokenize Seus Créditos',
-      lines: [
-        'Receba NTL (NeutraLink Token) pré-certificados automaticamente.',
-        'Opte pela certificação oficial em pools auditados.'
-      ]
-    },
-    {
-      icon: <DollarSign className="w-8 h-8 text-[#00C37A]" />,
-      title: 'Negocie no Marketplace',
-      lines: [
-        'Ofereça créditos pré-certificados ou certificados.',
-        'Defina seu preço com oráculos de mercado em tempo real.'
-      ]
-    },
-    {
-      icon: <Monitor className="w-8 h-8 text-[#00C37A]" />,
-      title: 'Acompanhe e Aposente',
-      lines: [
-        'Dashboard live com status de certificação, transações e relatórios.',
-        'Aposente créditos com documentação oficial ou use em marketing sustentável.'
-      ]
-    }
-  ]
+import Image from 'next/image';
+import { PlugZap, Sun, BadgeCheck } from 'lucide-react';
 
+const steps = [
+  {
+    title: 'Instale o NeutraConect',
+    description: 'Conecte nosso dispositivo IoT à sua geração solar para monitorar dados em tempo real.',
+    icon: PlugZap,
+  },
+  {
+    title: 'Gere Créditos de Carbono',
+    description: 'A energia limpa gerada é automaticamente convertida em créditos de carbono tokenizados.',
+    icon: Sun,
+  },
+  {
+    title: 'Venda ou Certifique',
+    description: 'Disponibilize seus créditos no marketplace ou envie para certificação oficial.',
+    icon: BadgeCheck,
+  },
+];
+
+export default function HowItWorks() {
   return (
-    <section id="como-funciona" className="py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-4xl font-extrabold text-center text-neutral-900 mb-16">
+    <section id="como-funciona" className="relative bg-white py-20 px-6 overflow-hidden">
+
+      {/* Imagem de fundo */}
+      <Image
+        src="/images/bg-howitworks.jpg"  
+        alt="Background gráfico"
+        fill
+        quality={100}
+        className="object-cover opacity-40 z-0 pointer-events-none blur-sm z-10"
+      />
+
+      {/* Conteúdo acima da imagem */}
+      <div className="relative z-10 max-w-7xl mx-auto text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-black">
           Como Funciona
         </h2>
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
-          {steps.map((step, idx) => (
+
+        <div className="grid gap-8 md:grid-cols-3">
+          {steps.map((step, index) => (
             <div
-              key={idx}
-              className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col"
+              key={index}
+              className="flex flex-col items-center text-center p-8 rounded-xl border border-neutral-300 bg-white bg-opacity-90 backdrop-blur-sm hover:shadow-2xl transition-shadow duration-300"
             >
-              <div className="mb-4">{step.icon}</div>
-              <h3 className="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-[#00C37A] transition-colors">
-                {step.title}
-              </h3>
-              <ul className="space-y-2 flex-1">
-                {step.lines.map((line, i) => (
-                  <li key={i} className="text-neutral-700">
-                    {line}
-                  </li>
-                ))}
-              </ul>
+              <div className="bg-primary/10 rounded-full p-4 mb-4">
+                <step.icon size={48} className="text-primary" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2 text-primary">{step.title}</h3>
+              <p className="text-base text-black">{step.description}</p>
             </div>
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }
