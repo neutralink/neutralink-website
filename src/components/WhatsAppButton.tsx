@@ -16,7 +16,7 @@ export default function WhatsAppButton() {
         className="bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-full flex items-center gap-2 shadow-lg transition"
       >
         <MessageCircle size={20} />
-        <span className="font-medium hidden sm:inline">Fale via WhatsApp</span>
+        <span className="font-medium hidden sm:inline">WhatsApp</span>
       </Link>
     </div>
   );
