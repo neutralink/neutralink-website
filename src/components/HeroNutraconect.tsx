@@ -26,7 +26,7 @@ export default function HeroNeutraconect() {
             Quero Adquirir o NeutraConect
           </Link>
         </div>
-        <div className="relative w-full h-80">
+        <div className="relative w-full h-[500px]"> {/* Aumentado para 500px de altura */}
           <Image
             src="/product/neutraconect-device.png"
             alt="Dispositivo NeutraConect"

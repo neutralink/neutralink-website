@@ -3,6 +3,6 @@
   "/page": "app/page.js",
   "/blog/page": "app/blog/page.js",
   "/neutraconect/page": "app/neutraconect/page.js",
-  "/marketplace/page": "app/marketplace/page.js",
-  "/vender-creditos/page": "app/vender-creditos/page.js"
+  "/vender-creditos/page": "app/vender-creditos/page.js",
+  "/marketplace/page": "app/marketplace/page.js"
 }

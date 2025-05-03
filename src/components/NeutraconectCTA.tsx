@@ -1,36 +1,28 @@
-import Image from 'next/image';
+import Link from 'next/link';
 
-export default function NeutraconectCompatibility() {
-  const brands = [
-    { name: 'Hoymiles', icon: 'hoymiles.svg' },
-    { name: 'Growatt', icon: 'growatt.svg' },
-    { name: 'Solis', icon: 'solis.svg' },
-    { name: 'Deye', icon: 'deye.svg' },
-    { name: 'Enphase', icon: 'enphase.svg' },
-  ];
-
+export default function NeutraconectCTA() {
   return (
-    <section className="bg-white text-black py-24 px-6">
-      <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6">
-          Compatível com os principais inversores do mercado
-        </h2>
-        <p className="text-lg text-neutral-700 max-w-3xl mx-auto mb-12">
-          O NeutraConect se adapta a diferentes cenários de usinas solares: tradicionais ou microinversores com gateway.
-        </p>
+    <section className="relative bg-green-600 text-white py-24 px-6 overflow-hidden">
+      {/* Fundo com gradiente animado ou imagem estática */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-20"
+        style={{ backgroundImage: "url('/backgrounds/neutraconect-pattern.jpg')" }}
+      />
+      <div className="absolute inset-0 bg-green-700/70" />
 
-        <div className="flex flex-wrap justify-center items-center gap-10">
-          {brands.map((brand) => (
-            <div key={brand.name} className="w-28 h-16 relative grayscale hover:grayscale-0 transition">
-              <Image
-                src={`/brands/${brand.icon}`}
-                alt={brand.name}
-                fill
-                className="object-contain"
-              />
-            </div>
-          ))}
-        </div>
+      <div className="relative z-10 max-w-4xl mx-auto text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          Pronto para monetizar sua geração de energia?
+        </h2>
+        <p className="text-lg text-neutral-100 mb-8">
+          Com o NeutraConect, transformar energia solar em créditos de carbono certificados é automático, seguro e rentável.
+        </p>
+        <Link
+          href="/contato"
+          className="inline-block bg-white text-green-600 font-semibold px-8 py-3 rounded-lg shadow hover:shadow-lg hover:bg-green-100 transition"
+        >
+          Quero adquirir o NeutraConect
+        </Link>
       </div>
     </section>
   );

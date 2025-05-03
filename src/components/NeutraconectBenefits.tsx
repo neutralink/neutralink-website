@@ -25,8 +25,16 @@ export default function NeutraconectBenefits() {
   ];
 
   return (
-    <section className="bg-gradient-to-b from-white to-neutral-100 text-black py-24 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section
+      className="relative text-black py-24 px-6 bg-white bg-cover bg-center"
+      style={{
+        backgroundImage: "url('/backgrounds/neutraconect-benefits.jpg')",
+      }}
+    >
+      {/* Overlay com transparência */}
+      <div className="absolute inset-0 bg-white/50 z-0" />
+
+      <div className="relative z-10 max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Por que o NeutraConect é único?
@@ -36,22 +44,22 @@ export default function NeutraconectBenefits() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           {benefits.map((item) => (
             <div
               key={item.title}
-              className="flex gap-6 items-start bg-white border border-neutral-200 p-6 rounded-xl shadow hover:shadow-md transition"
+              className="flex flex-col items-center text-center bg-white border border-neutral-200 p-6 rounded-xl shadow hover:shadow-md transition"
             >
-              <Image
-                src={`/icons/${item.icon}.svg`}
-                alt={item.title}
-                width={48}
-                height={48}
-              />
-              <div>
-                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-neutral-700 text-sm">{item.desc}</p>
+              <div className="mb-4">
+                <Image
+                  src={`/icons/${item.icon}.svg`}
+                  alt={item.title}
+                  width={48}
+                  height={48}
+                />
               </div>
+              <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+              <p className="text-neutral-700 text-sm">{item.desc}</p>
             </div>
           ))}
         </div>

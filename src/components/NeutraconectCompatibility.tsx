@@ -19,9 +19,9 @@ export default function NeutraconectCompatibility() {
           O NeutraConect se adapta a diferentes cenários de usinas solares: tradicionais ou microinversores com gateway.
         </p>
 
-        <div className="flex flex-wrap justify-center items-center gap-10">
+        <div className="flex flex-wrap justify-center items-center gap-12">
           {brands.map((brand) => (
-            <div key={brand.name} className="w-28 h-16 relative grayscale hover:grayscale-0 transition">
+            <div key={brand.name} className="w-36 h-20 relative grayscale hover:grayscale-0 transition">
               <Image
                 src={`/brands/${brand.icon}`}
                 alt={brand.name}

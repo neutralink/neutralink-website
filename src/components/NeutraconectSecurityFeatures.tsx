@@ -20,8 +20,16 @@ export default function NeutraconectSecurityFeatures() {
   ];
 
   return (
-    <section className="bg-neutral-900 text-white py-24 px-6">
-      <div className="max-w-6xl mx-auto text-center">
+    <section
+      className="relative text-white py-24 px-6 bg-black bg-cover bg-center"
+      style={{
+        backgroundImage: "url('/backgrounds/security-features-bg.jpg')",
+      }}
+    >
+      {/* Overlay com transparência */}
+      <div className="absolute inset-0 bg-black/70 z-0" />
+
+      <div className="relative z-10 max-w-6xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-6">
           Segurança em Primeiro Lugar
         </h2>
@@ -33,14 +41,14 @@ export default function NeutraconectSecurityFeatures() {
           {items.map((item) => (
             <div
               key={item.title}
-              className="bg-neutral-800 border border-neutral-700 p-6 rounded-lg shadow hover:shadow-lg transition"
+              className="bg-neutral-800 bg-opacity-90 border border-neutral-700 p-6 rounded-lg shadow hover:shadow-lg transition flex flex-col items-center text-center"
             >
-              <div className="mb-4">
+              <div className="mb-4 flex items-center justify-center w-16 h-16 bg-neutral-700 rounded-full">
                 <Image
                   src={`/icons/${item.icon}.svg`}
                   alt={item.title}
-                  width={48}
-                  height={48}
+                  width={32}
+                  height={32}
                 />
               </div>
               <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
