@@ -2804,6 +2804,9 @@ video {
 .font-sans {
   font-family: var(--font-sans), sans-serif;
 }
+.font-mono {
+  font-family: var(--font-mono), monospace;
+}
 .\!text-\[11px\] {
   font-size: 11px !important;
 }
@@ -5709,6 +5712,10 @@ html {
 
   .sm\:inline-flex {
     display: inline-flex;
+  }
+
+  .sm\:hidden {
+    display: none;
   }
 
   .sm\:h-\[480px\] {
