@@ -2801,11 +2801,11 @@ video {
 .align-middle {
   vertical-align: middle;
 }
-.font-sans {
-  font-family: var(--font-sans), sans-serif;
-}
 .font-mono {
   font-family: var(--font-mono), monospace;
+}
+.font-sans {
+  font-family: var(--font-sans), sans-serif;
 }
 .\!text-\[11px\] {
   font-size: 11px !important;

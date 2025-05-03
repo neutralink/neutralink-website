@@ -21,9 +21,9 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 w-full z-50">
       {/* Barra verde com contador */}
-      <div className="bg-green-700 text-white text-center py-1 text-sm font-mono">
+      <div className="bg-primary text-white text-center py-1 text-sm font-mono">
         <span className="hidden sm:inline">🌱 Créditos de carbono evitados: </span>
-        <span className="inline sm:hidden">🌱 CO₂ evitado: </span>
+        <span className="inline sm:hidden">🌱 CO₂ evitados: </span>
         {carbonCredits.toLocaleString('pt-BR', {
           minimumFractionDigits: 2,
         })}{" "}
