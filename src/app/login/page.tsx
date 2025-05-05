@@ -1,15 +1,48 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
-  const [isLogin, setIsLogin] = useState(true);
-  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  const router = useRouter()
+  const DEV_MODE = true // ← Altere para true para simular login automático
+
+  const [isLogin, setIsLogin] = useState(true)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  })
 
   const toggleMode = () => {
-    setIsLogin(!isLogin);
-    setFormData({ name: '', email: '', password: '' });
-  };
+    setIsLogin(!isLogin)
+    setFormData({ name: '', email: '', password: '' })
+  }
+
+  useEffect(() => {
+    if (DEV_MODE) {
+      localStorage.setItem('user', JSON.stringify({
+        id: 'admin1',
+        name: 'Admin NeutraLink',
+        role: 'ADMIN', // você pode trocar por INTEGRATOR, GENERATOR, etc.
+      }))
+      router.push('/dashboard')
+    }
+  }, [router])
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+
+    const fakeUser = {
+      id: '123',
+      name: formData.name || 'Usuário Teste',
+      email: formData.email,
+      role: 'INTEGRATOR', // Troque aqui também se quiser testar outras roles
+    }
+
+    localStorage.setItem('user', JSON.stringify(fakeUser))
+    router.push('/dashboard')
+  }
 
   return (
     <section className="bg-black text-white min-h-screen py-24 px-6">
@@ -23,16 +56,23 @@ export default function LoginPage() {
             : 'Preencha os dados para criar sua conta gratuita.'}
         </p>
 
-        <form className="space-y-6 text-left max-w-md mx-auto">
+        <form
+          className="space-y-6 text-left max-w-md mx-auto"
+          onSubmit={handleSubmit}
+        >
           {!isLogin && (
             <div>
-              <label className="block mb-1 text-sm text-neutral-300">Nome completo</label>
+              <label className="block mb-1 text-sm text-neutral-300">
+                Nome completo
+              </label>
               <input
                 type="text"
                 placeholder="Seu nome"
-                className="w-full px-4 py-3 rounded-md bg-neutral-900 border border-neutral-700 text-white focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-4 py-3 rounded-md bg-neutral-900 border border-neutral-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary"
                 value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
               />
             </div>
           )}
@@ -41,9 +81,11 @@ export default function LoginPage() {
             <input
               type="email"
               placeholder="seu@email.com"
-              className="w-full px-4 py-3 rounded-md bg-neutral-900 border border-neutral-700 text-white focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full px-4 py-3 rounded-md bg-neutral-900 border border-neutral-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary"
               value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
             />
           </div>
           <div>
@@ -51,19 +93,17 @@ export default function LoginPage() {
             <input
               type="password"
               placeholder="********"
-              className="w-full px-4 py-3 rounded-md bg-neutral-900 border border-neutral-700 text-white focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full px-4 py-3 rounded-md bg-neutral-900 border border-neutral-700 text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary"
               value={formData.password}
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
             />
           </div>
 
           <button
             type="submit"
             className="w-full bg-primary text-black font-semibold py-3 rounded-md hover:opacity-90 transition"
-            onClick={(e) => {
-              e.preventDefault();
-              alert(isLogin ? 'Login efetuado! (simulação)' : 'Conta criada! (simulação)');
-            }}
           >
             {isLogin ? 'Entrar' : 'Cadastrar'}
           </button>
@@ -88,5 +128,5 @@ export default function LoginPage() {
         </div>
       </div>
     </section>
-  );
+  )
 }

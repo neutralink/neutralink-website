@@ -1,3 +1,7 @@
 {
-  "/page": "app/page.js"
+  "/dashboard/gerador/page": "app/dashboard/gerador/page.js",
+  "/dashboard/gerador/usina/page": "app/dashboard/gerador/usina/page.js",
+  "/dashboard/gerador/configuracoes/page": "app/dashboard/gerador/configuracoes/page.js",
+  "/dashboard/gerador/dispositivo/page": "app/dashboard/gerador/dispositivo/page.js",
+  "/dashboard/gerador/creditos/page": "app/dashboard/gerador/creditos/page.js"
 }
