@@ -6,7 +6,7 @@ import { Bell, Settings, UserCircle } from 'lucide-react'
 
 export default function DashboardHeader() {
   return (
-    <header className="w-full fixed top-0 left-0 z-50 bg-black text-white flex items-center justify-between px-4 md:px-6 h-16 border-b border-neutral-800 shadow">
+    <header className="w-full fixed top-0 left-0 z-50 bg-black text-white flex items-center justify-between px-4 md:px-6 h-14 border-b border-neutral-800 shadow">
       {/* Logo */}
       <div className="flex items-center space-x-2">
         <Image
