@@ -469,11 +469,3 @@ export default function MarketplacePage() {
 2. Deixar o HeroSection, Cards, etc., sobre o fundo branco.
 3. Deixar Header e Footer pretos e fixos.
 
----
-
-# 📢 Pergunta rápida:
-
-**Quer que eu já te monte a primeira seção "Como Funciona" agora (com Cards ou Linha do Tempo, fundo branco), para seguir a nova estrutura que você quer?**
-
-Posso montar a Home para ir crescendo certinho agora! 🚀🎯  
-**Quer?** (Só confirmar!)
