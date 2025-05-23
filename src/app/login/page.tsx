@@ -85,7 +85,7 @@ export default function LoginPage() {
           {isLogin ? (
             <>
               Ainda não tem conta?{' '}
-              <button onClick={toggleMode} className="text-primary underline">
+              <button onClick={() => router.push('/login/select-role')} className="text-primary underline">
                 Criar agora
               </button>
             </>

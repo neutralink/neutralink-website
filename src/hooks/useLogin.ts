@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+interface LoginResponse {
+  token: string;
+  user: {
+    role: 'ADMIN' | 'GENERATOR' | 'BUYER' | 'COMPANY' | 'CERTIFIER' | 'INTEGRATOR';
+  };
+}
+
 export function useLogin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -17,12 +24,12 @@ export function useLogin() {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Erro ao fazer login');
+      const data: LoginResponse = await res.json();
+      if (!res.ok || !data.token || !data.user?.role) {
+        throw new Error('Erro ao fazer login');
+      }
 
-      // ✅ Salvar o token JWT
-      localStorage.setItem('token', data.token);
-
+      // Redirecionamento baseado na role
       switch (data.user.role) {
         case 'ADMIN':
           router.push('/admin/dashboard');
@@ -46,7 +53,7 @@ export function useLogin() {
 
       return data.token;
     } catch (err: any) {
-      setError(err.message);
+      setError(err.message || 'Erro inesperado');
       return null;
     } finally {
       setLoading(false);
