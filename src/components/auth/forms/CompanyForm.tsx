@@ -1,5 +1,3 @@
-
-
 'use client'
 
 import { useState } from 'react'
@@ -7,18 +5,24 @@ import { useRouter } from 'next/navigation'
 
 export default function CompanyForm() {
   const router = useRouter()
+
+  // Estado do formulário
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     companyName: '',
   })
+
+  // Estado de erro e carregamento
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
+  // Submissão do formulário
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
+
     try {
       const res = await fetch('/api/auth/register', {
         method: 'POST',
@@ -38,6 +42,7 @@ export default function CompanyForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Campo: Nome da Empresa */}
       <div>
         <label className="block mb-1 text-sm">Nome da Empresa</label>
         <input
@@ -48,6 +53,8 @@ export default function CompanyForm() {
           onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
         />
       </div>
+
+      {/* Campo: Nome Pessoal */}
       <div>
         <label className="block mb-1 text-sm">Seu Nome</label>
         <input
@@ -58,6 +65,8 @@ export default function CompanyForm() {
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         />
       </div>
+
+      {/* Campo: Email */}
       <div>
         <label className="block mb-1 text-sm">E-mail</label>
         <input
@@ -68,6 +77,8 @@ export default function CompanyForm() {
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
       </div>
+
+      {/* Campo: Senha */}
       <div>
         <label className="block mb-1 text-sm">Senha</label>
         <input
@@ -78,7 +89,11 @@ export default function CompanyForm() {
           onChange={(e) => setFormData({ ...formData, password: e.target.value })}
         />
       </div>
+
+      {/* Exibe erro se houver */}
       {error && <p className="text-red-500 text-sm">{error}</p>}
+
+      {/* Botão de envio */}
       <button
         type="submit"
         className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
