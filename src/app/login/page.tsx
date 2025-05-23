@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation' // App Router: useRouter from 'next/navigation' is correct for Client Components
 import { useLogin } from '@/hooks/useLogin'
 
 export default function LoginPage() {
@@ -97,3 +97,5 @@ export default function LoginPage() {
     </section>
   )
 }
+
+// Certifique-se de que todos os hooks utilizados em useLogin também estejam em arquivos marcados com 'use client'
