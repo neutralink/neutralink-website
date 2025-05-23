@@ -1,3 +1,4 @@
+'use client';
 
 import HowNeutraconectWorks from '@/components/HowNeutraconectWorks';
 import NeutraconectBenefits from '@/components/NeutraconectBenefits';
