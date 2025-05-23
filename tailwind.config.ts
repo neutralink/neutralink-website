@@ -1,5 +1,10 @@
 import type { Config } from 'tailwindcss'
 import withMT from '@material-tailwind/react/utils/withMT'
+import colors from 'tailwindcss/colors'
+
+
+
+
 
 export default withMT({
     darkMode: ['class'],
@@ -21,6 +26,7 @@ export default withMT({
   			]
   		},
   		colors: {
+            ...colors,
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			primary: {
@@ -97,5 +103,3 @@ export default withMT({
       require("tailwindcss-animate")
 ],
 } satisfies Config);
-
-

@@ -19,7 +19,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50">
+    <header className="fixed top-0 left-0 w-full z-50 bg-black">
       {/* Barra verde com contador */}
       <div className="bg-primary text-white text-center py-1 text-sm font-mono">
         <span className="hidden sm:inline">🌱 Créditos de carbono evitados: </span>
