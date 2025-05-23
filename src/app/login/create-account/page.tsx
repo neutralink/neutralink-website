@@ -6,7 +6,7 @@ export default function CreateAccountPage() {
     <section className="bg-black text-white min-h-screen py-20 px-4">
       <div className="max-w-2xl mx-auto">
         <Suspense fallback={<div>Carregando...</div>}>
-          <CreateAccountClient />
+          <CreateAccountClient selectedRole={null} />
         </Suspense>
       </div>
     </section>
