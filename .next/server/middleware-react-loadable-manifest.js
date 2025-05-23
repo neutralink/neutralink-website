@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{}"
+self.__REACT_LOADABLE_MANIFEST="{\"app/dashboard/layout.tsx -> @/components/dashboard/DashboardLayout\":{\"id\":\"app/dashboard/layout.tsx -> @/components/dashboard/DashboardLayout\",\"files\":[\"static/chunks/_app-pages-browser_src_components_dashboard_DashboardLayout_tsx.js\"]}}"
