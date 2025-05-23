@@ -8,7 +8,11 @@ export default function GeneratorForm() {
     name: '',
     email: '',
     password: '',
-    inverterBrand: '',
+    cep: '',
+    address: '',
+    city: '',
+    state: '',
+    cpf: '',
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +27,6 @@ export default function GeneratorForm() {
   return (
     <section className="max-w-lg mx-auto p-6 bg-neutral-800 rounded-lg shadow-md">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-neutral-100">Cadastro de Gerador</h2>
         <p className="text-sm text-neutral-400 mt-1">
           Preencha os dados abaixo para se registrar como gerador de créditos de carbono.
           Você poderá vincular um dispositivo IoT mais tarde no seu painel.
@@ -54,8 +57,36 @@ export default function GeneratorForm() {
           required
         />
         <input
-          name="inverterBrand"
-          placeholder="Marca do Inversor"
+          name="cpf"
+          placeholder="CPF"
+          className="w-full px-4 py-3 rounded-md bg-neutral-900 border border-neutral-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary"
+          onChange={handleChange}
+          required
+        />
+        <input
+          name="cep"
+          placeholder="CEP"
+          className="w-full px-4 py-3 rounded-md bg-neutral-900 border border-neutral-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary"
+          onChange={handleChange}
+          required
+        />
+        <input
+          name="address"
+          placeholder="Endereço completo"
+          className="w-full px-4 py-3 rounded-md bg-neutral-900 border border-neutral-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary"
+          onChange={handleChange}
+          required
+        />
+        <input
+          name="city"
+          placeholder="Cidade"
+          className="w-full px-4 py-3 rounded-md bg-neutral-900 border border-neutral-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary"
+          onChange={handleChange}
+          required
+        />
+        <input
+          name="state"
+          placeholder="Estado"
           className="w-full px-4 py-3 rounded-md bg-neutral-900 border border-neutral-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary"
           onChange={handleChange}
           required
