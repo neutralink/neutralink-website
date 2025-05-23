@@ -78,7 +78,7 @@ export default function Footer() {
 
       {/* CNPJ e Direitos Reservados */}
       <div className="border-t border-neutral-800 py-6 text-center text-xs text-neutral-500">
-        NeutraLink S.A. • CNPJ 00.000.000/0001-00 • Palmas – TO, Brasil<br />
+        EECS Tecnologia - NeutraLink • CNPJ 59.187.936/0001-16 • Palmas – TO, Brasil<br />
         © {new Date().getFullYear()} Todos os direitos reservados.
       </div>
     </footer>
