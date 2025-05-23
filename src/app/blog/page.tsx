@@ -1,7 +1,5 @@
 'use client';
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
+import { getAllPosts } from '@/lib/getAllPosts';
 import BlogBanner from '@/components/BlogBanner';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -23,26 +21,8 @@ interface Props {
 export default function BlogPage({ searchParams }: Props) {
   const postsPerPage = 6;
   const currentPage = parseInt(searchParams.page || '1', 10);
-  const postsDir = path.join(process.cwd(), 'src', 'posts');
-  const filenames = fs.readdirSync(postsDir);
 
-  // Processa os posts
-  const posts: Post[] = filenames
-    .map((filename) => {
-      const slug = filename.replace(/\.md$/, '');
-      const fileContent = fs.readFileSync(path.join(postsDir, filename), 'utf8');
-      const { data } = matter(fileContent);
-
-      return {
-        slug,
-        title: data.title,
-        date: data.date,
-        excerpt: data.excerpt,
-        coverImage: data.coverImage,
-        category: data.category,
-      };
-    })
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const posts = getAllPosts();
 
   // Paginação
   const totalPages = Math.ceil((posts.length - 1) / postsPerPage);
@@ -85,7 +65,6 @@ export default function BlogPage({ searchParams }: Props) {
                   <Link
                     href={`/blog/categoria/${post.category.toLowerCase()}`}
                     className={`inline-block text-sm font-medium px-3 py-1 rounded-full mb-3 transition ${getCategoryBadgeColor(post.category)}`}
-
                   >
                     {post.category}
                   </Link>
