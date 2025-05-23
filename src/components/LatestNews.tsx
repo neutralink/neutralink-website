@@ -12,7 +12,7 @@ interface Post {
   coverImage?: string;
 }
 
-export default function LatestNews() {
+export default async function LatestNews() {
   const postsDir = path.join(process.cwd(), 'src', 'posts');
   const filenames = fs.readdirSync(postsDir);
 

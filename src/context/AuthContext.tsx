@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 type Role = 'ADMIN' | 'GENERATOR' | 'BUYER' | 'COMPANY' | 'CERTIFIER' | 'INTEGRATOR';
 
@@ -29,7 +29,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const token = Cookies.get('token');
     if (token) {
       try {
-        const decoded = (jwt_decode as unknown as (token: string) => DecodedToken)(token);
+        const decoded = jwtDecode<DecodedToken>(token);
         setUserId(decoded.sub);
         setRole(decoded.role);
       } catch {
