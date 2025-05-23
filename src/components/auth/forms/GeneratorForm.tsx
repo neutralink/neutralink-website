@@ -19,9 +19,24 @@ export default function GeneratorForm() {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Generator form submitted:', form)
+    try {
+      const response = await fetch('/api/register-generator', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      const data = await response.json()
+      if (response.ok) {
+        alert('Cadastro realizado com sucesso!')
+      } else {
+        alert(`Erro: ${data.message}`)
+      }
+    } catch (error) {
+      console.error('Erro ao cadastrar:', error)
+      alert('Erro ao cadastrar. Tente novamente.')
+    }
   }
 
   return (
@@ -95,7 +110,7 @@ export default function GeneratorForm() {
           type="submit"
           className="w-full bg-green-500 hover:bg-green-600 text-black font-semibold py-3 rounded-md transition"
         >
-          Cadastrar como Gerador
+          Criar Conta
         </button>
       </form>
     </section>
