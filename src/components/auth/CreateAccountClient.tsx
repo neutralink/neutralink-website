@@ -1,24 +1,68 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
-import CreateAccountForm from '@/components/auth/CreateAccountForm'
+import { useState } from 'react'
 
-export default function CreateAccountClient() {
-  const searchParams = useSearchParams()
-  const role = searchParams.get('role')
+interface CreateAccountFormProps {
+  selectedRole: string | null;
+}
+
+export default function CreateAccountForm({ selectedRole }: CreateAccountFormProps) {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    confirmPassword: '',
+    role: selectedRole || 'user',
+  })
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Handle form submission logic
+  }
 
   return (
-    <>
-      <h1 className="text-3xl md:text-4xl font-bold text-center mb-6">
-        Criar Conta
-      </h1>
-      <p className="text-neutral-400 text-center mb-8">
-        Preencha os campos abaixo para registrar sua conta como{' '}
-        <span className="text-primary font-semibold">
-          {role ? role.toLowerCase() : 'usuário'}
-        </span>.
-      </p>
-      <CreateAccountForm selectedRole={role} />
-    </>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="password">Senha:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="confirmPassword">Confirme a senha:</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label>Role:</label>
+        <input type="text" value={formData.role} readOnly />
+      </div>
+      <button type="submit">Criar Conta</button>
+    </form>
   )
 }
