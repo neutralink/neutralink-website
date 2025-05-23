@@ -1,6 +1,6 @@
-'use client';
 import type { ReactNode } from 'react'
-import DashboardLayout from '@/components/dashboard/DashboardLayout'
+import dynamic from 'next/dynamic'
+const DashboardLayout = dynamic(() => import('@/components/dashboard/DashboardLayout'), { ssr: false })
 
 export const metadata = {
   title: 'Painel | NeutraLink',
