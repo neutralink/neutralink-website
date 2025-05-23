@@ -42,7 +42,7 @@ export default function SelectRolePage() {
   }
 
   return (
-    <section className="min-h-screen bg-black text-white flex items-center justify-center px-4">
+    <section className="min-h-screen bg-black text-white flex items-center justify-center px-4 pt-28">
       <div className="max-w-2xl w-full">
         <h1 className="text-3xl font-bold mb-6 text-center">
           Escolha seu tipo de conta na NeutraLink
