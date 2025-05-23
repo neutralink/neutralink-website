@@ -1,47 +1,28 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useLogin } from '@/hooks/useLogin'
 
 export default function LoginPage() {
   const router = useRouter()
-  const DEV_MODE = true // ← Altere para true para simular login automático
 
   const [isLogin, setIsLogin] = useState(true)
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
     password: '',
   })
 
   const toggleMode = () => {
     setIsLogin(!isLogin)
-    setFormData({ name: '', email: '', password: '' })
+    setFormData({ email: '', password: '' })
   }
 
-  useEffect(() => {
-    if (DEV_MODE) {
-      localStorage.setItem('user', JSON.stringify({
-        id: 'admin1',
-        name: 'Admin NeutraLink',
-        role: 'ADMIN', // você pode trocar por INTEGRATOR, GENERATOR, etc.
-      }))
-      router.push('/dashboard')
-    }
-  }, [router])
+  const { login, loading, error } = useLogin()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-
-    const fakeUser = {
-      id: '123',
-      name: formData.name || 'Usuário Teste',
-      email: formData.email,
-      role: 'INTEGRATOR', // Troque aqui também se quiser testar outras roles
-    }
-
-    localStorage.setItem('user', JSON.stringify(fakeUser))
-    router.push('/dashboard')
+    login(formData.email, formData.password)
   }
 
   return (
@@ -60,22 +41,6 @@ export default function LoginPage() {
           className="space-y-6 text-left max-w-md mx-auto"
           onSubmit={handleSubmit}
         >
-          {!isLogin && (
-            <div>
-              <label className="block mb-1 text-sm text-neutral-300">
-                Nome completo
-              </label>
-              <input
-                type="text"
-                placeholder="Seu nome"
-                className="w-full px-4 py-3 rounded-md bg-neutral-900 border border-neutral-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-              />
-            </div>
-          )}
           <div>
             <label className="block mb-1 text-sm text-neutral-300">E-mail</label>
             <input
@@ -104,9 +69,11 @@ export default function LoginPage() {
           <button
             type="submit"
             className="w-full bg-primary text-black font-semibold py-3 rounded-md hover:opacity-90 transition"
+            disabled={loading}
           >
-            {isLogin ? 'Entrar' : 'Cadastrar'}
+            {loading ? 'Entrando...' : isLogin ? 'Entrar' : 'Cadastrar'}
           </button>
+          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
         </form>
 
         <div className="mt-6 text-sm text-neutral-400">
