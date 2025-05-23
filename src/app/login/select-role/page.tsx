@@ -35,10 +35,8 @@ export default function SelectRolePage() {
     },
   ]
 
-  const handleContinue = () => {
-    if (selectedRole) {
-      router.push(`/login/create-account?role=${selectedRole}`)
-    }
+  const handleContinue = (role: string) => {
+    router.push(`/login/create-account/${role.toLowerCase()}`)
   }
 
   return (
@@ -71,10 +69,7 @@ export default function SelectRolePage() {
                 </div>
               </div>
               <button
-                onClick={() => {
-                  setSelectedRole(role.value)
-                  handleContinue()
-                }}
+                onClick={() => handleContinue(role.value)}
                 className="bg-lime-400 text-black px-4 py-1.5 font-semibold text-sm rounded-md shadow hover:opacity-90"
               >
                 Selecionar
