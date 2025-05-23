@@ -1,4 +1,7 @@
+
 'use client'
+
+import { useAuthGuard } from '@/hooks/useAuthGuard'
 
 import { useState } from 'react'
 import CreditCard from '@/components/dashboard/carteira/CreditCard'
@@ -9,6 +12,7 @@ import { Wallet } from 'lucide-react'
 import RoleSwitcherDev from '@/components/dashboard/RoleSwitcherDev'
 
 export default function WalletPage() {
+  useAuthGuard()
   const [credits] = useState([
     { id: 'c01', amount: 10, status: 'CERTIFIED', deviceType: 'neutraconect', date: '2025-04-10' },
     { id: 'c02', amount: 20, status: 'PRE_CERTIFIED', deviceType: 'neutramethane', date: '2025-04-12' },

@@ -6,7 +6,7 @@ export function useLogin() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  async function login(email: string, password: string) {
+  async function login(email: string, password: string): Promise<string | null> {
     setLoading(true);
     setError(null);
 
@@ -19,6 +19,9 @@ export function useLogin() {
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Erro ao fazer login');
+
+      // ✅ Salvar o token JWT
+      localStorage.setItem('token', data.token);
 
       switch (data.user.role) {
         case 'ADMIN':
@@ -40,8 +43,11 @@ export function useLogin() {
         default:
           router.push('/');
       }
+
+      return data.token;
     } catch (err: any) {
       setError(err.message);
+      return null;
     } finally {
       setLoading(false);
     }

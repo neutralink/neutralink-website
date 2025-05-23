@@ -20,9 +20,14 @@ export default function LoginPage() {
 
   const { login, loading, error } = useLogin()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    login(formData.email, formData.password)
+    const token = await login(formData.email, formData.password)
+
+    if (typeof token === 'string' && token.trim() !== '') {
+      localStorage.setItem('token', token)
+      router.push('/dashboard')
+    }
   }
 
   return (
