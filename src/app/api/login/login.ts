@@ -19,13 +19,13 @@ export async function POST(req: Request) {
   const { token, user } = await authRes.json();
 
   const response = NextResponse.json({ user });
-  response.headers.set('Set-Cookie', serialize('token', token, {
+  response.cookies.set('token', token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
     path: '/',
     maxAge: 60 * 60 * 24 * 7,
-  }));
+  });
 
   return response;
 }

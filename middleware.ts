@@ -45,5 +45,6 @@ export const config = {
     '/integrator/:path*',
     '/marketplace/:path*',
     '/company/:path*',
+    '/completar-perfil',
   ],
 }
