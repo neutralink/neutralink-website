@@ -6,12 +6,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
-    "build": "npm run prisma:generate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky install",
-    "prisma:generate": "prisma generate",
-    "postinstall": "prisma generate"
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -70,7 +68,6 @@
     "husky": "^9.1.7",
     "lint-staged": "^15.5.1",
     "prettier": "^3.5.3",
-    "prisma": "^6.8.2",
     "typescript": "^5.8.3"
   },
   "lint-staged": {
