@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { RefreshCcw } from 'lucide-react'
-import RoleSwitcherDev from '@/components/dashboard/RoleSwitcherDev'
+import RoleSwitcherDev from '../../../../components/dashboard/RoleSwitcherDev'
 
 
 export default function GeradorHomePage() {

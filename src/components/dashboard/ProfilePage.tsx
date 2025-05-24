@@ -2,11 +2,11 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { Switch } from '@/components/ui/switch'
-import { Button } from '@/components/ui/button'
-import { EditProfileModal } from '@/components/dashboard/EditProfileModal'
+import { Switch } from '../../components/ui/switch'
+import { Button } from '../../components/ui/button'
+import { EditProfileModal } from './EditProfileModal'
 import { ConfirmDeleteModal } from './ConfirmDeleteModal'
-import { QrCodeModal } from '@/components/dashboard/QrCodeModal'
+import { QrCodeModal } from './QrCodeModal'
 
 import {
   User,

@@ -2,10 +2,10 @@
 
 import { notFound } from 'next/navigation'
 import { useParams } from 'next/navigation'
-import GeneratorForm from '@/components/auth/forms/GeneratorForm'
-import BuyerForm from '@/components/auth/forms/BuyerForm'
-import CompanyForm from '@/components/auth/forms/CompanyForm'
-import IntegratorForm from '@/components/auth/forms/IntegratorForm'
+import GeneratorForm from '../../../../components/auth/forms/GeneratorForm'
+import BuyerForm from '../../../../components/auth/forms/BuyerForm'
+import CompanyForm from '../../../../components/auth/forms/CompanyForm'
+import IntegratorForm from '../../../../components/auth/forms/IntegratorForm'
 
 const forms = {
   generator: <GeneratorForm />,

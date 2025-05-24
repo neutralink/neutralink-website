@@ -1,12 +1,12 @@
 'use client'
 
-import { useAuthGuard } from '@/hooks/useAuthGuard'
+import { useAuthGuard } from '../../hooks/useAuthGuard'
 import { useState, useEffect, ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
 import { Bell, Leaf, Factory, Flame, DollarSign, Store } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from '../../components/ui/button'
 import Image from 'next/image'
-import RoleSwitcherDev from '@/components/dashboard/RoleSwitcherDev'
+import RoleSwitcherDev from '../../components/dashboard/RoleSwitcherDev'
 
 export default function DashboardPage() {
   const router = useRouter()

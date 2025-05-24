@@ -1,15 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import CreditFilterBar from '@/components/dashboard/marketplace/CreditFilterBar'
-import CreditCard from '@/components/dashboard/marketplace/CreditCard'
-import SummaryPanel from '@/components/dashboard/marketplace/SummaryPanel'
-import SalesList from '@/components/dashboard/marketplace/SalesList'
-import MarketPageLayout from '@/components/dashboard/marketplace/MarketPageLayout'
-import { Credit } from '@/components/dashboard/marketplace/types'
-import CreditDetailModal from '@/components/dashboard/marketplace/CreditDetailModal'
-import SellModal from '@/components/dashboard/marketplace/SellModal'
-import { Button } from '@/components/ui/button'
+import CreditFilterBar from '../../../components/dashboard/marketplace/CreditFilterBar'
+import CreditCard from '../../../components/dashboard/marketplace/CreditCard'
+import SummaryPanel from '../../../components/dashboard/marketplace/SummaryPanel'
+import SalesList from '../../../components/dashboard/marketplace/SalesList'
+import MarketPageLayout from '../../../components/dashboard/marketplace/MarketPageLayout'
+import { Credit } from '../../../components/dashboard/marketplace/types'
+import CreditDetailModal from '../../../components/dashboard/marketplace/CreditDetailModal'
+import SellModal from '../../../components/dashboard/marketplace/SellModal'
+import { Button } from '../../../components/ui/button'
 
 const mockCredits = [
   {

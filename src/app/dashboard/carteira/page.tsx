@@ -3,7 +3,7 @@
 
 import { useAuthGuard } from '@/hooks/useAuthGuard'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import CreditCard from '@/components/dashboard/carteira/CreditCard'
 import CreditTable from '@/components/dashboard/carteira/CreditTable'
 import ExportButton from '@/components/dashboard/carteira/ExportButton'
@@ -13,12 +13,34 @@ import RoleSwitcherDev from '@/components/dashboard/RoleSwitcherDev'
 
 export default function WalletPage() {
   useAuthGuard()
-  const [credits] = useState([
-    { id: 'c01', amount: 10, status: 'CERTIFIED', deviceType: 'neutraconect', date: '2025-04-10' },
-    { id: 'c02', amount: 20, status: 'PRE_CERTIFIED', deviceType: 'neutramethane', date: '2025-04-12' },
-    { id: 'c03', amount: 15, status: 'SOLD', deviceType: 'neutraconect', date: '2025-04-15', price: 900 },
-    { id: 'c04', amount: 12, status: 'BOUGHT', deviceType: 'neutramethane', date: '2025-04-18' },
-  ])
+  type Credit = {
+    id: string;
+    amount: number;
+    status: 'CERTIFIED' | 'PRE_CERTIFIED' | 'SOLD' | 'BOUGHT';
+    deviceType: string;
+    date: string;
+    price?: number;
+  }
+
+  const [credits, setCredits] = useState<Credit[]>([])
+
+  useEffect(() => {
+    const fetchCredits = async () => {
+      try {
+        const response = await fetch('https://api.neutralinkeco.com/credits', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        })
+        const data = await response.json()
+        setCredits(data)
+      } catch (error) {
+        console.error('Erro ao buscar créditos:', error)
+      }
+    }
+
+    fetchCredits()
+  }, [])
 
   const total = credits.reduce((acc, c) => acc + c.amount, 0)
   const certificados = credits.filter((c) => c.status === 'CERTIFIED').reduce((acc, c) => acc + c.amount, 0)

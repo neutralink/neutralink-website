@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { MapPin, BadgeCheck, Share2, Heart } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from '../../../components/ui/button'
 
 interface CreditCardProps {
   credit: {

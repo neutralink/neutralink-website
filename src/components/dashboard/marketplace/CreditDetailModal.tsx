@@ -1,10 +1,10 @@
 'use client'
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../../../components/ui/dialog'
+import { Button } from '../../../components/ui/button'
 import { useState } from 'react'
 import { Leaf, MapPin, Factory } from 'lucide-react'
-import PaymentModal from '@/components/dashboard/marketplace/PaymentModal'
+import PaymentModal from './PaymentModal'
 
 // Interface localizada no início do arquivo
 // Tente usar o tipo Credit importado, se existir e for padronizado.

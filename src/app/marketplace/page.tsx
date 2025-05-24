@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import MarketplaceHighlight from '@/components/MarketplaceHighlight';
+import MarketplaceHighlight from '../../components/MarketplaceHighlight';
 
 export default function MarketplacePage() {
   const [status, setStatus] = useState('');

@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation' // App Router: useRouter from 'next/navigation' is correct for Client Components
-import { useLogin } from '@/hooks/useLogin'
-import OAuthButtons from '@/components/auth/OAuthButtons'
+import { useLogin } from '../../hooks/useLogin'
+import OAuthButtons from '../../components/auth/OAuthButtons'
 import { signIn } from 'next-auth/react'
 
 export default function LoginPage() {

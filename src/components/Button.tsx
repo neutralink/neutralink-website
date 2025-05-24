@@ -1,5 +1,5 @@
 // src/components/Button.tsx
-import { cn } from '@/lib/utils'; // Vamos criar essa função 'cn' para juntar classes
+import { cn } from '../lib/utils'; // Vamos criar essa função 'cn' para juntar classes
 import { ButtonHTMLAttributes } from 'react';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

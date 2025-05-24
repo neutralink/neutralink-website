@@ -1,7 +1,7 @@
 'use client'
 
 import { Credit } from './types'
-import { Button } from '@/components/ui/button'
+import { Button } from '../../../components/ui/button'
 import { Pencil, Trash2 } from 'lucide-react'
 
 interface SalesListProps {

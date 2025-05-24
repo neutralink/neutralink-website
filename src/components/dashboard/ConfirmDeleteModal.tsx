@@ -1,7 +1,7 @@
 'use client'
 
 import * as Dialog from '@radix-ui/react-dialog'
-import { Button } from '@/components/ui/button'
+import { Button } from '../../components/ui/button'
 import { X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 

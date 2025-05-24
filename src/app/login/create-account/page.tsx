@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import CreateAccountClient from '@/components/auth/CreateAccountClient'
+import CreateAccountClient from '../../../components/auth/CreateAccountClient'
 
 export default function CreateAccountPage() {
   return (
