@@ -23,7 +23,7 @@ export default function CreateAccountByRolePage() {
   }
 
   return (
-    <section className="min-h-screen px-6 py-24">
+    <section className="min-h-screen px-6 pt-32 pb-24">
       <div className="max-w-3xl mx-auto">
         {forms[role]}
       </div>
