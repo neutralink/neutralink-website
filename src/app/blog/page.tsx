@@ -42,7 +42,7 @@ export default function BlogPage({ searchParams }: Props) {
         {currentPage === 1 && <BlogBanner post={latestPost} />}
 
         {/* Lista de Posts */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16 animate-fade-in">
           {paginatedPosts.map((post) => (
             <div
               key={post.slug}
@@ -71,7 +71,9 @@ export default function BlogPage({ searchParams }: Props) {
                 )}
 
                 {/* Título e Data */}
-                <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
+                <Link href={`/blog/${post.slug}`} className="hover:underline">
+                  <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
+                </Link>
                 <p className="text-sm text-neutral-500 mb-4">
                   {new Date(post.date).toLocaleDateString('pt-BR', {
                     day: '2-digit',
@@ -86,7 +88,7 @@ export default function BlogPage({ searchParams }: Props) {
                 {/* Link para o Post */}
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="text-primary font-medium hover:underline"
+                  className="text-primary font-semibold hover:underline inline-flex items-center gap-1"
                 >
                   Ler mais →
                 </Link>

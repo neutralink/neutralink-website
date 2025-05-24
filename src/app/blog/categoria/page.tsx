@@ -67,7 +67,7 @@ export default function CategoriaIndexPage() {
         <div className="md:col-span-3 space-y-24">
           {categories.map((cat) => (
             <div key={cat} id={cat.toLowerCase()}>
-              <h2 className="text-2xl font-bold mb-6 border-b border-neutral-200 pb-2">
+              <h2 className="text-2xl font-bold mb-6 border-b border-neutral-200 pb-2 whitespace-nowrap">
                 {cat}
               </h2>
 
@@ -75,7 +75,7 @@ export default function CategoriaIndexPage() {
                 {groupedByCategory[cat].map((post) => (
                   <div
                     key={post.slug}
-                    className="border border-neutral-200 rounded-lg overflow-hidden shadow hover:shadow-lg transition bg-white"
+                    className="border border-neutral-200 rounded-lg overflow-hidden shadow hover:shadow-lg hover:-translate-y-1 hover:ring-2 hover:ring-primary transition-all bg-white"
                   >
                     <div className="relative w-full h-48">
                       <Image
@@ -100,19 +100,19 @@ export default function CategoriaIndexPage() {
                           }[cat] ?? 'bg-neutral-100 text-neutral-600'
                         }`}
                       >
-                        {cat}
+                        <span className="mr-1">📂</span> {cat}
                       </Link>
 
                       <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
-                      <p className="text-sm text-neutral-500 mb-4">
-                        {new Date(post.date).toLocaleDateString('pt-BR')}
+                      <p className="text-sm text-neutral-500 mb-4 flex items-center gap-1">
+                        🕒 {new Date(post.date).toLocaleDateString('pt-BR')}
                       </p>
                       <p className="text-neutral-700 mb-4">{post.excerpt}</p>
                       <Link
                         href={`/blog/${post.slug}`}
                         className="text-primary font-medium hover:underline"
                       >
-                        Ler mais →
+                        Ler mais <span>→</span>
                       </Link>
                     </div>
                   </div>

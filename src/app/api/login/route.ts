@@ -5,11 +5,20 @@ import { serialize } from 'cookie';
 export async function POST(req: Request) {
   const { email, password } = await req.json();
 
-  const authRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
-  });
+  if (!email || !password) {
+    return NextResponse.json({ error: 'Email e senha são obrigatórios.' }, { status: 400 });
+  }
+
+  let authRes;
+  try {
+    authRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+  } catch (err) {
+    return NextResponse.json({ error: 'Erro de rede. Tente novamente mais tarde.' }, { status: 500 });
+  }
 
   if (!authRes.ok) {
     const error = await authRes.json();
@@ -17,8 +26,8 @@ export async function POST(req: Request) {
   }
 
   const { token, user } = await authRes.json();
-
-  const response = NextResponse.json({ user });
+  const { password: _, ...safeUser } = user;
+  const response = NextResponse.json({ user: safeUser });
   response.cookies.set('token', token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
