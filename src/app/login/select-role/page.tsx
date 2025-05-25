@@ -36,7 +36,7 @@ export default function SelectRolePage() {
   ]
 
   const handleContinue = (role: string) => {
-    router.push(`/login/create-account/${role.toLowerCase()}`)
+    router.push(`/login/google?role=${role}`)
   }
 
   return (

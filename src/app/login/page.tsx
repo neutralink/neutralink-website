@@ -9,16 +9,10 @@ import { signIn } from 'next-auth/react'
 export default function LoginPage() {
   const router = useRouter()
 
-  const [isLogin, setIsLogin] = useState(true)
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   })
-
-  const toggleMode = () => {
-    setIsLogin(!isLogin)
-    setFormData({ email: '', password: '' })
-  }
 
   const { login, loading, error } = useLogin()
 
@@ -35,13 +29,9 @@ export default function LoginPage() {
   return (
     <section className="bg-black text-white min-h-screen py-24 px-6">
       <div className="max-w-3xl mx-auto text-center">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">
-          {isLogin ? 'Acesse sua conta' : 'Crie sua conta'}
-        </h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">Acesse sua conta</h1>
         <p className="text-neutral-400 mb-10">
-          {isLogin
-            ? 'Entre com seu e-mail e senha para acessar a plataforma.'
-            : 'Preencha os dados para criar sua conta gratuita.'}
+          Entre com seu e-mail e senha ou com sua conta Google, se já estiver cadastrado.
         </p>
 
         <form
@@ -78,13 +68,14 @@ export default function LoginPage() {
             className="w-full bg-primary text-black font-semibold py-3 rounded-md hover:opacity-90 transition"
             disabled={loading}
           >
-            {loading ? 'Entrando...' : isLogin ? 'Entrar' : 'Cadastrar'}
+            {loading ? 'Entrando...' : 'Entrar'}
           </button>
           {error && <p className="text-red-500 text-sm text-center">{error}</p>}
         </form>
 
         <div className="my-6 text-center text-neutral-400">ou continue com</div>
         <div className="flex justify-center gap-4">
+          {/* Backend deve rejeitar se o usuário não existir ainda */}
           <button
             onClick={() => signIn('google')}
             className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition"
@@ -100,21 +91,10 @@ export default function LoginPage() {
         </div>
 
         <div className="mt-6 text-sm text-neutral-400">
-          {isLogin ? (
-            <>
-              Ainda não tem conta?{' '}
-              <button onClick={() => router.push('/login/select-role')} className="text-primary underline">
-                Criar agora
-              </button>
-            </>
-          ) : (
-            <>
-              Já tem conta?{' '}
-              <button onClick={toggleMode} className="text-primary underline">
-                Entrar
-              </button>
-            </>
-          )}
+          Ainda não tem conta?{' '}
+          <button onClick={() => router.push('/login/select-role')} className="text-primary underline">
+            Criar agora
+          </button>
         </div>
       </div>
     </section>
