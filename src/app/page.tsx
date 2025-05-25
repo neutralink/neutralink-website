@@ -11,6 +11,8 @@ import MarketplaceHighlight from '../components/MarketplaceHighlight';
 import VideoShowcase from '../components/VideoShowcase';
 
 export default function HomePage() {
+  console.log('✅ GOOGLE CLIENT ID:', process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID);
+
   return (
     <div className="flex flex-col">
       <HeroSection />
@@ -20,10 +22,8 @@ export default function HomePage() {
       <Benefits />
       <CreditOwnership />
       <LatestNews />
-      <FinalCTA/>
+      <FinalCTA />
       {/* Aqui virão as outras seções depois: */}
-     
-     
     </div>
   );
 }
