@@ -8,6 +8,7 @@ import { signIn } from 'next-auth/react'
 
 export default function LoginPage() {
   const router = useRouter()
+  console.log('✅ GOOGLE CLIENT ID:', process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID)
 
   const [formData, setFormData] = useState({
     email: '',
