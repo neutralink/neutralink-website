@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { GoogleLogin } from '@react-oauth/google'
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
 
 export default function GoogleLoginPage() {
   const router = useRouter()
@@ -52,10 +52,12 @@ export default function GoogleLoginPage() {
         <p className="text-neutral-400 mb-6">
           Clique abaixo para entrar com sua conta Google e finalizar seu cadastro como <strong>{role}</strong>.
         </p>
-        <GoogleLogin
-          onSuccess={handleGoogleLogin}
-          onError={() => alert('Erro ao autenticar com Google')}
-        />
+        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
+          <GoogleLogin
+            onSuccess={handleGoogleLogin}
+            onError={() => alert('Erro ao autenticar com Google')}
+          />
+        </GoogleOAuthProvider>
       </div>
     </div>
   )
