@@ -1,14 +1,17 @@
-
-
 'use client'
 
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { GoogleLogin } from '@react-oauth/google'
 
 export default function GoogleLoginPage() {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const role = searchParams.get('role')
+  const [role, setRole] = useState<string | null>(null)
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    setRole(params.get('role'))
+  }, [])
 
   const handleGoogleLogin = async (credentialResponse: any) => {
     const idToken = credentialResponse.credential
