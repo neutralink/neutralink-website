@@ -43,95 +43,40 @@ export default function MobileBottomBar() {
 }
 
 function getNavItemsByRole(role: string) {
-  switch (role) {
-    case 'GENERATOR':
-      return [
-        {
-          href: '/dashboard',
-          label: 'Home',
-          icon: () => <LayoutDashboard className="w-5 h-5" />,
-        },
-        {
-          href: '/dashboard/pool',
-          label: 'Pool',
-          icon: () => <Leaf className="w-5 h-5" />,
-        },
-        {
-          href: '/dashboard/dispositivos',
-          label: 'Dispositivos',
-          icon: () => <HardDrive className="w-5 h-5" />,
-        },
-        {
-          href: '/dashboard/carteira',
-          label: 'Carteira',
-          icon: () => <Wallet className="w-5 h-5" />,
-        },
-        {
-          href: '/dashboard/marketplace',
-          label: 'Marketplace',
-          icon: () => <PlugZap className="w-5 h-5" />,
-        },
-        {
-          href: '/dashboard/configuracoes',
-          label: 'Configurações',
-          icon: () => <Settings className="w-5 h-5" />,
-        },
-      ]
-    case 'ADMIN':
-      return [
-        {
-          href: '/dashboard',
-          label: 'Admin',
-          icon: () => <LayoutDashboard className="w-5 h-5" />,
-        },
-        {
-          href: '/dashboard/configuracoes',
-          label: 'Config',
-          icon: () => <Settings className="w-5 h-5" />,
-        },
-      ]
-    case 'BUYER':
-      return [
-        {
-          href: '/dashboard',
-          label: 'Home',
-          icon: () => <LayoutDashboard className="w-5 h-5" />,
-        },
-        {
-          href: '/dashboard/marketplace',
-          label: 'Marketplace',
-          icon: () => <PlugZap className="w-5 h-5" />,
-        },
-        {
-          href: '/dashboard/carteira',
-          label: 'Carteira',
-          icon: () => <Wallet className="w-5 h-5" />,
-        },
-        {
-          href: '/dashboard/configuracoes',
-          label: 'Configurações',
-          icon: () => <Settings className="w-5 h-5" />,
-        },
-      ]
-    case 'INTEGRATOR':
-      return [
-        {
-          href: '/dashboard',
-          label: 'Home',
-          icon: () => <LayoutDashboard className="w-5 h-5" />,
-        },
-        {
-          href: '/dashboard/dispositivos',
-          label: 'Dispositivos',
-          icon: () => <HardDrive className="w-5 h-5" />,
-        },
-        {
-          href: '/dashboard/configuracoes',
-          label: 'Configurações',
-          icon: () => <Settings className="w-5 h-5" />,
-        },
-      ]
-    default:
-      return []
+  const baseIcons = {
+    dashboard: () => <LayoutDashboard className="w-5 h-5" />,
+    pool: () => <Leaf className="w-5 h-5" />,
+    dispositivos: () => <HardDrive className="w-5 h-5" />,
+    carteira: () => <Wallet className="w-5 h-5" />,
+    marketplace: () => <PlugZap className="w-5 h-5" />,
+    configuracoes: () => <Settings className="w-5 h-5" />,
   }
+
+  const navConfig: Record<string, { href: string; label: string; icon: () => JSX.Element }[]> = {
+    GENERATOR: [
+      { href: '/dashboard', label: 'Home', icon: baseIcons.dashboard },
+      { href: '/dashboard/pool', label: 'Pool', icon: baseIcons.pool },
+      { href: '/dashboard/dispositivos', label: 'Dispositivos', icon: baseIcons.dispositivos },
+      { href: '/dashboard/carteira', label: 'Carteira', icon: baseIcons.carteira },
+      { href: '/dashboard/marketplace', label: 'Marketplace', icon: baseIcons.marketplace },
+      { href: '/dashboard/configuracoes', label: 'Configurações', icon: baseIcons.configuracoes },
+    ],
+    ADMIN: [
+      { href: '/dashboard', label: 'Admin', icon: baseIcons.dashboard },
+      { href: '/dashboard/configuracoes', label: 'Config', icon: baseIcons.configuracoes },
+    ],
+    BUYER: [
+      { href: '/dashboard', label: 'Home', icon: baseIcons.dashboard },
+      { href: '/dashboard/marketplace', label: 'Marketplace', icon: baseIcons.marketplace },
+      { href: '/dashboard/carteira', label: 'Carteira', icon: baseIcons.carteira },
+      { href: '/dashboard/configuracoes', label: 'Configurações', icon: baseIcons.configuracoes },
+    ],
+    INTEGRATOR: [
+      { href: '/dashboard', label: 'Home', icon: baseIcons.dashboard },
+      { href: '/dashboard/dispositivos', label: 'Dispositivos', icon: baseIcons.dispositivos },
+      { href: '/dashboard/configuracoes', label: 'Configurações', icon: baseIcons.configuracoes },
+    ],
+  }
+
+  return navConfig[role] || []
 }
