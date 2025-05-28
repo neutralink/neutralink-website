@@ -27,8 +27,7 @@ export async function POST(req: Request) {
 
   const { token, user } = await authRes.json();
   const { password: _, ...safeUser } = user;
-  const response = NextResponse.json({ user: safeUser });
-  response.cookies.set('token', token, {
+  const serialized = serialize('token', token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
@@ -36,5 +35,11 @@ export async function POST(req: Request) {
     maxAge: 60 * 60 * 24 * 7,
   });
 
-  return response;
+  return new Response(JSON.stringify({ user: safeUser }), {
+    status: 200,
+    headers: {
+      'Set-Cookie': serialized,
+      'Content-Type': 'application/json',
+    },
+  });
 }

@@ -1,8 +1,7 @@
-
-
 'use client'
 
 import { useState } from 'react'
+import { GoogleLogin } from '@react-oauth/google';
 
 export default function GeneratorRegistrationPage() {
   const [formData, setFormData] = useState({
@@ -22,16 +21,45 @@ export default function GeneratorRegistrationPage() {
     })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('Form submitted:', formData)
-    // TODO: Integrate with backend route to create user
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...formData, role: 'GENERATOR' }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao criar conta');
+      }
+
+      const data = await response.json();
+      console.log('Usuário registrado com sucesso:', data);
+      // TODO: redirecionar para dashboard ou tela de perfil
+    } catch (error) {
+      console.error('Erro ao enviar formulário:', error);
+    }
+  };
 
   return (
     <section className="bg-black text-white min-h-screen py-24 px-6">
       <div className="max-w-xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">Cadastro do Gerador</h1>
+        <div className="mb-6">
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              console.log('Google login sucesso', credentialResponse);
+              // TODO: enviar token ao backend para login ou criação de conta
+            }}
+            onError={() => {
+              console.error('Erro ao fazer login com Google');
+            }}
+          />
+          <div className="text-center my-4 text-sm text-neutral-400">ou cadastre com e-mail</div>
+        </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"

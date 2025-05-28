@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { usePathname } from 'next/navigation';
+import { AuthProvider } from '@/contexts/AuthContext';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -16,9 +17,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="pt-BR">
       <body className="flex flex-col min-h-screen text-foreground">
         <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
-          {!isDashboard && <Header />}
-          <main className="flex-1">{children}</main>
-          {!isDashboard && <Footer />}
+          <AuthProvider>
+            {!isDashboard && <Header />}
+            <main className="flex-1">{children}</main>
+            {!isDashboard && <Footer />}
+          </AuthProvider>
         </GoogleOAuthProvider>
       </body>
     </html>

@@ -1,8 +1,8 @@
-// File: /Users/pedrosoares/Documents/GitHub/neutralink-website/src/app/dashboard/page.tsx
-import * as entry from '../../../../src/app/dashboard/page.js'
+// File: /Users/pedrosoares/Documents/GitHub/neutralink-website/src/app/login/select-role/page.tsx
+import * as entry from '../../../../../src/app/login/select-role/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
-type TEntry = typeof import('../../../../src/app/dashboard/page.js')
+type TEntry = typeof import('../../../../../src/app/login/select-role/page.js')
 
 // Check that the entry is a valid entry
 checkFields<Diff<{

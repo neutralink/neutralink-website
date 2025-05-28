@@ -1,4 +1,5 @@
 'use client'
+import Cookies from 'js-cookie';
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation' // App Router: useRouter from 'next/navigation' is correct for Client Components
@@ -22,7 +23,7 @@ export default function LoginPage() {
     const token = await login(formData.email, formData.password)
 
     if (typeof token === 'string' && token.trim() !== '') {
-      localStorage.setItem('token', token)
+      Cookies.set('token', token, { expires: 7 });
       router.push('/dashboard')
     }
   }
