@@ -1,3 +1,5 @@
+@tailwind base;
+
 @layer base {
     :root {
       --primary: 152 55% 47%; /* Verde NeutraLink */
