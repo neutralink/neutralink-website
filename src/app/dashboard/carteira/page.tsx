@@ -9,7 +9,7 @@ import CreditTable from '@/components/dashboard/carteira/CreditTable'
 import ExportButton from '@/components/dashboard/carteira/ExportButton'
 import { Button } from '@/components/ui/button'
 import { Wallet } from 'lucide-react'
-import RoleSwitcherDev from '@/components/dashboard/RoleSwitcherDev'
+
 
 export default function WalletPage() {
   useAuthGuard()
@@ -55,7 +55,7 @@ export default function WalletPage() {
         Gerencie seus créditos de carbono tokenizados. Aqui você pode acompanhar saldos, histórico de transações e realizar ações como certificação, compra ou venda.
       </p>
 
-      <RoleSwitcherDev />
+    
 
       {/* Saldo em carteira */}
       <div className="bg-gray-900 p-4 rounded-xl flex items-center gap-4">
