@@ -10,16 +10,17 @@ import {
   PlugZap,
   Wallet,
 } from 'lucide-react'
-import { useUser } from '@/contexts/AuthContext'
+import { useContext } from 'react'
+import { AuthContext } from '@/contexts/AuthContext'
 
 export default function MobileBottomBar() {
   const pathname = usePathname()
-  const { user } = useUser()
-  const role = user?.role
+  const context = useContext(AuthContext)
+  if (!context || !context.user) return <div className="h-20" />
+  const { user } = context
+  const role = user.role
 
-  if (!role) return <div className="h-20" />
-
-  const navItems = getNavItemsByRole(role)
+  const navItems = getNavItemsByRole(role ?? '')
 
   return (
     <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex justify-around items-center backdrop-blur-md bg-black/30 text-white border-0 border-neutral-100 px-4 py-2 h-20">

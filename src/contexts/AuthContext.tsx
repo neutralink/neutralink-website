@@ -14,8 +14,10 @@ interface DecodedToken {
 }
 
 interface AuthContextType {
-  userId: string | null;
-  role: Role | null;
+  user: {
+    userId: string | null;
+    role: Role | null;
+  };
   isAuthenticated: boolean;
   logout: () => void;
 }
@@ -51,7 +53,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ userId, role, isAuthenticated: !!userId, logout }}>
+    <AuthContext.Provider value={{ user: { userId, role }, isAuthenticated: !!userId, logout }}>
       {children}
     </AuthContext.Provider>
   );
