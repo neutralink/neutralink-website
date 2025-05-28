@@ -12,7 +12,7 @@ import { useUser } from '@/hooks/useUser'
 export default function DashboardPage() {
   const router = useRouter()
   useAuthGuard()
-  const { user } = useUser(); // Ajuste conforme seu hook real
+  const { role } = useUser();
 
   const [totalHoje, setTotalHoje] = useState(28.5)
   const [totalMes, setTotalMes] = useState(620.8)
@@ -114,7 +114,7 @@ export default function DashboardPage() {
           Ver histórico
         </Button>
       </div>
-      {user?.role === 'GENERATOR' && (
+      {role === 'GENERATOR' && (
         <div className="fixed bottom-0 left-0 right-0 z-50">
           <MobileBottomBar />
         </div>
