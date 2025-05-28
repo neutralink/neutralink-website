@@ -75,6 +75,11 @@ function getNavItemsByRole(role: string) {
           icon: () => <Wallet className="w-5 h-5" />,
         },
         {
+          href: '/dashboard/marketplace',
+          label: 'Marketplace',
+          icon: () => <PlugZap className="w-5 h-5" />,
+        },
+        {
           href: '/dashboard/configuracoes',
           label: 'Configurações',
           icon: () => <Settings className="w-5 h-5" />,
