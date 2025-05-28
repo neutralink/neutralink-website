@@ -28,8 +28,8 @@ export default function LoginPage() {
   }
 
   return (
-    <section className="bg-black text-white min-h-screen py-24 px-6">
-      <div className="max-w-3xl mx-auto text-center">
+    <section className="bg-black text-white min-h-screen flex items-center justify-center px-6">
+      <div className="w-full max-w-3xl text-center">
         <h1 className="text-3xl md:text-4xl font-bold mb-4">Acesse sua conta</h1>
         <p className="text-neutral-400 mb-10">
           Entre com seu e-mail e senha ou com sua conta Google, se já estiver cadastrado.
@@ -76,7 +76,6 @@ export default function LoginPage() {
 
         <div className="my-6 text-center text-neutral-400">ou continue com</div>
         <div className="flex justify-center gap-4">
-          {/* Backend deve rejeitar se o usuário não existir ainda */}
           <button
             onClick={() => signIn('google')}
             className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition"
