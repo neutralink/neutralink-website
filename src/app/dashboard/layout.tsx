@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { AuthProvider } from '@/contexts/AuthContext'
 
 const DashboardLayout = dynamic(() => import('@/components/dashboard/DashboardLayout'), { ssr: false })
 
@@ -37,5 +38,9 @@ export default function Layout({ children }: { children: ReactNode }) {
       </div>
     )
 
-  return <DashboardLayout>{children}</DashboardLayout>
+  return (
+    <AuthProvider>
+      <DashboardLayout>{children}</DashboardLayout>
+    </AuthProvider>
+  )
 }
