@@ -12,7 +12,8 @@ import { useUser } from '@/hooks/useUser'
 export default function DashboardPage() {
   const router = useRouter()
   useAuthGuard()
-  const { role } = useUser();
+  const { user } = useUser();
+  const role = user?.role;
 
   const [totalHoje, setTotalHoje] = useState(28.5)
   const [totalMes, setTotalMes] = useState(620.8)
