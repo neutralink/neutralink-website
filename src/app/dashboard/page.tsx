@@ -6,8 +6,8 @@ import { useRouter } from 'next/navigation'
 import { Bell, Leaf, Factory, Flame, DollarSign, Store } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 import Image from 'next/image'
-import MobileBottomBar from '../../components/MobileBottomBar';
-import { useUser } from '../../hooks/useUser'
+import MobileBottomBar from '@/components/dashboard/MobileBottomBar';
+import { useUser } from '@/hooks/useUser'
 
 export default function DashboardPage() {
   const router = useRouter()
