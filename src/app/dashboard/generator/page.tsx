@@ -1,24 +1,19 @@
 'use client'
 
-import type { ReactNode } from 'react'
-import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import dynamic from 'next/dynamic'
 import { AuthProvider } from '@/contexts/AuthContext'
 
 const DashboardLayout = dynamic(() => import('@/components/dashboard/DashboardLayout'), { ssr: false })
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function Page() {
   const router = useRouter()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-  const verifyAuth = (token: string): boolean => {
-    return typeof token === 'string' && token.trim().length > 10
-  }
-
   useEffect(() => {
     const token = localStorage.getItem('token')
-    if (!verifyAuth(token || '')) {
+    if (!token || token.trim().length < 10) {
       router.push('/login')
     } else {
       setIsAuthenticated(true)
@@ -40,7 +35,12 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   return (
     <AuthProvider>
-      <DashboardLayout>{children}</DashboardLayout>
+      <DashboardLayout>
+        <div className="p-6">
+          <h1 className="text-xl font-bold">Área do Gerador</h1>
+          <p>Conteúdo exclusivo para geradores de crédito de carbono.</p>
+        </div>
+      </DashboardLayout>
     </AuthProvider>
   )
 }
