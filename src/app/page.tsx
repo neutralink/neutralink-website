@@ -16,6 +16,11 @@ export default function HomePage() {
   return (
     <div className="flex flex-col">
       <HeroSection />
+      <div className="p-8">
+        <button className="bg-primary text-white px-4 py-2 rounded">
+          Botão Teste
+        </button>
+      </div>
       <HowItWorks />
       <VideoShowcase />
       <MarketplaceHighlight />
