@@ -7,7 +7,6 @@ import colors from 'tailwindcss/colors'
 
 
 export default withMT({
-    darkMode: ['class'],
     content: [
     './src/**/*.{js,ts,jsx,tsx}',
     './node_modules/@material-tailwind/react/components/**/*.{js,ts,jsx,tsx}',
