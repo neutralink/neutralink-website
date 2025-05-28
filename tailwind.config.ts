@@ -30,7 +30,7 @@ export default withMT({
   			foreground: 'hsl(var(--foreground))',
   			primary: {
   				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
+  				foreground: 'hsl(var(--primaryForeground))'
   			},
   			muted: {
   				DEFAULT: 'hsl(var(--muted))',
