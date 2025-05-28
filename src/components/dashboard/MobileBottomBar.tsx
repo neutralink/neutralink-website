@@ -10,20 +10,12 @@ import {
   PlugZap,
   Wallet,
 } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useUser } from '@/contexts/AuthContext'
 
 export default function MobileBottomBar() {
   const pathname = usePathname()
-  const [role, setRole] = useState<string | null>(null)
-
-  useEffect(() => {
-    const stored = localStorage.getItem('user')
-    if (stored) {
-      const user = JSON.parse(stored)
-      console.log('USER ROLE:', user?.role)
-      setRole(user?.role || null)
-    }
-  }, [])
+  const { user } = useUser()
+  const role = user?.role
 
   if (!role) return <div className="h-20" />
 
