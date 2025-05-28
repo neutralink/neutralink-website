@@ -56,7 +56,7 @@ export default function LoginPage() {
             <input
               type="password"
               placeholder="********"
-              className="w-full px-4 py-3 rounded-md bg-neutral-900 border border-neutral-700 text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full px-4 py-3 rounded-md bg-neutral-900 border border-neutral-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary"
               value={formData.password}
               onChange={(e) =>
                 setFormData({ ...formData, password: e.target.value })

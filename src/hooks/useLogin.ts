@@ -18,7 +18,7 @@ export function useLogin() {
     setError(null);
 
     try {
-      const res = await fetch('/api/login', {
+      const res = await fetch('https://api.neutralinkeco.com/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -28,6 +28,7 @@ export function useLogin() {
       if (!res.ok || !data.token || !data.user?.role) {
         throw new Error('Erro ao fazer login');
       }
+      localStorage.setItem('token', data.token);
 
       // Redirecionamento baseado na role
       switch (data.user.role) {
