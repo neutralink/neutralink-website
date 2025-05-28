@@ -6,10 +6,13 @@ import { useRouter } from 'next/navigation'
 import { Bell, Leaf, Factory, Flame, DollarSign, Store } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 import Image from 'next/image'
+import MobileBottomBar from '../../components/MobileBottomBar';
+import { useUser } from '../../hooks/useUser'
 
 export default function DashboardPage() {
   const router = useRouter()
   useAuthGuard()
+  const { user } = useUser(); // Ajuste conforme seu hook real
 
   const [totalHoje, setTotalHoje] = useState(28.5)
   const [totalMes, setTotalMes] = useState(620.8)
@@ -111,6 +114,11 @@ export default function DashboardPage() {
           Ver histórico
         </Button>
       </div>
+      {user?.role === 'GENERATOR' && (
+        <div className="fixed bottom-0 left-0 right-0 z-50">
+          <MobileBottomBar />
+        </div>
+      )}
     </div>
   )
 }
