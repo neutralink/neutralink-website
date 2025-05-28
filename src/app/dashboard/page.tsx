@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation'
 import { Bell, Leaf, Factory, Flame, DollarSign, Store } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 import Image from 'next/image'
-import RoleSwitcherDev from '../../components/dashboard/RoleSwitcherDev'
 
 export default function DashboardPage() {
   const router = useRouter()
@@ -111,33 +110,6 @@ export default function DashboardPage() {
         <Button onClick={() => router.push('/dashboard/carteira')} className="bg-green-500 text-white font-bold py-2 rounded-lg">
           Ver histórico
         </Button>
-      </div>
-
-      {/* Ícones fixos somente para mobile */}
-      <RoleSwitcherDev />
-      <div className="md:hidden fixed bottom-4 left-0 right-0 px-6 flex justify-around items-center z-50">
-        <button
-          className="relative flex flex-col items-center text-xs hover:text-green-400 transition"
-          aria-label="Notificações"
-        >
-          <Bell size={26} />
-          <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
-          <span className="mt-1">Alertas</span>
-        </button>
-        <button className="flex flex-col items-center text-xs hover:text-green-400 transition">
-          <Store size={26} />
-          <span className="mt-1">Marketplace</span>
-        </button>
-        <button className="flex flex-col items-center text-xs hover:text-green-400 transition">
-          <Image
-            src="/icons/user-photo.jpg"
-            alt="Avatar"
-            width={32}
-            height={32}
-            className="rounded-full object-cover"
-          />
-          <span className="mt-1">Perfil</span>
-        </button>
       </div>
     </div>
   )
