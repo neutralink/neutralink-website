@@ -20,11 +20,12 @@ export default function MobileBottomBar() {
     const stored = localStorage.getItem('user')
     if (stored) {
       const user = JSON.parse(stored)
+      console.log('USER ROLE:', user?.role)
       setRole(user?.role || null)
     }
   }, [])
 
-  if (!role) return null
+  if (!role) return <div className="h-20" />
 
   const navItems = getNavItemsByRole(role)
 
