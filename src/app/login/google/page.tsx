@@ -60,13 +60,15 @@ export default function CreateAccountPage() {
           onSubmit={async (e) => {
             e.preventDefault();
             const formData = new FormData(e.currentTarget);
+            const name = formData.get('name');
             const email = formData.get('email');
             const password = formData.get('password');
+            const cpf = formData.get('cpf');
             try {
               const res = await fetch('https://api.neutralinkeco.com/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password, role }),
+                body: JSON.stringify({ name, email, password, cpf, role }),
               });
               const data = await res.json();
               if (!res.ok) throw new Error(data.error || 'Erro ao criar conta');
@@ -80,6 +82,13 @@ export default function CreateAccountPage() {
           className="space-y-4"
         >
           <input
+            name="name"
+            type="text"
+            placeholder="Nome completo"
+            required
+            className="w-full px-4 py-3 rounded bg-neutral-800 text-white placeholder-gray-400"
+          />
+          <input
             name="email"
             type="email"
             placeholder="Seu e-mail"
@@ -90,6 +99,13 @@ export default function CreateAccountPage() {
             name="password"
             type="password"
             placeholder="Senha"
+            required
+            className="w-full px-4 py-3 rounded bg-neutral-800 text-white placeholder-gray-400"
+          />
+          <input
+            name="cpf"
+            type="text"
+            placeholder="CPF"
             required
             className="w-full px-4 py-3 rounded bg-neutral-800 text-white placeholder-gray-400"
           />
