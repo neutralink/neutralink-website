@@ -24,7 +24,18 @@ export default function Layout({ children }: { children: ReactNode }) {
     }
   }, [router])
 
-  if (!isAuthenticated) return null
+  if (!isAuthenticated)
+    return (
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+        width: '100vw'
+      }}>
+        <p>Carregando...</p>
+      </div>
+    )
 
   return <DashboardLayout>{children}</DashboardLayout>
 }
