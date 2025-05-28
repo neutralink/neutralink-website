@@ -115,7 +115,7 @@ export default function DashboardPage() {
           Ver histórico
         </Button>
       </div>
-      {role === 'GENERATOR' && (
+      {['GENERATOR', 'BUYER', 'COMPANY'].includes(role ?? '') && (
         <div className="fixed bottom-0 left-0 right-0 z-50">
           <MobileBottomBar />
         </div>
