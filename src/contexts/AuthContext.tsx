@@ -1,59 +1,58 @@
-// src/contexts/AuthContext.tsx
-'use client'
+'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
+import { jwtDecode } from 'jwt-decode';
 
-// 1. Tipo de dado do usuário (ajuste conforme necessário)
-type User = {
-  id: string
-  name: string
-  email: string
-  role: 'GENERATOR' | 'BUYER' | 'ADMIN'
+type Role = 'ADMIN' | 'GENERATOR' | 'BUYER' | 'COMPANY' | 'CERTIFIER' | 'INTEGRATOR';
+
+interface DecodedToken {
+  sub: string;
+  role: Role;
+  exp: number;
 }
 
-// 2. Tipo do contexto
-type AuthContextType = {
-  user: User | null
-  setUser: (user: User | null) => void
-  logout: () => void
+interface AuthContextType {
+  userId: string | null;
+  role: Role | null;
+  isAuthenticated: boolean;
+  logout: () => void;
 }
 
-// 3. Criação do contexto com valor inicial
-export const AuthContext = createContext<AuthContextType | undefined>(undefined)
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// 4. Provider do contexto
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null)
-
-  useEffect(() => {
-    // Aqui você pode buscar o usuário salvo no localStorage, cookies, etc.
-    const storedUser = localStorage.getItem('user')
-    if (storedUser) setUser(JSON.parse(storedUser))
-  }, [])
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [userId, setUserId] = useState<string | null>(null);
+  const [role, setRole] = useState<Role | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
-    // Salva usuário no localStorage ao atualizar
-    if (user) {
-      localStorage.setItem('user', JSON.stringify(user))
-    } else {
-      localStorage.removeItem('user')
+    const token = Cookies.get('token');
+    if (token) {
+      try {
+        const decoded = jwtDecode<DecodedToken>(token);
+        setUserId(decoded.sub);
+        setRole(decoded.role);
+      } catch {
+        setUserId(null);
+        setRole(null);
+      }
     }
-  }, [user])
+  }, []);
 
-  const logout = () => setUser(null)
+  function logout() {
+    fetch('/api/logout', { method: 'POST' }).then(() => {
+      Cookies.remove('token');
+      setUserId(null);
+      setRole(null);
+      router.push('/login');
+    });
+  }
 
   return (
-    <AuthContext.Provider value={{ user, setUser, logout }}>
+    <AuthContext.Provider value={{ userId, role, isAuthenticated: !!userId, logout }}>
       {children}
     </AuthContext.Provider>
-  )
-}
-
-// 5. Hook customizado para acessar o contexto
-export const useUser = () => {
-  const context = useContext(AuthContext)
-  if (context === undefined) {
-    throw new Error('useUser must be used within an AuthProvider')
-  }
-  return context
+  );
 }
