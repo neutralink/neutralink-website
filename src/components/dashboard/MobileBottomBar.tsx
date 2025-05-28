@@ -51,37 +51,90 @@ export default function MobileBottomBar() {
 }
 
 function getNavItemsByRole(role: string) {
-  if (role === 'GENERATOR') {
-    return [
-      
-      {
-        href: '/dashboard',
-        label: 'Home',
-        icon: () => <LayoutDashboard className="w-5 h-5" />,
-      },
-
-      {
-        href: '/dashboard/pool',
-        label: 'Pool',
-        icon: () => <Leaf className="w-5 h-5" />,
-      },
-      {
-        href: '/dashboard/dispositivos',
-        label: 'Dispositivos',
-        icon: () => <HardDrive className="w-5 h-5" />,
-      },
-      {
-        href: '/dashboard/carteira',
-        label: 'Carteira',
-        icon: () => <Wallet className="w-5 h-5" />,
-      },
-      {
-        href: '/dashboard/configuracoes',
-        label: 'Configurações',
-        icon: () => <Settings className="w-5 h-5" />,
-      },
-    ]
+  switch (role) {
+    case 'GENERATOR':
+      return [
+        {
+          href: '/dashboard',
+          label: 'Home',
+          icon: () => <LayoutDashboard className="w-5 h-5" />,
+        },
+        {
+          href: '/dashboard/pool',
+          label: 'Pool',
+          icon: () => <Leaf className="w-5 h-5" />,
+        },
+        {
+          href: '/dashboard/dispositivos',
+          label: 'Dispositivos',
+          icon: () => <HardDrive className="w-5 h-5" />,
+        },
+        {
+          href: '/dashboard/carteira',
+          label: 'Carteira',
+          icon: () => <Wallet className="w-5 h-5" />,
+        },
+        {
+          href: '/dashboard/configuracoes',
+          label: 'Configurações',
+          icon: () => <Settings className="w-5 h-5" />,
+        },
+      ]
+    case 'ADMIN':
+      return [
+        {
+          href: '/dashboard',
+          label: 'Admin',
+          icon: () => <LayoutDashboard className="w-5 h-5" />,
+        },
+        {
+          href: '/dashboard/configuracoes',
+          label: 'Config',
+          icon: () => <Settings className="w-5 h-5" />,
+        },
+      ]
+    case 'BUYER':
+      return [
+        {
+          href: '/dashboard',
+          label: 'Home',
+          icon: () => <LayoutDashboard className="w-5 h-5" />,
+        },
+        {
+          href: '/dashboard/marketplace',
+          label: 'Marketplace',
+          icon: () => <PlugZap className="w-5 h-5" />,
+        },
+        {
+          href: '/dashboard/carteira',
+          label: 'Carteira',
+          icon: () => <Wallet className="w-5 h-5" />,
+        },
+        {
+          href: '/dashboard/configuracoes',
+          label: 'Configurações',
+          icon: () => <Settings className="w-5 h-5" />,
+        },
+      ]
+    case 'INTEGRATOR':
+      return [
+        {
+          href: '/dashboard',
+          label: 'Home',
+          icon: () => <LayoutDashboard className="w-5 h-5" />,
+        },
+        {
+          href: '/dashboard/dispositivos',
+          label: 'Dispositivos',
+          icon: () => <HardDrive className="w-5 h-5" />,
+        },
+        {
+          href: '/dashboard/configuracoes',
+          label: 'Configurações',
+          icon: () => <Settings className="w-5 h-5" />,
+        },
+      ]
+    default:
+      return []
   }
-
-  return []
 }
