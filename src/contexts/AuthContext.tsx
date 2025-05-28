@@ -64,5 +64,5 @@ export function useUser() {
   if (!context) {
     throw new Error('useUser must be used within an AuthProvider');
   }
-  return context.user;
+  return context;
 }
