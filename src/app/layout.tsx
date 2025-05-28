@@ -1,6 +1,7 @@
 "use client";
 
 import './globals.css';
+import '../styles/custom-overrides.css' // <- deve vir depois da lib
 import { ReactNode } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
