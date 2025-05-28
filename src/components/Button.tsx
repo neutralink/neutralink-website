@@ -18,8 +18,8 @@ export default function Button({
     'inline-flex items-center justify-center font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2';
 
   const variants = {
-    primary: 'bg-primary text-black hover:opacity-90',
-    outline: 'border border-primary text-primary hover:bg-primary hover:text-black',
+    primary: 'bg-primary text-primaryForeground hover:opacity-90',
+    outline: 'border border-primary text-primary hover:bg-primary hover:text-primaryForeground',
     ghost: 'text-primary hover:underline',
   };
 
