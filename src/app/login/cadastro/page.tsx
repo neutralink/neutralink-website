@@ -13,17 +13,18 @@ export default function CadastroPage() {
 
   const [cpfValid, setCpfValid] = useState(true);
   const [passwordStrength, setPasswordStrength] = useState<'fraca' | 'media' | 'forte' | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const getRoleLabel = (role: string | null) => {
     switch (role) {
       case 'GENERATOR':
-        return 'Gerador de Dispositivo IoT';
+        return 'Quero vender créditos com minha energia solar';
       case 'BUYER':
-        return 'Comprador de Créditos';
+        return 'Sou uma pessoa e quero comprar créditos de carbono';
       case 'COMPANY':
-        return 'Empresa que Compensa CO₂';
+        return 'Sou uma empresa e quero compensar emissões';
       case 'INTEGRATOR':
-        return 'Integrador de Dispositivos';
+        return 'Quero conectar equipamentos e ganhar comissão';
       default:
         return '';
     }
@@ -118,19 +119,28 @@ export default function CadastroPage() {
             required
             className="w-full px-5 py-3 rounded-md bg-neutral-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-600"
           />
-          <input
-            name="password"
-            type="password"
-            placeholder="Senha"
-            required
-            onChange={(e) => {
-              const value = e.target.value;
-              if (value.length < 6) setPasswordStrength('fraca');
-              else if (/[A-Z]/.test(value) && /[0-9]/.test(value)) setPasswordStrength('forte');
-              else setPasswordStrength('media');
-            }}
-            className="w-full px-5 py-3 rounded-md bg-neutral-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-600"
-          />
+          <div className="relative">
+            <input
+              name="password"
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Senha"
+              required
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value.length < 6) setPasswordStrength('fraca');
+                else if (/[A-Z]/.test(value) && /[0-9]/.test(value)) setPasswordStrength('forte');
+                else setPasswordStrength('media');
+              }}
+              className="w-full px-5 py-3 pr-12 rounded-md bg-neutral-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-600"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-white"
+            >
+              {showPassword ? '🙈' : '👁️'}
+            </button>
+          </div>
           {passwordStrength && (
             <p className={`text-sm ${
               passwordStrength === 'fraca' ? 'text-red-400' :

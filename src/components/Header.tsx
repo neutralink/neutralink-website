@@ -58,7 +58,7 @@ export default function Header() {
             </Link>
             <div className="flex space-x-4 ml-6">
               <Link
-                href="/register"
+                href="/login/select-role"
                 className="bg-primary text-black px-4 py-2 rounded-lg font-semibold hover:opacity-90"
               >
                 Registre-se
@@ -92,7 +92,7 @@ export default function Header() {
             <Link href="/neutraconect" onClick={() => setMenuOpen(false)} className="hover:text-primary">
               NeutraConect
             </Link>
-            <Link href="/register" onClick={() => setMenuOpen(false)} className="bg-primary text-black px-4 py-2 rounded-lg font-semibold text-center">
+            <Link href="/login/select-role" onClick={() => setMenuOpen(false)} className="bg-primary text-black px-4 py-2 rounded-lg font-semibold text-center">
               Registre-se
             </Link>
             <Link href="/login" onClick={() => setMenuOpen(false)} className="border border-primary text-primary px-4 py-2 rounded-lg font-semibold text-center">

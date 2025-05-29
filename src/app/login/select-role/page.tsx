@@ -13,25 +13,25 @@ export default function SelectRolePage() {
       label: 'Quero gerar créditos com energia solar',
       value: 'GENERATOR',
       description: 'Conecte seu inversor ou sensor IoT e comece gerar NTL automaticamente.',
-      icon: <Sun className="text-lime-400 w-8 h-8" />,
+      icon: <Sun className="text-primary w-8 h-8" />,
     },
     {
       label: 'Quero comprar créditos de carbono',
       value: 'BUYER',
       description: 'Compre créditos verificados para compensar suas emissões pessoais.',
-      icon: <BadgeDollarSign className="text-lime-400 w-8 h-8" />,
+      icon: <BadgeDollarSign className="text-primary w-8 h-8" />,
     },
     {
       label: 'Sou uma empresa que precisa compensar CO₂',
       value: 'COMPANY',
       description: 'Acesse créditos certificados e relatórios ESG completos.',
-      icon: <Building2 className="text-lime-400 w-8 h-8" />,
+      icon: <Building2 className="text-primary w-8 h-8" />,
     },
     {
       label: 'Sou um integrador de dispositivos IoT',
       value: 'INTEGRATOR',
       description: 'Conecte inversores para usuários e ganhe comissões.',
-      icon: <Cable className="text-lime-400 w-8 h-8" />,
+      icon: <Cable className="text-primary w-8 h-8" />,
     },
   ]
 
@@ -70,7 +70,7 @@ export default function SelectRolePage() {
               </div>
               <button
                 onClick={() => handleContinue(role.value)}
-                className="bg-lime-400 text-black px-4 py-1.5 font-semibold text-sm rounded-md shadow hover:opacity-90"
+                className="bg-primary text-black px-4 py-1.5 font-semibold text-sm rounded-md shadow hover:opacity-90"
               >
                 Selecionar
               </button>
