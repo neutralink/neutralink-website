@@ -46,10 +46,11 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold mb-4">Conformidade</h4>
           <ul className="space-y-2 text-sm text-neutral-300">
-            <li>LGPD</li>
-            <li>GHG Protocol</li>
-            <li>Verra & Gold Standard</li>
-            <li><Link href="/terms" className="hover:text-primary">Termos de Uso</Link></li>
+            <li><Link href="/politica-de-privacidade" className="hover:text-primary">Política de Privacidade</Link></li>
+            <li><Link href="/termos-de-uso" className="hover:text-primary">Termos de Uso</Link></li>
+            <li><span>LGPD</span></li>
+            <li><span>GHG Protocol</span></li>
+            <li><span>Verra & Gold Standard</span></li>
           </ul>
         </div>
 
