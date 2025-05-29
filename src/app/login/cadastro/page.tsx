@@ -91,7 +91,10 @@ export default function CadastroPage() {
                 body: JSON.stringify({ name, email, password, cpf, role }),
               });
               const data = await res.json();
-              if (!res.ok) throw new Error(data.error || 'Erro ao criar conta');
+              if (!res.ok) {
+                alert(data.error || 'Erro ao criar conta');
+                return;
+              }
               Cookies.set('token', data.token, { expires: 7 });
               router.push('/dashboard');
             } catch (err) {
