@@ -1286,6 +1286,10 @@ video {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
+.mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
 .-ml-1 {
   margin-left: -0.25rem;
 }
@@ -3656,6 +3660,9 @@ video {
 .placeholder-gray-400::placeholder {
   --tw-placeholder-opacity: 1;
   color: rgb(156 163 175 / var(--tw-placeholder-opacity, 1));
+}
+.accent-green-600 {
+  accent-color: #16a34a;
 }
 .opacity-0 {
   opacity: 0;
