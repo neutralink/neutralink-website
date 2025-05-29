@@ -102,6 +102,19 @@ export default function CreateAccountPage() {
             required
             className="w-full px-4 py-3 rounded bg-neutral-800 text-white placeholder-gray-400"
           />
+          <label className="flex items-start space-x-2 text-sm text-gray-400">
+            <input
+              type="checkbox"
+              required
+              className="mt-1 accent-green-600"
+            />
+            <span>
+              Li e concordo com os
+              <a href="/termos" className="underline text-white mx-1" target="_blank">Termos de Uso</a>
+              e a
+              <a href="/cookies" className="underline text-white mx-1" target="_blank">Política de Cookies</a>.
+            </span>
+          </label>
           <button
             type="submit"
             className="w-full bg-green-600 hover:bg-green-700 transition font-semibold py-3 rounded"
