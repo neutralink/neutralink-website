@@ -11,6 +11,9 @@ export default function CadastroPage() {
   const [showTerms, setShowTerms] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
 
+  const [cpfValid, setCpfValid] = useState(true);
+  const [passwordStrength, setPasswordStrength] = useState<'fraca' | 'media' | 'forte' | null>(null);
+
   const getRoleLabel = (role: string | null) => {
     switch (role) {
       case 'GENERATOR':
@@ -72,6 +75,10 @@ export default function CadastroPage() {
         <form
           onSubmit={async (e) => {
             e.preventDefault();
+            if (!cpfValid) {
+              alert('CPF inválido');
+              return;
+            }
             const formData = new FormData(e.currentTarget);
             const name = formData.get('name');
             const email = formData.get('email');
@@ -113,15 +120,36 @@ export default function CadastroPage() {
             type="password"
             placeholder="Senha"
             required
+            onChange={(e) => {
+              const value = e.target.value;
+              if (value.length < 6) setPasswordStrength('fraca');
+              else if (/[A-Z]/.test(value) && /[0-9]/.test(value)) setPasswordStrength('forte');
+              else setPasswordStrength('media');
+            }}
             className="w-full px-5 py-3 rounded-md bg-neutral-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-600"
           />
+          {passwordStrength && (
+            <p className={`text-sm ${
+              passwordStrength === 'fraca' ? 'text-red-400' :
+              passwordStrength === 'media' ? 'text-yellow-400' : 'text-green-400'
+            }`}>
+              Segurança da senha: {passwordStrength}
+            </p>
+          )}
           <input
             name="cpf"
             type="text"
             placeholder="CPF"
             required
+            onChange={(e) => {
+              const value = e.target.value;
+              setCpfValid(/^\d{11}$/.test(value));
+            }}
             className="w-full px-5 py-3 rounded-md bg-neutral-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-600"
           />
+          {!cpfValid && (
+            <p className="text-red-400 text-sm">CPF inválido. Deve conter exatamente 11 números.</p>
+          )}
           <label className="flex items-start space-x-2 text-sm text-gray-400">
             <input
               type="checkbox"
