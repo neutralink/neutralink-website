@@ -36,7 +36,7 @@ export default function SelectRolePage() {
   ]
 
   const handleContinue = (role: string) => {
-    router.push(`/login/google?role=${role}`)
+    router.push(`/login/cadastro?role=${role}`)
   }
 
   return (
