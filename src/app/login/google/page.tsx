@@ -32,14 +32,7 @@ export default function CreateAccountPage() {
 
       Cookies.set('token', data.token, { expires: 7 });
 
-      const user = data.user
-      const isProfileIncomplete = !user.cpf || !user.birthDate || !user.address
-
-      if (isProfileIncomplete) {
-        router.push('/complete-profile')
-      } else {
-        router.push('/dashboard')
-      }
+      router.push('/dashboard')
     } catch (err) {
       console.error(err)
       alert('Falha no login com Google')
@@ -73,7 +66,7 @@ export default function CreateAccountPage() {
               const data = await res.json();
               if (!res.ok) throw new Error(data.error || 'Erro ao criar conta');
               Cookies.set('token', data.token, { expires: 7 });
-              router.push('/complete-profile');
+              router.push('/dashboard');
             } catch (err) {
               console.error(err);
               alert('Erro ao criar conta');
