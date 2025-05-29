@@ -138,7 +138,17 @@ export default function CadastroPage() {
               onClick={() => setShowPassword((prev) => !prev)}
               className="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-white"
             >
-              {showPassword ? '🙈' : '👁️'}
+              {showPassword ? (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-5.523 0-10-4.477-10-10a9.961 9.961 0 013.12-7.136m3.23-.256A9.962 9.962 0 0112 3c5.523 0 10 4.477 10 10 0 2.002-.586 3.866-1.585 5.448M9.88 9.879a3 3 0 104.242 4.242" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 00-3-3m0 0a3 3 0 013 3m0 0a3 3 0 01-3 3" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-.657 2.104-2.008 3.972-3.958 5.267M15 12a3 3 0 01-3 3m0 0a3 3 0 01-3-3" />
+                </svg>
+              )}
             </button>
           </div>
           {passwordStrength && (
