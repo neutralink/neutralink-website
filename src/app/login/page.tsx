@@ -91,6 +91,11 @@ export default function LoginPage() {
           </button>
         </div>
 
+        <div className="mt-4 text-sm text-neutral-400">
+          <button onClick={() => router.push('/recuperar-senha')} className="text-primary underline">
+            Esqueceu a senha?
+          </button>
+        </div>
         <div className="mt-6 text-sm text-neutral-400">
           Ainda não tem conta?{' '}
           <button onClick={() => router.push('/login/select-role')} className="text-primary underline">
