@@ -44,7 +44,7 @@ export default function CategoriaIndexPage() {
   const categories = Object.keys(groupedByCategory).sort();
 
   return (
-    <section className="bg-white text-black min-h-screen py-24 px-6">
+    <section className="bg-black text-white min-h-screen py-24 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
         {/* Sidebar esquerda */}
         <aside className="md:col-span-1">
@@ -75,7 +75,7 @@ export default function CategoriaIndexPage() {
                 {groupedByCategory[cat].map((post) => (
                   <div
                     key={post.slug}
-                    className="border border-neutral-200 rounded-lg overflow-hidden shadow hover:shadow-lg hover:-translate-y-1 hover:ring-2 hover:ring-primary transition-all bg-white"
+                    className="border border-neutral-700 rounded-lg overflow-hidden shadow hover:shadow-lg hover:-translate-y-1 hover:ring-2 hover:ring-primary transition-all bg-neutral-900"
                   >
                     <div className="relative w-full h-48">
                       <Image
@@ -104,10 +104,10 @@ export default function CategoriaIndexPage() {
                       </Link>
 
                       <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
-                      <p className="text-sm text-neutral-500 mb-4 flex items-center gap-1">
+                      <p className="text-sm text-neutral-400 mb-4 flex items-center gap-1">
                         🕒 {new Date(post.date).toLocaleDateString('pt-BR')}
                       </p>
-                      <p className="text-neutral-700 mb-4">{post.excerpt}</p>
+                      <p className="text-neutral-300 mb-4">{post.excerpt}</p>
                       <Link
                         href={`/blog/${post.slug}`}
                         className="text-primary font-medium hover:underline"

@@ -1,4 +1,3 @@
-'use client';
 import { getAllPosts } from '@/lib/getAllPosts';
 import BlogBanner from '@/components/BlogBanner';
 import Link from 'next/link';
@@ -34,8 +33,8 @@ export default function BlogPage({ searchParams }: Props) {
     <section className="bg-white text-black min-h-screen py-24 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Título */}
-        <h1 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          Últimas Notícias
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-center">
+          📢 Últimas Notícias da NeutraLink
         </h1>
 
         {/* Banner do Post Mais Recente */}
@@ -52,7 +51,7 @@ export default function BlogPage({ searchParams }: Props) {
               <div className="relative w-full h-48">
                 <Image
                   src={post.coverImage ?? '/posts/default.jpg'}
-                  alt={post.title}
+                  alt={`Imagem de capa do post: ${post.title}`}
                   fill
                   className="object-cover"
                 />
@@ -99,7 +98,7 @@ export default function BlogPage({ searchParams }: Props) {
 
         {/* Navegação de Páginas */}
         <div className="flex flex-col items-center mt-12 space-y-4">
-          <span className="text-sm text-neutral-600">
+          <span className="text-sm text-neutral-800 font-semibold">
             Página {currentPage} de {totalPages}
           </span>
 
@@ -107,17 +106,17 @@ export default function BlogPage({ searchParams }: Props) {
             {currentPage > 1 && (
               <Link
                 href={`/blog?page=${currentPage - 1}`}
-                className="px-4 py-2 border border-primary text-primary rounded-md hover:bg-primary hover:text-white transition"
+                className="flex items-center gap-2 px-4 py-2 border border-primary text-primary rounded-md hover:bg-primary hover:text-white transition"
               >
-                ← Página anterior
+                <span>← Página anterior</span>
               </Link>
             )}
             {currentPage < totalPages && (
               <Link
                 href={`/blog?page=${currentPage + 1}`}
-                className="px-4 py-2 border border-primary text-primary rounded-md hover:bg-primary hover:text-white transition"
+                className="flex items-center gap-2 px-4 py-2 border border-primary text-primary rounded-md hover:bg-primary hover:text-white transition"
               >
-                Próxima página →
+                <span>Próxima página →</span>
               </Link>
             )}
           </div>

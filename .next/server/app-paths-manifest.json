@@ -1,6 +1,4 @@
 {
   "/page": "app/page.js",
-  "/login/cadastro/page": "app/login/cadastro/page.js",
-  "/login/select-role/page": "app/login/select-role/page.js",
-  "/termos-de-uso/page": "app/termos-de-uso/page.js"
+  "/blog/[slug]/page": "app/blog/[slug]/page.js"
 }

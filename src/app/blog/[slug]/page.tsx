@@ -2,8 +2,14 @@ import fs from 'fs';
 import path from 'path';
 import { notFound } from 'next/navigation';
 import matter from 'gray-matter';
-import { remark } from 'remark';
-import remarkHtml from 'remark-html'
+import { unified } from 'unified';
+import remarkParse from 'remark-parse';
+import remarkGfm from 'remark-gfm';
+import remarkRehype from 'remark-rehype';
+import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
+import { defaultSchema } from 'hast-util-sanitize';
+import rehypeStringify from 'rehype-stringify';
 import { getAllPosts } from '@/lib/getPosts';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -25,9 +31,14 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   const filePath = path.join(process.cwd(), 'src', 'posts', `${params.slug}.md`);
   const fileContent = fs.readFileSync(filePath, 'utf8');
   const { content } = matter(fileContent);
-  const processed = await remark()
-  .use(remarkHtml)
-  .process(content)
+  const processed = await unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
+    .use(rehypeSanitize, defaultSchema)
+    .use(rehypeStringify as any)
+    .process(content);
   const contentHtml = processed.toString();
 
   const shareUrl = encodeURIComponent(`https://www.neutralinkeco.com/blog/${post.slug}`);
@@ -57,9 +68,9 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           })}
         </p>
 
-        {/* Conteúdo renderizado */}
+        {/* Conteúdo renderizado (Markdown) */}
         <div
-          className="prose prose-invert prose-neutral max-w-none mb-12"
+          className="prose prose-invert prose-neutral text-neutral-200 [&_*]:!text-neutral-200 max-w-none mb-12"
           dangerouslySetInnerHTML={{ __html: contentHtml }}
         />
 

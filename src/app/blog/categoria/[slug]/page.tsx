@@ -49,8 +49,8 @@ export default function BlogPage() {
     groupedByCategory[category].push(post);
   }
 
-  return (
-    <section className="bg-white text-black min-h-screen py-24 px-6">
+return (
+    <section className="bg-black text-white min-h-screen py-24 px-6">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl md:text-4xl font-bold mb-12 text-center">
           Últimas Notícias
@@ -71,7 +71,7 @@ export default function BlogPage() {
                 {posts.map((post) => (
                   <div
                     key={post.slug}
-                    className="border border-neutral-200 rounded-lg overflow-hidden shadow hover:shadow-lg transition bg-white"
+                    className="border border-neutral-700 rounded-lg overflow-hidden shadow hover:shadow-lg transition bg-neutral-900"
                   >
                     <div className="relative w-full h-48">
                       <Image
@@ -96,10 +96,10 @@ export default function BlogPage() {
                       )}
 
                       <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
-                      <p className="text-sm text-neutral-500 mb-4">
+                      <p className="text-sm text-neutral-400 mb-4">
                         {new Date(post.date).toLocaleDateString('pt-BR')}
                       </p>
-                      <p className="text-neutral-700 mb-4">{post.excerpt}</p>
+                      <p className="text-neutral-300 mb-4">{post.excerpt}</p>
                       <Link
                         href={`/blog/${post.slug}`}
                         className="text-primary font-medium hover:underline"
