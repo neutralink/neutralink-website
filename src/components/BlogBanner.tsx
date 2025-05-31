@@ -10,6 +10,7 @@ interface BlogBannerProps {
     title: string;
     date: string;
     excerpt: string;
+    coverImage: string;
   };
 }
 
@@ -25,7 +26,7 @@ export default function BlogBanner({ post }: BlogBannerProps) {
       {/* Imagem de capa responsiva */}
       <div className="relative w-full h-[400px] sm:h-[480px] md:h-[520px] lg:h-[600px]">
         <Image
-          src="/posts/iot-credits.jpg"
+          src={post.coverImage?.startsWith('/') ? post.coverImage : `/posts/${post.coverImage}`}
           alt={post.title}
           fill
           className="object-cover opacity-50"

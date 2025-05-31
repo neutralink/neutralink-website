@@ -25,75 +25,103 @@ export default function BlogPage({ searchParams }: Props) {
 
   // Paginação
   const totalPages = Math.ceil((posts.length - 1) / postsPerPage);
-  const startIndex = (currentPage - 1) * postsPerPage + 1;
+  const startIndex = 1 + (currentPage - 1) * postsPerPage;
   const paginatedPosts = posts.slice(startIndex, startIndex + postsPerPage);
   const latestPost = posts[0];
 
+
   return (
-    <section className="bg-white text-black min-h-screen py-24 px-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Título */}
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-center">
+    <section className="bg-gradient-to-b from-white via-neutral-50 to-neutral-100 text-black min-h-screen pt-40 pb-24 px-6 relative">
+      <div className="absolute top-[-80px] right-[-80px] w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="max-w-7xl mx-auto relative z-10">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-center mt-3">
           📢 Últimas Notícias da NeutraLink
         </h1>
 
-        {/* Banner do Post Mais Recente */}
-        {currentPage === 1 && <BlogBanner post={latestPost} />}
+        {/* Banner no Topo */}
+        <BlogBanner post={latestPost} />
 
-        {/* Lista de Posts */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16 animate-fade-in">
-          {paginatedPosts.map((post) => (
-            <div
-              key={post.slug}
-              className="border border-neutral-200 rounded-lg overflow-hidden shadow hover:shadow-lg transition bg-white"
-            >
-              {/* Imagem do Post */}
-              <div className="relative w-full h-48">
-                <Image
-                  src={post.coverImage ?? '/posts/default.jpg'}
-                  alt={`Imagem de capa do post: ${post.title}`}
-                  fill
-                  className="object-cover"
-                />
-              </div>
+        {/* Card de Categorias abaixo do Banner */}
+        <div className="w-full bg-neutral-100 border border-neutral-300 rounded-lg p-6 mt-10 mb-10">
+          <h2 className="text-lg font-semibold mb-4 text-center">Categorias</h2>
+          <div className="flex flex-wrap justify-center gap-4">
+            {[...new Set(posts.map((p) => p.category).filter(Boolean))].map((category) => (
+              <Link
+                key={category}
+                href={`/blog/categoria/${category?.toLowerCase()}`}
+                className="bg-white px-4 py-2 rounded-full shadow text-sm font-medium border border-neutral-300 hover:bg-primary hover:text-white transition"
+              >
+                {category}
+              </Link>
+            ))}
+          </div>
+        </div>
 
-              {/* Conteúdo do Post */}
-              <div className="p-6">
-                {/* Categoria */}
-                {post.category && (
-                  <Link
-                    href={`/blog/categoria/${post.category.toLowerCase()}`}
-                    className={`inline-block text-sm font-medium px-3 py-1 rounded-full mb-3 transition ${getCategoryBadgeColor(post.category)}`}
-                  >
-                    {post.category}
+        <div className="mt-16 animate-fade-in">
+          {/* Lista de Posts */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-white rounded-xl p-4 shadow-md">
+            {paginatedPosts.map((post) => {
+              console.log('renderizando:', post.slug);
+              return (
+              <div
+                key={post.slug}
+                className="border border-neutral-200 rounded-lg overflow-hidden shadow hover:shadow-lg transition bg-white"
+              >
+                {/* Imagem do Post */}
+                <div className="relative w-full h-48">
+                  <Image
+                    src={
+                      post.coverImage
+                        ? post.coverImage.startsWith('/')
+                          ? post.coverImage
+                          : `/posts/${post.coverImage}`
+                        : '/posts/default.jpg'
+                    }
+                    alt={`Imagem de capa do post: ${post.title}`}
+                    width={600}
+                    height={300}
+                    className="object-cover w-full h-auto"
+                  />
+                </div>
+
+                {/* Conteúdo do Post */}
+                <div className="p-6">
+                  {/* Categoria */}
+                  {post.category && (
+                    <Link
+                      href={`/blog/categoria/${post.category.toLowerCase()}`}
+                      className={`inline-block text-sm font-medium px-3 py-1 rounded-full mb-3 transition ${getCategoryBadgeColor(post.category)}`}
+                    >
+                      {post.category}
+                    </Link>
+                  )}
+
+                  {/* Título e Data */}
+                  <Link href={`/blog/${post.slug}`} className="hover:underline">
+                    <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
                   </Link>
-                )}
+                  <p className="text-sm text-neutral-500 mb-4">
+                    {new Date(post.date).toLocaleDateString('pt-BR', {
+                      day: '2-digit',
+                      month: 'long',
+                      year: 'numeric',
+                    })}
+                  </p>
 
-                {/* Título e Data */}
-                <Link href={`/blog/${post.slug}`} className="hover:underline">
-                  <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
-                </Link>
-                <p className="text-sm text-neutral-500 mb-4">
-                  {new Date(post.date).toLocaleDateString('pt-BR', {
-                    day: '2-digit',
-                    month: 'long',
-                    year: 'numeric',
-                  })}
-                </p>
+                  {/* Resumo */}
+                  <p className="text-neutral-700 mb-4">{post.excerpt}</p>
 
-                {/* Resumo */}
-                <p className="text-neutral-700 mb-4">{post.excerpt}</p>
-
-                {/* Link para o Post */}
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="text-primary font-semibold hover:underline inline-flex items-center gap-1"
-                >
-                  Ler mais →
-                </Link>
+                  {/* Link para o Post */}
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="text-primary font-semibold hover:underline inline-flex items-center gap-1"
+                  >
+                    Ler mais →
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            )})}
+          </div>
         </div>
 
         {/* Navegação de Páginas */}
