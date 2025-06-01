@@ -57,7 +57,7 @@ return (
         </h1>
 
         {/* Banner com a última notícia */}
-        <BlogBanner post={latestPost} />
+        <BlogBanner post={{ ...latestPost, coverImage: latestPost.coverImage ?? '/posts/default.jpg' }} />
 
         {/* Seções por categoria */}
         <div className="mt-16 space-y-24">
