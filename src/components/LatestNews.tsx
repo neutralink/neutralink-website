@@ -13,7 +13,7 @@ interface Post {
 }
 
 export default async function LatestNews() {
-  const postsDir = path.join(process.cwd(), 'src', 'posts');
+  const postsDir = path.join(process.cwd(), 'src', 'images');
   const filenames = fs.readdirSync(postsDir);
 
   const posts: Post[] = filenames
