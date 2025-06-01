@@ -1,13 +1,17 @@
-
 'use client';
 
 import { useSearchParams, useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function ResetarSenhaPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const token = searchParams.get('token');
+  const [token, setToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    const t = searchParams.get('token');
+    setToken(t);
+  }, [searchParams]);
 
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
