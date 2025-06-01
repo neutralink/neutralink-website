@@ -1,22 +1,21 @@
 'use client';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 
-import { useSearchParams, useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
-
-export default function ResetarSenhaPage() {
+function ResetarSenhaForm() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [token, setToken] = useState<string | null>(null);
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const t = searchParams.get('token');
     setToken(t);
   }, [searchParams]);
-
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -90,5 +89,13 @@ export default function ResetarSenhaPage() {
         {message && <p className="mt-2 text-sm">{message}</p>}
       </form>
     </div>
+  );
+}
+
+export default function ResetarSenhaPage() {
+  return (
+    <Suspense fallback={<div className="text-white">Carregando...</div>}>
+      <ResetarSenhaForm />
+    </Suspense>
   );
 }
