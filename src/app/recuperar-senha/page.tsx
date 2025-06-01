@@ -31,7 +31,11 @@ export default function RecuperarSenhaPage() {
         </p>
 
         {enviado ? (
-          <p className="text-green-500">Um link foi enviado para seu e-mail.</p>
+          <p className="text-green-500">
+            Um link de redefinição foi enviado para seu e-mail.
+            <br />
+            Verifique também sua <strong>caixa de spam</strong> ou lixo eletrônico.
+          </p>
         ) : (
           <form className="space-y-6 text-left" onSubmit={handleSubmit}>
             <div>
