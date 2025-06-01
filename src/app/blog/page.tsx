@@ -22,12 +22,10 @@ export default function BlogPage({ searchParams }: Props) {
   const currentPage = parseInt(searchParams.page || '1', 10);
 
   const posts = getAllPosts();
-
-  // Paginação
-  const totalPages = Math.ceil((posts.length - 1) / postsPerPage);
-  const startIndex = 1 + (currentPage - 1) * postsPerPage;
-  const paginatedPosts = posts.slice(startIndex, startIndex + postsPerPage);
-  const latestPost = posts[0];
+  const [latestPost, ...otherPosts] = posts;
+  const totalPages = Math.ceil(otherPosts.length / postsPerPage);
+  const startIndex = (currentPage - 1) * postsPerPage;
+  const paginatedPosts = otherPosts.slice(startIndex, startIndex + postsPerPage);
 
 
   return (
@@ -68,10 +66,10 @@ export default function BlogPage({ searchParams }: Props) {
                 className="border border-neutral-200 rounded-lg overflow-hidden shadow hover:shadow-lg transition bg-white"
               >
                 {/* Imagem do Post */}
-                <div className="relative w-full h-48">
+                <div className="relative w-full h-48 mt-4">
                   <Image
                     src={
-                      post.coverImage
+                      typeof post.coverImage === 'string'
                         ? post.coverImage.startsWith('/')
                           ? post.coverImage
                           : `/posts/${post.coverImage}`

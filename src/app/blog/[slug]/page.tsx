@@ -69,8 +69,13 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   return (
     <>
       {head}
-      <section className="bg-black text-white min-h-screen py-24 px-6">
+      <section className="bg-black text-white min-h-screen pt-32 pb-24 px-6">
         <div className="max-w-3xl mx-auto">
+          {/* Breadcrumbs */}
+          <p className="text-sm text-neutral-400 mb-4">
+            <Link href="/" className="hover:underline">Início</Link> / <Link href="/blog" className="hover:underline">Blog</Link> / {post.title}
+          </p>
+
           {/* Imagem de capa */}
           <div className="mt-8 mb-6 rounded-lg overflow-hidden">
             <Image
@@ -81,11 +86,6 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               className="w-full h-auto object-cover"
             />
           </div>
-
-          {/* Breadcrumbs */}
-          <p className="text-sm text-neutral-400 mb-4">
-            <Link href="/" className="hover:underline">Início</Link> / <Link href="/blog" className="hover:underline">Blog</Link> / {post.title}
-          </p>
 
           {/* Título e Data */}
           <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
@@ -161,19 +161,29 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 .map((p) => (
                   <div
                     key={p.slug}
-                    className="bg-neutral-900 border border-neutral-700 rounded-lg p-6 shadow hover:shadow-lg transition"
+                    className="bg-neutral-900 border border-neutral-700 rounded-lg overflow-hidden shadow hover:shadow-lg transition"
                   >
-                    <h3 className="text-xl font-semibold mb-2">{p.title}</h3>
-                    <p className="text-sm text-neutral-500 mb-4">
-                      {new Date(p.date).toLocaleDateString('pt-BR')}
-                    </p>
-                    <p className="text-neutral-400 mb-4">{p.excerpt}</p>
-                    <Link
-                      href={`/blog/${p.slug}`}
-                      className="text-primary font-medium hover:underline"
-                    >
-                      Ler mais →
-                    </Link>
+                    <div className="w-full h-40 relative">
+                      <Image
+                        src={typeof p.coverImage === 'string' ? (p.coverImage.startsWith('/') ? p.coverImage : `/posts/${p.coverImage}`) : '/posts/default.jpg'}
+                        alt={`Miniatura do post: ${p.title}`}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h3 className="text-lg font-semibold mb-1">{p.title}</h3>
+                      <p className="text-sm text-neutral-500 mb-2">
+                        {new Date(p.date).toLocaleDateString('pt-BR')}
+                      </p>
+                      <p className="text-neutral-400 text-sm line-clamp-2">{p.excerpt}</p>
+                      <Link
+                        href={`/blog/${p.slug}`}
+                        className="text-primary text-sm font-medium hover:underline mt-2 inline-block"
+                      >
+                        Ler mais →
+                      </Link>
+                    </div>
                   </div>
                 ))}
             </div>
