@@ -72,8 +72,8 @@ export default function BlogPage({ searchParams }: Props) {
                       typeof post.coverImage === 'string'
                         ? post.coverImage.startsWith('/')
                           ? post.coverImage
-                          : `/posts/${post.coverImage}`
-                        : '/posts/default.jpg'
+                          : `/images/${post.coverImage}`
+                        : '/images/default.jpg'
                     }
                     alt={`Imagem de capa do post: ${post.title}`}
                     width={600}

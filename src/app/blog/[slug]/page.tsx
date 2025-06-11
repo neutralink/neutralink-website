@@ -79,7 +79,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           {/* Imagem de capa */}
           <div className="mt-8 mb-6 rounded-lg overflow-hidden">
             <Image
-              src={post.coverImage || '/posts/iot-credits.jpg'}
+              src={post.coverImage || '/images/iot-credits.jpg'}
               alt={post.title}
               width={1200}
               height={630}

@@ -1,5 +1,6 @@
-
-
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
 
 export interface Post {
   coverImage: string;
@@ -11,30 +12,27 @@ export interface Post {
 }
 
 export const getAllPosts = (): Post[] => {
-  return [
-    {
-      coverImage: "/images/certificacao-ntlx.jpg",
-      title: "Certificação NTLX: como funciona?",
-      slug: "certificacao-ntlx",
-      date: "2025-05-01",
-      category: "Certificação",
-      excerpt: "Entenda o processo de certificação dos créditos de carbono na plataforma NeutraLink."
-    },
-    {
-      coverImage: "/images/creditos-esg.jpg",
-      title: "Créditos ESG para empresas",
-      slug: "creditos-esg-empresas",
-      date: "2025-05-03",
-      category: "ESG",
-      excerpt: "Veja como empresas podem utilizar créditos de carbono para cumprir metas ESG."
-    },
-    {
-      coverImage: "/images/tokenizacao-carbono-iot.jpg",
-      title: "Tokenização de carbono com IoT",
-      slug: "tokenizacao-carbono-iot",
-      date: "2025-05-10",
-      category: "Tecnologia",
-      excerpt: "Como a NeutraLink usa dispositivos IoT para transformar energia solar em créditos."
-    }
-  ];
+  const postsDirectory = path.join(process.cwd(), 'src', 'posts');
+  const filenames = fs.readdirSync(postsDirectory);
+
+  const posts: Post[] = filenames
+    .filter((filename) => filename.endsWith('.md'))
+    .map((filename) => {
+      const filePath = path.join(postsDirectory, filename);
+      const fileContent = fs.readFileSync(filePath, 'utf8');
+      const { data } = matter(fileContent);
+      const slug = filename.replace(/\.md$/, '');
+
+      return {
+        coverImage: `/images/${data.coverImage ?? 'default.jpg'}`,
+        title: data.title ?? 'Sem título',
+        slug,
+        date: data.date ?? '',
+        category: data.category ?? '',
+        excerpt: data.excerpt ?? '',
+      };
+    })
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  return posts;
 };
