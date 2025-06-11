@@ -2,7 +2,7 @@
 title: "Como funciona a certificação final dos créditos NTLx na NeutraLink"
 date: "2025-04-29T22:00:00"
 excerpt: "A certificação dos créditos de carbono NTLx traz segurança jurídica, validação oficial e documentação completa para uso ESG. Entenda como funciona dentro da plataforma NeutraLink."
-coverImage: "/posts/certificacao-ntlx.jpg"
+coverImage: "/images/certificacao-ntlx.jpg"
 category: "ESG"
 ---
 

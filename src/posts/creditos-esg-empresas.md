@@ -2,7 +2,7 @@
 title: "Como empresas podem usar créditos de carbono da NeutraLink para fortalecer sua agenda ESG"
 date: "2025-04-29T20:00:00"
 excerpt: "Os créditos tokenizados da NeutraLink oferecem às empresas uma forma segura, rastreável e legítima de compensar emissões e reforçar suas práticas sustentáveis."
-coverImage: "/posts/creditos-esg.jpg"
+coverImage: "/images/creditos-esg.jpg"
 category: "ESG"
 ---
 

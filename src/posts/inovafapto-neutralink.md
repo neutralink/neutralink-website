@@ -2,7 +2,7 @@
 title: "NeutraLink é selecionada para o programa de aceleração InovaFapto"
 date: "2025-05-14T18:00:00"
 excerpt: "A NeutraLink foi escolhida para participar do InovaFapto, programa de aceleração da Fundação de Apoio Científico e Tecnológico do Tocantins, reforçando sua liderança em inovação e mercado de carbono digital."
-coverImage: "/posts/inovafapto-neutralink.jpg"
+coverImage: "/images/inovafapto-neutralink.jpg"
 category: "Notícias"
 ---
 

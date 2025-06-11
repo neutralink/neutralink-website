@@ -13,24 +13,29 @@ interface Post {
 }
 
 export default async function LatestNews() {
-  const postsDir = path.join(process.cwd(), 'src', 'images');
-  const filenames = fs.readdirSync(postsDir);
+  const postsDir = path.join(process.cwd(), 'src', 'posts');
+  const filenames = await fs.promises.readdir(postsDir);
 
-  const posts: Post[] = filenames
-    .map((filename) => {
-      const slug = filename.replace(/\.md$/, '');
-      const fileContent = fs.readFileSync(path.join(postsDir, filename), 'utf8');
-      const { data } = matter(fileContent);
-      return {
-        slug,
-        title: data.title,
-        date: data.date,
-        excerpt: data.excerpt,
-        coverImage: data.coverImage,
-      };
-    })
+  const posts: Post[] = (
+    await Promise.all(
+      filenames.map(async (filename) => {
+        const slug = filename.replace(/\.md$/, '');
+        const fileContent = await fs.promises.readFile(path.join(postsDir, filename), 'utf8');
+        const { data } = matter(fileContent);
+        return {
+          slug,
+          title: data.title ?? 'Sem título',
+          date: data.date ?? new Date().toISOString(),
+          excerpt: data.excerpt ?? '',
+          coverImage: data.coverImage,
+        };
+      })
+    )
+  )
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 3); // apenas os 3 mais recentes
+    .slice(0, 3);
+
+  console.log('POSTS GERADOS:', posts);
 
   return (
     <section className="bg-neutral-100 text-black py-24 px-6">
@@ -63,7 +68,7 @@ export default async function LatestNews() {
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
                 <p className="text-sm text-neutral-500 mb-4">
-                  {new Date(post.date).toLocaleDateString('pt-BR')}
+                  {isNaN(new Date(post.date).getTime()) ? 'Data inválida' : new Date(post.date).toLocaleDateString('pt-BR')}
                 </p>
                 <p className="text-neutral-700 mb-4">{post.excerpt}</p>
                 <Link

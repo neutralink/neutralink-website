@@ -2,7 +2,7 @@
 title: "O que é a NeutraLink e por que ela existe"
 date: "2025-04-29T10:00:00"
 excerpt: "Conheça a plataforma que está revolucionando o mercado de carbono com tecnologia, rastreabilidade e inclusão para pequenos geradores de energia solar."
-coverImage: "/posts/iot-credits.jpg"
+coverImage: "/images/iot-credits.jpg"
 category: "ESG"
 ---
 

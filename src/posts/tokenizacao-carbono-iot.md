@@ -2,7 +2,7 @@
 title: "Como a tokenização de créditos de carbono via IoT funciona na prática"
 date: "2025-04-29T15:00:00"
 excerpt: "Descubra como a NeutraLink transforma dados reais de geração solar em créditos de carbono tokenizados e rastreáveis, com segurança e automação."
-coverImage: "/posts/tokenizacao-iot.jpg"
+coverImage: "/images/tokenizacao-iot.jpg"
 category: "ESG"
 ---
 
