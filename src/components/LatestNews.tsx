@@ -58,7 +58,7 @@ export default async function LatestNews() {
             >
               <div className="relative w-full h-48">
                 <Image
-                  src={post.coverImage ?? '/posts/default.jpg'}
+                  src={post.coverImage ?? '/images/default.jpg'}
                   alt={post.title}
                   fill
                   className="object-cover"

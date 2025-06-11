@@ -26,9 +26,14 @@ export default function BlogBanner({ post }: BlogBannerProps) {
       {/* Imagem de capa responsiva */}
       <div className="relative w-full h-[400px] sm:h-[480px] md:h-[520px] lg:h-[600px]">
         <Image
-          src={post.coverImage?.startsWith('/') ? post.coverImage : `/posts/${post.coverImage}`}
+          src={
+            post.coverImage?.startsWith('/')
+              ? post.coverImage
+              : `/images/${post.coverImage || 'default.jpg'}`
+          }
           alt={post.title}
           fill
+          unoptimized
           className="object-cover opacity-50"
         />
         <div className="absolute inset-0 bg-black/60 z-10" />
