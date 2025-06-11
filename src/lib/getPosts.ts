@@ -24,7 +24,7 @@ export function getAllPosts(): Post[] {
       title: data.title,
       date: data.date,
       excerpt: data.excerpt,
-      coverImage: data.coverImage || '/posts/iot-credits.jpg',
+      coverImage: data.coverImage || '/images/iot-credits.jpg',
     };
   });
 

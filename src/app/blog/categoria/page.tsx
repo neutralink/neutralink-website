@@ -79,10 +79,17 @@ export default function CategoriaIndexPage() {
                   >
                     <div className="relative w-full h-48">
                       <Image
-                        src={post.coverImage ?? '/posts/default.jpg'}
+                        src={
+                          typeof post.coverImage === 'string'
+                            ? post.coverImage.startsWith('/')
+                              ? post.coverImage
+                              : `/images/${post.coverImage}`
+                            : '/images/default.jpg'
+                        }
                         alt={post.title}
                         fill
                         className="object-cover"
+                        unoptimized
                       />
                     </div>
 

@@ -165,7 +165,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                   >
                     <div className="w-full h-40 relative">
                       <Image
-                        src={typeof p.coverImage === 'string' ? (p.coverImage.startsWith('/') ? p.coverImage : `/posts/${p.coverImage}`) : '/posts/default.jpg'}
+                        src={typeof p.coverImage === 'string' ? (p.coverImage.startsWith('/') ? p.coverImage : `/images/${p.coverImage}`) : '/images/default.jpg'}
                         alt={`Miniatura do post: ${p.title}`}
                         fill
                         className="object-cover"

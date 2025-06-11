@@ -57,7 +57,12 @@ return (
         </h1>
 
         {/* Banner com a última notícia */}
-        <BlogBanner post={{ ...latestPost, coverImage: latestPost.coverImage ?? '/posts/default.jpg' }} />
+        <BlogBanner post={{ 
+          ...latestPost, 
+          coverImage: latestPost.coverImage?.startsWith('/') 
+            ? latestPost.coverImage 
+            : `/images/${latestPost.coverImage ?? 'default.jpg'}` 
+        }} />
 
         {/* Seções por categoria */}
         <div className="mt-16 space-y-24">
@@ -75,7 +80,13 @@ return (
                   >
                     <div className="relative w-full h-48">
                       <Image
-                        src={post.coverImage ?? '/posts/default.jpg'}
+                        src={
+                          typeof post.coverImage === 'string'
+                            ? post.coverImage.startsWith('/')
+                              ? post.coverImage
+                              : `/images/${post.coverImage}`
+                            : '/images/default.jpg'
+                        }
                         alt={post.title}
                         fill
                         className="object-cover"
