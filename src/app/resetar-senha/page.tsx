@@ -77,7 +77,7 @@ function ResetarSenhaForm() {
             onClick={() => setShowPassword(!showPassword)}
             className="absolute right-2 top-2 text-sm text-gray-400"
           >
-            {showPassword ? '🙈' : '👁️'}
+            {showPassword ? 'Ocultar' : 'Mostrar'}
           </button>
         </div>
         <div className="relative">
@@ -94,7 +94,7 @@ function ResetarSenhaForm() {
             onClick={() => setShowPassword(!showPassword)}
             className="absolute right-2 top-2 text-sm text-gray-400"
           >
-            {showPassword ? '🙈' : '👁️'}
+            {showPassword ? 'Ocultar' : 'Mostrar'}
           </button>
         </div>
 
