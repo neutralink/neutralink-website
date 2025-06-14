@@ -11,6 +11,8 @@ function ResetarSenhaForm() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  // Estado para controlar visibilidade da senha
+  const [showPassword, setShowPassword] = useState(true);
 
   useEffect(() => {
     const t = searchParams.get('token');
@@ -61,22 +63,40 @@ function ResetarSenhaForm() {
       <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4">
         <h1 className="text-2xl font-bold">Redefinir Senha</h1>
 
-        <input
-          type="password"
-          placeholder="Nova senha"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          className="w-full p-2 bg-neutral-800 rounded"
-          required
-        />
-        <input
-          type="password"
-          placeholder="Confirmar nova senha"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          className="w-full p-2 bg-neutral-800 rounded"
-          required
-        />
+        <div className="relative">
+          <input
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Nova senha"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            className="w-full p-2 bg-neutral-800 rounded pr-10"
+            required
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-2 top-2 text-sm text-gray-400"
+          >
+            {showPassword ? '🙈' : '👁️'}
+          </button>
+        </div>
+        <div className="relative">
+          <input
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Confirmar nova senha"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className="w-full p-2 bg-neutral-800 rounded pr-10"
+            required
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-2 top-2 text-sm text-gray-400"
+          >
+            {showPassword ? '🙈' : '👁️'}
+          </button>
+        </div>
 
         <button
           type="submit"
