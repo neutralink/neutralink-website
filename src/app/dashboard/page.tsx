@@ -117,11 +117,6 @@ export default function DashboardPage() {
           Ver histórico
         </Button>
       </div>
-      {['GENERATOR', 'BUYER', 'COMPANY'].includes(role ?? '') && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-red-600 text-white text-center py-4">
-          MENU VISÍVEL AQUI
-        </div>
-      )}
     </div>
   )
 }
