@@ -26,20 +26,38 @@ export default function WalletPage() {
 
   useEffect(() => {
     const fetchCredits = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.warn('Token ausente. Redirecionando para login.');
+        window.location.href = '/login';
+        return;
+      }
+
       try {
         const response = await fetch('https://api.neutralinkeco.com/credits', {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${token}`,
           },
-        })
-        const data = await response.json()
-        setCredits(data)
+        });
+
+        if (response.status === 401) {
+          console.warn('Token inválido ou expirado. Redirecionando para login.');
+          window.location.href = '/login';
+          return;
+        }
+
+        const data = await response.json();
+        if (!Array.isArray(data)) {
+          throw new Error('Dados inválidos recebidos da API');
+        }
+
+        setCredits(data);
       } catch (error) {
-        console.error('Erro ao buscar créditos:', error)
+        console.error('Erro ao buscar créditos:', error);
       }
     }
 
-    fetchCredits()
+    fetchCredits();
   }, [])
 
   const total = credits.reduce((acc, c) => acc + c.amount, 0)
