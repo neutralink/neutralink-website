@@ -1,67 +1,47 @@
 'use client'
 
 import { useState } from 'react'
-import { useSearchParams } from 'next/navigation'
 
 export function RecuperarSenhaForm() {
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+  const [email, setEmail] = useState('')
   const [enviado, setEnviado] = useState(false)
-  const searchParams = useSearchParams()
-  const token = searchParams.get('token')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!token) {
-      alert('Token inválido ou ausente.')
+    if (!email) {
+      alert('Por favor, informe um e-mail válido.')
       return
     }
 
-    if (password !== confirmPassword) {
-      alert('As senhas não coincidem.')
-      return
-    }
-
-    const res = await fetch('https://api.neutralinkeco.com/auth/reset-password', {
+    const res = await fetch('https://api.neutralinkeco.com/auth/forgot-password', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token, password }),
+      body: JSON.stringify({ email }),
     })
 
     if (res.ok) {
       setEnviado(true)
     } else {
-      alert('Erro ao redefinir senha.')
+      alert('Erro ao solicitar redefinição de senha.')
     }
   }
 
   return (
     <div className="w-full max-w-md text-center">
-      <h1 className="text-3xl font-bold mb-4">Redefinir Senha</h1>
+      <h1 className="text-3xl font-bold mb-4">Recuperar Senha</h1>
       {enviado ? (
-        <p className="text-green-500">Senha redefinida com sucesso! Você já pode fazer login.</p>
+        <p className="text-green-500">Link de redefinição enviado! Verifique seu e-mail.</p>
       ) : (
         <form className="space-y-6 text-left" onSubmit={handleSubmit}>
           <div>
-            <label className="block mb-1 text-sm text-neutral-300">Nova senha</label>
+            <label className="block mb-1 text-sm text-neutral-300">E-mail</label>
             <input
-              type="password"
-              placeholder="Digite a nova senha"
+              type="email"
+              placeholder="Digite seu e-mail"
               className="w-full px-4 py-3 rounded-md bg-neutral-900 border border-neutral-700 text-white"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label className="block mb-1 text-sm text-neutral-300">Confirme a nova senha</label>
-            <input
-              type="password"
-              placeholder="Confirme a nova senha"
-              className="w-full px-4 py-3 rounded-md bg-neutral-900 border border-neutral-700 text-white"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -69,7 +49,7 @@ export function RecuperarSenhaForm() {
             type="submit"
             className="w-full bg-primary text-black font-semibold py-3 rounded-md hover:opacity-90 transition"
           >
-            Redefinir Senha
+            Enviar link de redefinição
           </button>
         </form>
       )}
