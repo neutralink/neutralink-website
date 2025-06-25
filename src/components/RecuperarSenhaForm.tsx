@@ -36,7 +36,9 @@ export function RecuperarSenhaForm() {
     <div className="w-full max-w-md text-center">
       <h1 className="text-3xl font-bold mb-4">Recuperar Senha</h1>
       {enviado ? (
-        <p className="text-green-500">Link de redefinição enviado! Verifique seu e-mail.</p>
+        <p className="text-green-500">
+          Link de redefinição enviado! Verifique seu e-mail. Se o e-mail estiver registrado, enviaremos instruções de recuperação.
+        </p>
       ) : (
         <form className="space-y-6 text-left" onSubmit={handleSubmit}>
           <div>
