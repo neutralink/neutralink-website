@@ -20,11 +20,15 @@ export function RecuperarSenhaForm() {
       body: JSON.stringify({ email }),
     })
 
+    const data = await res.json()
     if (res.ok) {
       setEnviado(true)
     } else {
-      const data = await res.json()
-      alert(data.error || 'Erro ao solicitar redefinição de senha.')
+      if (data.message?.includes('Usuário não encontrado')) {
+        alert('Este e-mail não está cadastrado na nossa plataforma.')
+      } else {
+        alert(data.message || data.error || 'Erro ao solicitar redefinição de senha.')
+      }
     }
   }
 
