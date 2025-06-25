@@ -32,6 +32,9 @@ function ResetarSenhaForm() {
       return;
     }
 
+    console.log('Token:', token);
+    console.log('Nova senha:', newPassword);
+
     setLoading(true);
 
     try {
@@ -44,7 +47,7 @@ function ResetarSenhaForm() {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.message || 'Erro ao redefinir senha');
+        throw new Error(data.error || data.message || 'Erro ao redefinir senha');
       }
 
       setMessage('Senha redefinida com sucesso! Redirecionando...');
@@ -106,7 +109,11 @@ function ResetarSenhaForm() {
           {loading ? 'Enviando...' : 'Redefinir Senha'}
         </button>
 
-        {message && <p className="mt-2 text-sm">{message}</p>}
+        {message && (
+          <p className={`mt-2 text-sm ${message.includes('sucesso') ? 'text-green-400' : 'text-red-400'}`}>
+            {message}
+          </p>
+        )}
       </form>
     </div>
   );
