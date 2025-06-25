@@ -23,7 +23,8 @@ export function RecuperarSenhaForm() {
     if (res.ok) {
       setEnviado(true)
     } else {
-      alert('Erro ao solicitar redefinição de senha.')
+      const data = await res.json()
+      alert(data.error || 'Erro ao solicitar redefinição de senha.')
     }
   }
 
