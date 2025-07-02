@@ -96,8 +96,8 @@ export default function CadastroPage() {
                 alert(data.error || 'Erro ao criar conta');
                 return;
               }
-              Cookies.set('token', data.token, { expires: 7 });
-              router.push('/dashboard');
+              alert('Conta criada com sucesso! Verifique seu e-mail para ativar sua conta. Caso não encontre, cheque sua caixa de spam ou lixo eletrônico.');
+              router.push('/verifique-seu-email');
             } catch (err) {
               console.error(err);
               alert('Erro ao criar conta');
