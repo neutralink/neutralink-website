@@ -3,7 +3,6 @@
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
 import { z } from 'zod';
 
 const registrationSchema = z.object({
@@ -226,26 +225,6 @@ export default function CadastroPage() {
           </form>
         )}
 
-        <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
-          <span className="h-px w-1/4 bg-gray-600" />
-          ou entre com Google
-          <span className="h-px w-1/4 bg-gray-600" />
-        </div>
-
-        <div className="flex justify-center">
-          <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
-            <GoogleLogin
-              onSuccess={handleGoogleLogin}
-              onError={() => alert('Erro ao autenticar com Google')}
-              locale="pt-BR"
-              text="signup_with"
-              width="100%"
-              shape="rectangular"
-              size="large"
-              theme="filled_black"
-            />
-          </GoogleOAuthProvider>
-        </div>
       </div>
 
       {showTerms && (
