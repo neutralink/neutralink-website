@@ -115,6 +115,7 @@ export default function CadastroPage() {
               }
 
               try {
+                const grecaptcha = (window as any).grecaptcha;
                 const recaptchaToken = await grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, { action: 'submit' });
 
                 const res = await fetch('https://api.neutralinkeco.com/auth/register', {

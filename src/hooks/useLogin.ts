@@ -13,7 +13,7 @@ export function useLogin() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  async function login(email: string, password: string): Promise<string | null> {
+  async function login(email: string, password: string, recaptchaToken?: string): Promise<string | null> {
     setLoading(true);
     setError(null);
 
@@ -21,7 +21,7 @@ export function useLogin() {
       const res = await fetch('https://api.neutralinkeco.com/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, recaptchaToken }),
       });
 
       const data: LoginResponse = await res.json();

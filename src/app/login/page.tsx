@@ -20,10 +20,18 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const token = await login(formData.email, formData.password)
+
+    // Executa o reCAPTCHA v3 com a ação "login"
+    const grecaptcha = (window as any).grecaptcha
+    const recaptchaToken = await grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, {
+      action: 'login',
+    })
+
+    // Chama a função de login com o token reCAPTCHA
+    const token = await login(formData.email, formData.password, recaptchaToken)
 
     if (typeof token === 'string' && token.trim() !== '') {
-      Cookies.set('token', token, { expires: 7 });
+      Cookies.set('token', token, { expires: 7 })
       router.push('/dashboard')
     }
   }
