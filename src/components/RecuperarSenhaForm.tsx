@@ -14,10 +14,13 @@ export function RecuperarSenhaForm() {
       return
     }
 
+    const grecaptcha = (window as any).grecaptcha;
+    const recaptchaToken = await grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, { action: 'forgot_password' });
+
     const res = await fetch('https://api.neutralinkeco.com/auth/forgot-password', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ email, recaptchaToken }),
     })
 
     const data = await res.json()
