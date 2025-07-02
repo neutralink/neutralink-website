@@ -4,6 +4,14 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
+import { z } from 'zod';
+
+const registrationSchema = z.object({
+  name: z.string().min(3, 'Nome deve ter no mínimo 3 caracteres'),
+  email: z.string().email('E-mail inválido'),
+  password: z.string().min(6, 'A senha deve conter no mínimo 6 caracteres'),
+  cpf: z.string().regex(/^\d{11}$/, 'CPF deve conter exatamente 11 números'),
+});
 
 export default function CadastroPage() {
   const router = useRouter()
@@ -93,10 +101,18 @@ export default function CadastroPage() {
                 return;
               }
               const formData = new FormData(e.currentTarget);
-              const name = formData.get('name');
-              const email = formData.get('email');
-              const password = formData.get('password');
-              const cpf = formData.get('cpf');
+              const name = formData.get('name')?.toString() || '';
+              const email = formData.get('email')?.toString() || '';
+              const password = formData.get('password')?.toString() || '';
+              const cpf = formData.get('cpf')?.toString() || '';
+
+              const validation = registrationSchema.safeParse({ name, email, password, cpf });
+
+              if (!validation.success) {
+                const errorMessages = validation.error.errors.map(err => err.message).join('\n');
+                alert(errorMessages);
+                return;
+              }
               try {
                 const res = await fetch('https://api.neutralinkeco.com/auth/register', {
                   method: 'POST',
