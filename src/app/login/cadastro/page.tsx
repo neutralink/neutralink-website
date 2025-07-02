@@ -113,11 +113,14 @@ export default function CadastroPage() {
                 alert(errorMessages);
                 return;
               }
+
               try {
+                const recaptchaToken = await grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, { action: 'submit' });
+
                 const res = await fetch('https://api.neutralinkeco.com/auth/register', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ name, email, password, cpf, role }),
+                  body: JSON.stringify({ name, email, password, cpf, role, recaptchaToken }),
                 });
                 const data = await res.json();
                 if (!res.ok) {
