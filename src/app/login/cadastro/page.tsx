@@ -14,6 +14,7 @@ export default function CadastroPage() {
   const [cpfValid, setCpfValid] = useState(true);
   const [passwordStrength, setPasswordStrength] = useState<'fraca' | 'media' | 'forte' | null>(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
   const getRoleLabel = (role: string | null) => {
     switch (role) {
@@ -73,126 +74,137 @@ export default function CadastroPage() {
           )}
         </div>
 
-        <form
-          onSubmit={async (e) => {
-            e.preventDefault();
-            if (!cpfValid) {
-              alert('CPF inválido');
-              return;
-            }
-            const formData = new FormData(e.currentTarget);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const password = formData.get('password');
-            const cpf = formData.get('cpf');
-            try {
-              const res = await fetch('https://api.neutralinkeco.com/auth/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, password, cpf, role }),
-              });
-              const data = await res.json();
-              if (!res.ok) {
-                alert(data.error || 'Erro ao criar conta');
+        {registrationSuccess ? (
+          <div className="text-center space-y-4 bg-neutral-900 border border-green-600 rounded-lg p-6">
+            <h2 className="text-2xl font-bold text-green-400">Conta criada com sucesso!</h2>
+            <p className="text-gray-300">
+              Enviamos um e-mail de verificação para você. Por favor, confirme o e-mail para ativar sua conta.
+            </p>
+            <p className="text-yellow-400 text-sm">
+              ⚠️ Caso não encontre, verifique sua <strong>caixa de spam</strong> ou lixo eletrônico.
+            </p>
+          </div>
+        ) : (
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              if (!cpfValid) {
+                alert('CPF inválido');
                 return;
               }
-              alert('Conta criada com sucesso! Verifique seu e-mail para ativar sua conta. Caso não encontre, cheque sua caixa de spam ou lixo eletrônico.');
-              router.push('/verifique-seu-email');
-            } catch (err) {
-              console.error(err);
-              alert('Erro ao criar conta');
-            }
-          }}
-          className="space-y-6"
-        >
-          <input
-            name="name"
-            type="text"
-            placeholder="Nome completo"
-            required
-            className="w-full px-5 py-3 rounded-md bg-neutral-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-600"
-          />
-          <input
-            name="email"
-            type="email"
-            placeholder="Seu e-mail"
-            required
-            className="w-full px-5 py-3 rounded-md bg-neutral-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-600"
-          />
-          <div className="relative">
+              const formData = new FormData(e.currentTarget);
+              const name = formData.get('name');
+              const email = formData.get('email');
+              const password = formData.get('password');
+              const cpf = formData.get('cpf');
+              try {
+                const res = await fetch('https://api.neutralinkeco.com/auth/register', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ name, email, password, cpf, role }),
+                });
+                const data = await res.json();
+                if (!res.ok) {
+                  alert(data.error || 'Erro ao criar conta');
+                  return;
+                }
+                setRegistrationSuccess(true);
+              } catch (err) {
+                console.error(err);
+                alert('Erro ao criar conta');
+              }
+            }}
+            className="space-y-6"
+          >
             <input
-              name="password"
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Senha"
+              name="name"
+              type="text"
+              placeholder="Nome completo"
+              required
+              className="w-full px-5 py-3 rounded-md bg-neutral-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-600"
+            />
+            <input
+              name="email"
+              type="email"
+              placeholder="Seu e-mail"
+              required
+              className="w-full px-5 py-3 rounded-md bg-neutral-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-600"
+            />
+            <div className="relative">
+              <input
+                name="password"
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Senha"
+                required
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value.length < 6) setPasswordStrength('fraca');
+                  else if (/[A-Z]/.test(value) && /[0-9]/.test(value)) setPasswordStrength('forte');
+                  else setPasswordStrength('media');
+                }}
+                className="w-full px-5 py-3 pr-12 rounded-md bg-neutral-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-600"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-white"
+              >
+                {showPassword ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-5.523 0-10-4.477-10-10a9.961 9.961 0 013.12-7.136m3.23-.256A9.962 9.962 0 0112 3c5.523 0 10 4.477 10 10 0 2.002-.586 3.866-1.585 5.448M9.88 9.879a3 3 0 104.242 4.242" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 00-3-3m0 0a3 3 0 013 3m0 0a3 3 0 01-3 3" />
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-.657 2.104-2.008 3.972-3.958 5.267M15 12a3 3 0 01-3 3m0 0a3 3 0 01-3-3" />
+                  </svg>
+                )}
+              </button>
+            </div>
+            {passwordStrength && (
+              <p className={`text-sm ${
+                passwordStrength === 'fraca' ? 'text-red-400' :
+                passwordStrength === 'media' ? 'text-yellow-400' : 'text-green-400'
+              }`}>
+                Segurança da senha: {passwordStrength}
+              </p>
+            )}
+            <input
+              name="cpf"
+              type="text"
+              placeholder="CPF"
               required
               onChange={(e) => {
                 const value = e.target.value;
-                if (value.length < 6) setPasswordStrength('fraca');
-                else if (/[A-Z]/.test(value) && /[0-9]/.test(value)) setPasswordStrength('forte');
-                else setPasswordStrength('media');
+                setCpfValid(/^\d{11}$/.test(value));
               }}
-              className="w-full px-5 py-3 pr-12 rounded-md bg-neutral-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-600"
+              className="w-full px-5 py-3 rounded-md bg-neutral-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-600"
             />
+            {!cpfValid && (
+              <p className="text-red-400 text-sm">CPF inválido. Deve conter exatamente 11 números.</p>
+            )}
+            <label className="flex items-start space-x-2 text-sm text-gray-400">
+              <input
+                type="checkbox"
+                required
+                className="mt-1 accent-green-600"
+              />
+              <span>
+                Li e concordo com os
+                <button type="button" onClick={() => setShowTerms(true)} className="underline text-white mx-1">Termos de Uso</button>
+                e a
+                <button type="button" onClick={() => setShowPrivacy(true)} className="underline text-white mx-1">Política de Privacidade</button>.
+              </span>
+            </label>
             <button
-              type="button"
-              onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-white"
+              type="submit"
+              className="w-full bg-green-600 hover:bg-green-700 transition font-semibold py-3 rounded-md"
             >
-              {showPassword ? (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-5.523 0-10-4.477-10-10a9.961 9.961 0 013.12-7.136m3.23-.256A9.962 9.962 0 0112 3c5.523 0 10 4.477 10 10 0 2.002-.586 3.866-1.585 5.448M9.88 9.879a3 3 0 104.242 4.242" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 00-3-3m0 0a3 3 0 013 3m0 0a3 3 0 01-3 3" />
-                </svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-.657 2.104-2.008 3.972-3.958 5.267M15 12a3 3 0 01-3 3m0 0a3 3 0 01-3-3" />
-                </svg>
-              )}
+              Criar conta
             </button>
-          </div>
-          {passwordStrength && (
-            <p className={`text-sm ${
-              passwordStrength === 'fraca' ? 'text-red-400' :
-              passwordStrength === 'media' ? 'text-yellow-400' : 'text-green-400'
-            }`}>
-              Segurança da senha: {passwordStrength}
-            </p>
-          )}
-          <input
-            name="cpf"
-            type="text"
-            placeholder="CPF"
-            required
-            onChange={(e) => {
-              const value = e.target.value;
-              setCpfValid(/^\d{11}$/.test(value));
-            }}
-            className="w-full px-5 py-3 rounded-md bg-neutral-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-600"
-          />
-          {!cpfValid && (
-            <p className="text-red-400 text-sm">CPF inválido. Deve conter exatamente 11 números.</p>
-          )}
-          <label className="flex items-start space-x-2 text-sm text-gray-400">
-            <input
-              type="checkbox"
-              required
-              className="mt-1 accent-green-600"
-            />
-            <span>
-              Li e concordo com os
-              <button type="button" onClick={() => setShowTerms(true)} className="underline text-white mx-1">Termos de Uso</button>
-              e a
-              <button type="button" onClick={() => setShowPrivacy(true)} className="underline text-white mx-1">Política de Privacidade</button>.
-            </span>
-          </label>
-          <button
-            type="submit"
-            className="w-full bg-green-600 hover:bg-green-700 transition font-semibold py-3 rounded-md"
-          >
-            Criar conta
-          </button>
-        </form>
+          </form>
+        )}
 
         <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
           <span className="h-px w-1/4 bg-gray-600" />
