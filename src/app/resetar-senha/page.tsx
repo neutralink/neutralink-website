@@ -32,6 +32,11 @@ function ResetarSenhaForm() {
       return;
     }
 
+    const grecaptcha = (window as any).grecaptcha;
+    const recaptchaToken = await grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, {
+      action: 'reset_password',
+    });
+
     console.log('Token:', token);
     console.log('Nova senha:', newPassword);
 
@@ -41,7 +46,7 @@ function ResetarSenhaForm() {
       const res = await fetch('https://api.neutralinkeco.com/auth/reset-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token, password: newPassword }),
+        body: JSON.stringify({ token, password: newPassword, recaptchaToken }),
       });
 
       const data = await res.json();
