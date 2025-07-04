@@ -1,13 +1,5 @@
 'use client'
 
-if (typeof window !== 'undefined') {
-  const script = document.createElement('script');
-  script.src = 'https://www.google.com/recaptcha/api.js';
-  script.async = true;
-  script.defer = true;
-  document.body.appendChild(script);
-}
-
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -30,6 +22,7 @@ export default function CadastroPage() {
   const [passwordStrength, setPasswordStrength] = useState<'fraca' | 'media' | 'forte' | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState('');
 
   const getRoleLabel = (role: string | null) => {
     switch (role) {
@@ -45,6 +38,18 @@ export default function CadastroPage() {
         return '';
     }
   };
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://www.google.com/recaptcha/api.js';
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+
+    (window as any).onRecaptchaSuccess = (token: string) => {
+      setRecaptchaToken(token);
+    };
+  }, []);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -122,14 +127,10 @@ export default function CadastroPage() {
               }
 
               try {
-                const recaptchaResponse = (document.getElementById('g-recaptcha-response') as HTMLTextAreaElement)?.value;
-
-                if (!recaptchaResponse) {
+                if (!recaptchaToken) {
                   alert('⚠️ Por favor, marque o reCAPTCHA antes de continuar.');
                   return;
                 }
-
-                const recaptchaToken = recaptchaResponse;
 
                 const res = await fetch('https://api.neutralinkeco.com/auth/register', {
                   method: 'POST',
@@ -231,7 +232,11 @@ export default function CadastroPage() {
               </span>
             </label>
             <div className="flex justify-center">
-              <div className="g-recaptcha" data-sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}></div>
+              <div
+                className="g-recaptcha"
+                data-sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+                data-callback="onRecaptchaSuccess"
+              ></div>
             </div>
             <button
               type="submit"
