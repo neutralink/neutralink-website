@@ -1,15 +1,8 @@
 'use client'
-if (typeof window !== 'undefined') {
-  const script = document.createElement('script')
-  script.src = 'https://www.google.com/recaptcha/api.js'
-  script.async = true
-  script.defer = true
-  document.body.appendChild(script)
-}
 
 import Cookies from 'js-cookie';
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation' // App Router: useRouter from 'next/navigation' is correct for Client Components
 import { useLogin } from '../../hooks/useLogin'
 import OAuthButtons from '../../components/auth/OAuthButtons'
@@ -24,19 +17,32 @@ export default function LoginPage() {
     password: '',
   })
 
+  const [recaptchaToken, setRecaptchaToken] = useState('')
+
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.src = 'https://www.google.com/recaptcha/api.js'
+    script.async = true
+    script.defer = true
+    document.body.appendChild(script)
+  }, [])
+
+  useEffect(() => {
+    (window as any).onRecaptchaSuccess = (token: string) => {
+      console.log('✅ Token do reCAPTCHA:', token)
+      setRecaptchaToken(token)
+    }
+  }, [])
+
   const { login, loading, error } = useLogin()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    const recaptchaResponse = (document.getElementById('g-recaptcha-response') as HTMLTextAreaElement)?.value
-
-    if (!recaptchaResponse) {
+    if (!recaptchaToken) {
       console.error('⚠️ reCAPTCHA não verificado')
       return
     }
-
-    const recaptchaToken = recaptchaResponse
 
     // Chama a função de login com o token reCAPTCHA
     const token = await login(formData.email, formData.password, recaptchaToken)
@@ -85,7 +91,11 @@ export default function LoginPage() {
           </div>
 
           <div className="flex justify-center">
-            <div className="g-recaptcha" data-sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}></div>
+            <div
+              className="g-recaptcha"
+              data-sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+              data-callback="onRecaptchaSuccess"
+            ></div>
           </div>
 
           <button
