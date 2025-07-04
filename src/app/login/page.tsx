@@ -20,12 +20,20 @@ export default function LoginPage() {
   const [recaptchaToken, setRecaptchaToken] = useState('')
 
   useEffect(() => {
-    const script = document.createElement('script')
-    script.src = 'https://www.google.com/recaptcha/api.js'
-    script.async = true
-    script.defer = true
-    document.body.appendChild(script)
+    const existingScript = document.querySelector('script[src="https://www.google.com/recaptcha/api.js"]')
+    if (!existingScript) {
+      const script = document.createElement('script')
+      script.src = 'https://www.google.com/recaptcha/api.js'
+      script.async = true
+      script.defer = true
+      document.body.appendChild(script)
+    }
   }, [])
+
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+  if (!siteKey) {
+    console.warn('⚠️ RECAPTCHA site key não está configurada!')
+  }
 
   useEffect(() => {
     (window as any).onRecaptchaSuccess = (token: string) => {
@@ -40,6 +48,7 @@ export default function LoginPage() {
     e.preventDefault()
 
     if (!recaptchaToken) {
+      alert('Por favor, verifique o reCAPTCHA antes de continuar.')
       console.error('⚠️ reCAPTCHA não verificado')
       return
     }
