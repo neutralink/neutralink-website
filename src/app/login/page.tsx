@@ -23,8 +23,21 @@ export default function LoginPage() {
 
     // Executa o reCAPTCHA v3 com a ação "login"
     const grecaptcha = (window as any).grecaptcha
-    const recaptchaToken = await grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, {
-      action: 'login',
+
+    if (!grecaptcha || !process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
+      console.error('⚠️ reCAPTCHA não carregado ou chave ausente')
+      return
+    }
+
+    const recaptchaToken = await new Promise<string>((resolve, reject) => {
+      grecaptcha.ready(() => {
+        grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, { action: 'login' })
+          .then(resolve)
+          .catch((err: any) => {
+            console.error('Erro ao executar reCAPTCHA:', err)
+            reject(err)
+          })
+      })
     })
 
     // Chama a função de login com o token reCAPTCHA
