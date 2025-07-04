@@ -1,11 +1,15 @@
+'use client';
+
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 interface LoginResponse {
-  token: string;
-  user: {
+  token?: string;
+  user?: {
     role: 'ADMIN' | 'GENERATOR' | 'BUYER' | 'COMPANY' | 'CERTIFIER' | 'INTEGRATOR';
   };
+  message?: string;
 }
 
 export function useLogin() {
@@ -26,31 +30,13 @@ export function useLogin() {
 
       const data: LoginResponse = await res.json();
       if (!res.ok || !data.token || !data.user?.role) {
-        throw new Error('Erro ao fazer login');
+        throw new Error(data?.message || 'Erro ao fazer login');
       }
       localStorage.setItem('token', data.token);
+      Cookies.set('token', data.token, { expires: 7 });
 
-      // Redirecionamento baseado na role
-      switch (data.user.role) {
-        case 'ADMIN':
-          router.push('/admin/dashboard');
-          break;
-        case 'GENERATOR':
-          router.push('/generator/dashboard');
-          break;
-        case 'BUYER':
-        case 'COMPANY':
-          router.push('/marketplace');
-          break;
-        case 'CERTIFIER':
-          router.push('/certifier/pool');
-          break;
-        case 'INTEGRATOR':
-          router.push('/integrator/devices');
-          break;
-        default:
-          router.push('/');
-      }
+      // Centralizando redirecionamento para /dashboard
+      router.push('/dashboard');
 
       return data.token;
     } catch (err: any) {
