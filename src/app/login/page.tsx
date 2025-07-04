@@ -1,4 +1,12 @@
 'use client'
+if (typeof window !== 'undefined') {
+  const script = document.createElement('script')
+  script.src = 'https://www.google.com/recaptcha/api.js'
+  script.async = true
+  script.defer = true
+  document.body.appendChild(script)
+}
+
 import Cookies from 'js-cookie';
 
 import { useState } from 'react'
@@ -21,24 +29,14 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    // Executa o reCAPTCHA v3 com a ação "login"
-    const grecaptcha = (window as any).grecaptcha
+    const recaptchaResponse = (document.getElementById('g-recaptcha-response') as HTMLTextAreaElement)?.value
 
-    if (!grecaptcha || !process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
-      console.error('⚠️ reCAPTCHA não carregado ou chave ausente')
+    if (!recaptchaResponse) {
+      console.error('⚠️ reCAPTCHA não verificado')
       return
     }
 
-    const recaptchaToken = await new Promise<string>((resolve, reject) => {
-      grecaptcha.ready(() => {
-        grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, { action: 'login' })
-          .then(resolve)
-          .catch((err: any) => {
-            console.error('Erro ao executar reCAPTCHA:', err)
-            reject(err)
-          })
-      })
-    })
+    const recaptchaToken = recaptchaResponse
 
     // Chama a função de login com o token reCAPTCHA
     const token = await login(formData.email, formData.password, recaptchaToken)
@@ -84,6 +82,10 @@ export default function LoginPage() {
                 setFormData({ ...formData, password: e.target.value })
               }
             />
+          </div>
+
+          <div className="flex justify-center">
+            <div className="g-recaptcha" data-sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}></div>
           </div>
 
           <button

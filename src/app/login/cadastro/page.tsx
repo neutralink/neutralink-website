@@ -1,5 +1,13 @@
 'use client'
 
+if (typeof window !== 'undefined') {
+  const script = document.createElement('script');
+  script.src = 'https://www.google.com/recaptcha/api.js';
+  script.async = true;
+  script.defer = true;
+  document.body.appendChild(script);
+}
+
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -114,8 +122,14 @@ export default function CadastroPage() {
               }
 
               try {
-                const grecaptcha = (window as any).grecaptcha;
-                const recaptchaToken = await grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, { action: 'submit' });
+                const recaptchaResponse = (document.getElementById('g-recaptcha-response') as HTMLTextAreaElement)?.value;
+
+                if (!recaptchaResponse) {
+                  alert('⚠️ Por favor, marque o reCAPTCHA antes de continuar.');
+                  return;
+                }
+
+                const recaptchaToken = recaptchaResponse;
 
                 const res = await fetch('https://api.neutralinkeco.com/auth/register', {
                   method: 'POST',
@@ -216,6 +230,9 @@ export default function CadastroPage() {
                 <button type="button" onClick={() => setShowPrivacy(true)} className="underline text-white mx-1">Política de Privacidade</button>.
               </span>
             </label>
+            <div className="flex justify-center">
+              <div className="g-recaptcha" data-sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}></div>
+            </div>
             <button
               type="submit"
               className="w-full bg-green-600 hover:bg-green-700 transition font-semibold py-3 rounded-md"
