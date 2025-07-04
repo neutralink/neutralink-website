@@ -1,5 +1,20 @@
 'use client';
 
+declare global {
+  interface Window {
+    grecaptcha: WindowGrecaptcha;
+    onloadCallback?: () => void;
+  }
+}
+
+interface WindowGrecaptcha {
+  render: (container: HTMLElement, parameters: { sitekey: string; callback: (token: string) => void }) => number;
+  getResponse: (widgetId?: string | number) => string;
+  reset: (widgetId?: string | number) => void;
+  ready: (cb: () => void) => void;
+  execute: (siteKey: string, options: { action: string }) => Promise<string>;
+}
+
 import { useEffect, useRef } from 'react';
 
 type RecaptchaCheckboxProps = {
@@ -8,31 +23,15 @@ type RecaptchaCheckboxProps = {
 
 const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string;
 
-declare global {
-  interface Window {
-    grecaptcha:
-      | {
-          ready: (cb: () => void) => void;
-          execute: (siteKey: string, options: { action: string }) => Promise<string>;
-        }
-      | {
-          render: (...args: any[]) => any;
-          getResponse: (widgetId?: string | number) => string;
-          reset: (widgetId?: string | number) => void;
-        };
-  }
-}
 
 export default function RecaptchaCheckbox({ onVerify }: RecaptchaCheckboxProps) {
   const recaptchaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const loadRecaptcha = () => {
-      if (document.getElementById('recaptcha-v2-script')) return;
-
       const script = document.createElement('script');
       script.id = 'recaptcha-v2-script';
-      script.src = 'https://www.google.com/recaptcha/api.js';
+      script.src = 'https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit';
       script.async = true;
       script.defer = true;
       document.body.appendChild(script);
@@ -40,20 +39,19 @@ export default function RecaptchaCheckbox({ onVerify }: RecaptchaCheckboxProps) 
 
     if (typeof window !== 'undefined') {
       loadRecaptcha();
+
+      window.onloadCallback = () => {
+        if (window.grecaptcha && recaptchaRef.current) {
+          window.grecaptcha.render(recaptchaRef.current, {
+            sitekey: SITE_KEY,
+            callback: (token: string) => {
+              onVerify(token);
+            },
+          });
+        }
+      };
     }
   }, []);
 
-  // Quando o reCAPTCHA for resolvido, essa função será chamada
-  (window as any).onRecaptchaSuccess = (token: string) => {
-    onVerify(token);
-  };
-
-  return (
-    <div
-      ref={recaptchaRef}
-      className="g-recaptcha"
-      data-sitekey={SITE_KEY}
-      data-callback="onRecaptchaSuccess"
-    />
-  );
+  return <div ref={recaptchaRef} />;
 }
