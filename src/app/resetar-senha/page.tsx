@@ -15,6 +15,14 @@ function ResetarSenhaForm() {
   const [showPassword, setShowPassword] = useState(true);
 
   useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://www.google.com/recaptcha/api.js';
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+  }, []);
+
+  useEffect(() => {
     const t = searchParams.get('token');
     setToken(t);
   }, [searchParams]);
@@ -32,10 +40,14 @@ function ResetarSenhaForm() {
       return;
     }
 
-    const grecaptcha = (window as any).grecaptcha;
-    const recaptchaToken = await grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, {
-      action: 'reset_password',
-    });
+    const recaptchaResponse = (document.getElementById('g-recaptcha-response') as HTMLTextAreaElement)?.value;
+
+    if (!recaptchaResponse) {
+      setMessage('Por favor, marque o reCAPTCHA antes de continuar.');
+      return;
+    }
+
+    const recaptchaToken = recaptchaResponse;
 
     console.log('Token:', token);
     console.log('Nova senha:', newPassword);
@@ -104,6 +116,14 @@ function ResetarSenhaForm() {
           >
             {showPassword ? 'Ocultar' : 'Mostrar'}
           </button>
+        </div>
+
+        <div className="flex justify-center">
+          <div
+            className="g-recaptcha"
+            data-sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+            data-callback="onRecaptchaSuccess"
+          ></div>
         </div>
 
         <button
