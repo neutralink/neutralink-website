@@ -37,6 +37,9 @@ useEffect(() => {
     });
   };
 
+  // ✅ Define o callback antes de carregar o script
+  (window as any).onloadCallback = loadRecaptcha;
+
   const existingScript = document.querySelector('script[src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"]');
   if (!existingScript) {
     const script = document.createElement('script');
@@ -45,8 +48,6 @@ useEffect(() => {
     script.defer = true;
     document.body.appendChild(script);
   }
-
-  (window as any).onloadCallback = loadRecaptcha;
 }, [siteKey]);
 
 
