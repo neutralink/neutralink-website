@@ -6,7 +6,7 @@ export default function LoginLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <Script
-        src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        src="https://www.google.com/recaptcha/api.js"
         strategy="beforeInteractive"
       />
       {children}

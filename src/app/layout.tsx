@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="pt-BR">
       <head>
         <script
-          src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+          src="https://www.google.com/recaptcha/api.js"
           async
           defer
         ></script>
