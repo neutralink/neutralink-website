@@ -14,13 +14,7 @@ export function RecuperarSenhaForm() {
       return
     }
 
-    const grecaptcha = (window as any).grecaptcha;
-    await new Promise<void>((resolve) => grecaptcha.ready(resolve));
-
-    const recaptchaToken = await grecaptcha.execute(
-      process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
-      { action: 'forgot_password' }
-    );
+    const recaptchaToken = (document.getElementById('g-recaptcha-response') as HTMLInputElement)?.value;
 
     const res = await fetch('https://api.neutralinkeco.com/auth/forgot-password', {
       method: 'POST',
@@ -62,6 +56,7 @@ export function RecuperarSenhaForm() {
               required
             />
           </div>
+          <div className="g-recaptcha" data-sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!} />
           <button
             type="submit"
             className="w-full bg-primary text-black font-semibold py-3 rounded-md hover:opacity-90 transition"
