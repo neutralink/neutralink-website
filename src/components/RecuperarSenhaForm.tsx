@@ -50,9 +50,11 @@ export function RecuperarSenhaForm() {
       ) : (
         <form className="space-y-6 text-left" onSubmit={handleSubmit}>
           <div>
-            <label className="block mb-1 text-sm text-neutral-300">E-mail</label>
+            <label htmlFor="email" className="block mb-1 text-sm text-neutral-300">E-mail</label>
             <input
               type="email"
+              id="email"
+              name="email"
               placeholder="Digite seu e-mail"
               className="w-full px-4 py-3 rounded-md bg-neutral-900 border border-neutral-700 text-white"
               value={email}
