@@ -19,28 +19,36 @@ export default function LoginPage() {
 
   const [recaptchaToken, setRecaptchaToken] = useState('')
 
-  useEffect(() => {
-    const existingScript = document.querySelector('script[src="https://www.google.com/recaptcha/api.js"]')
-    if (!existingScript) {
-      const script = document.createElement('script')
-      script.src = 'https://www.google.com/recaptcha/api.js'
-      script.async = true
-      script.defer = true
-      document.body.appendChild(script)
-    }
-  }, [])
-
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
   if (!siteKey) {
     console.warn('⚠️ RECAPTCHA site key não está configurada!')
   }
 
-  useEffect(() => {
-    (window as any).onRecaptchaSuccess = (token: string) => {
-      console.log('✅ Token do reCAPTCHA:', token)
-      setRecaptchaToken(token)
-    }
-  }, [])
+useEffect(() => {
+  const loadRecaptcha = () => {
+    if (!(window as any).grecaptcha) return;
+
+    (window as any).grecaptcha.render('recaptcha-container', {
+      sitekey: siteKey,
+      callback: (token: string) => {
+        console.log('✅ Token recebido:', token);
+        setRecaptchaToken(token);
+      },
+    });
+  };
+
+  const existingScript = document.querySelector('script[src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"]');
+  if (!existingScript) {
+    const script = document.createElement('script');
+    script.src = 'https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit';
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+  }
+
+  (window as any).onloadCallback = loadRecaptcha;
+}, [siteKey]);
+
 
   const { login, loading, error } = useLogin()
 
@@ -100,11 +108,7 @@ export default function LoginPage() {
           </div>
 
           <div className="flex justify-center">
-            <div
-              className="g-recaptcha"
-              data-sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-              data-callback="onRecaptchaSuccess"
-            ></div>
+            <div id="recaptcha-container"></div>
           </div>
 
           <button

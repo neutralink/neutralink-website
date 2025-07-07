@@ -15,6 +15,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
   return (
     <html lang="pt-BR">
+      <head>
+        <script
+          src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+          async
+          defer
+        ></script>
+      </head>
       <body className="flex flex-col min-h-screen text-foreground">
         <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
           <AuthProvider>

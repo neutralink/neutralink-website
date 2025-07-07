@@ -1,3 +1,4 @@
+
 'use client'
 
 import Cookies from 'js-cookie';
@@ -24,6 +25,8 @@ export default function CadastroPage() {
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState('');
 
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!;
+
   const getRoleLabel = (role: string | null) => {
     switch (role) {
       case 'GENERATOR':
@@ -41,13 +44,23 @@ export default function CadastroPage() {
 
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = 'https://www.google.com/recaptcha/api.js';
+    script.src = 'https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit';
     script.async = true;
     script.defer = true;
     document.body.appendChild(script);
 
-    (window as any).onRecaptchaSuccess = (token: string) => {
-      setRecaptchaToken(token);
+    (window as any).onloadCallback = () => {
+      if (typeof window.grecaptcha !== 'undefined') {
+        const container = document.getElementById('recaptcha-container');
+        if (container) {
+          window.grecaptcha.render(container, {
+            sitekey: siteKey,
+            callback: (token: string) => {
+              setRecaptchaToken(token);
+            }
+          });
+        }
+      }
     };
   }, []);
 
@@ -231,13 +244,7 @@ export default function CadastroPage() {
                 <button type="button" onClick={() => setShowPrivacy(true)} className="underline text-white mx-1">Política de Privacidade</button>.
               </span>
             </label>
-            <div className="flex justify-center">
-              <div
-                className="g-recaptcha"
-                data-sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-                data-callback="onRecaptchaSuccess"
-              ></div>
-            </div>
+            <div id="recaptcha-container" className="flex justify-center"></div>
             <button
               type="submit"
               className="w-full bg-green-600 hover:bg-green-700 transition font-semibold py-3 rounded-md"
