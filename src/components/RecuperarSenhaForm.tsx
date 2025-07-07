@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import dynamic from 'next/dynamic'
+const RecaptchaWidget = dynamic(() => import('./RecaptchaWidget'), { ssr: false })
 
 export function RecuperarSenhaForm() {
   const [email, setEmail] = useState('')
@@ -56,7 +58,7 @@ export function RecuperarSenhaForm() {
               required
             />
           </div>
-          <div className="g-recaptcha" data-sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!} />
+          <RecaptchaWidget />
           <button
             type="submit"
             className="w-full bg-primary text-black font-semibold py-3 rounded-md hover:opacity-90 transition"
