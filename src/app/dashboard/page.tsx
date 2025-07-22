@@ -86,8 +86,8 @@ export default function DashboardPage() {
         </button>
       </div>
       <div className="flex-1 md:ml-60 min-h-screen">
-        <div className="text-white pt-[140px] pb-10 px-4 space-y-6 max-w-7xl mx-auto">
-          <div className="bg-gray-950 px-6 py-2 border-b border-gray-800 flex flex-col md:flex-row md:items-center md:justify-between gap-4 fixed top-16 md:top-0 left-0 right-0 z-50">
+        <div className="text-white pt-32 pb-6 px-6 md:px-10 space-y-6 max-w-screen-xl mx-auto">
+          <div className="sticky top-0 z-40 bg-gray-950 px-4 py-3 border-b border-gray-800 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="flex items-center gap-2">
               <Image
                 src="/icons/resum-list.svg"
@@ -123,7 +123,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Métricas principais */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             <Card title="Dispositivos ativos" value="🟢 2 online. 🔴 1 offline." onClick={() => router.push('/dashboard/dispositivos')} />
             <Card title="Total Créditos NTL Gerados" value={`${creditosGerados} NTL`} highlight onClick={() => router.push('/dashboard/carteira')} />
             <Card title="Hoje" value={`${totalHoje} NTL`} />
@@ -133,7 +133,7 @@ export default function DashboardPage() {
 
 
           {/* Cards por tipo de dispositivo */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Card
               title="NeutraConect"
               value="142 kWh"
@@ -147,16 +147,16 @@ export default function DashboardPage() {
               icon={<Flame size={45} />}
               highlight
             />
-            <Card
-              title="Valor Total Gerado"
-              value={`R$ ${(creditosGerados * 60).toFixed(2)}`}
-              subtitle="Base: R$60,00/NTL (Mercado voluntário)"
-              className="col-span-2"
-              icon={<DollarSign size={45} />}
-              highlight
-              onClick={() => router.push('/dashboard/carteira')}
-            />
           </div>
+          <Card
+            title="Valor Total Gerado"
+            value={`R$ ${(creditosGerados * 60).toFixed(2)}`}
+            subtitle="Base: R$60,00/NTL (Mercado voluntário)"
+            className="col-span-2"
+            icon={<DollarSign size={45} />}
+            highlight
+            onClick={() => router.push('/dashboard/carteira')}
+          />
 
           {/* Gráficos combinados (apenas desktop) */}
           <div className="hidden md:grid grid-cols-2 gap-6 mt-12">
@@ -174,6 +174,11 @@ export default function DashboardPage() {
 
 
           {/* Ações principais */}
+          <div className="flex md:hidden gap-2 mt-6">
+            <Button className="flex-1 bg-green-600 text-white hover:bg-green-700 transition">Certificar</Button>
+            <Button className="flex-1 bg-blue-600 text-white hover:bg-blue-700 transition">Vender</Button>
+            <Button className="flex-1 bg-gray-600 text-white hover:bg-gray-700 transition">Histórico</Button>
+          </div>
         </div>
       </div>
     </div>
