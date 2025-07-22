@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST='{"app/dashboard/layout.tsx -> @/components/dashboard/DashboardLayout":{"id":3309,"files":["static/chunks/5878-463afa864ef842a4.js","static/chunks/2972-85943ecaf1979401.js","static/chunks/3309.d6255f5ff6f8c5a5.js"]}}';
+self.__REACT_LOADABLE_MANIFEST="{\"app/dashboard/layout.tsx -> @/components/dashboard/DashboardLayout\":{\"id\":\"app/dashboard/layout.tsx -> @/components/dashboard/DashboardLayout\",\"files\":[\"static/chunks/_app-pages-browser_src_components_dashboard_DashboardLayout_tsx.js\"]}}"
