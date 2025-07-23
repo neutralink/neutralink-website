@@ -86,7 +86,7 @@ export default function DashboardPage() {
         </button>
       </div>
       <div className="flex-1 md:ml-60 min-h-screen">
-        <div className="text-white pt-32 pb-6 px-6 md:px-10 space-y-6 max-w-screen-xl mx-auto">
+        <div className="text-white pt-15 md:pt-32 pb-6 px-6 md:px-10 space-y-6 max-w-screen-xl mx-auto">
           <div className="sticky top-0 z-40 bg-gray-950 px-4 py-3 border-b border-gray-800 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="flex items-center gap-2">
               <Image
@@ -149,7 +149,12 @@ export default function DashboardPage() {
             />
           </div>
           <Card
-            title="Valor Total Gerado"
+            title={
+              <span className="flex items-center gap-2">
+                <DollarSign size={20} />
+                Carteira de Créditos de Carbono
+              </span>
+            }
             value={`R$ ${(creditosGerados * 60).toFixed(2)}`}
             subtitle="Base: R$60,00/NTL (Mercado voluntário)"
             className="col-span-2"

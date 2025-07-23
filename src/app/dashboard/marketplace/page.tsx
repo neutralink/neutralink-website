@@ -52,18 +52,8 @@ export default function MarketplacePage() {
 
   return (
     <MarketPageLayout>
-      {/* Barra de filtros */}
-      <div className="mt-4">
-        <CreditFilterBar
-          onlyMine={onlyMine}
-          setOnlyMine={setOnlyMine}
-          onFilterChange={(value) => {
-            setOnlyMine(value === 'MY_CREDITS')
-          }}
-        />
-      </div>
-
-      <div className="mt-6 bg-gray-900 rounded-xl p-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      {/* Card "Colocar Créditos à Venda" movido para o topo */}
+      <div className="mt-0 bg-gray-900 rounded-xl p-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-col">
           <h3 className="text-lg font-semibold text-white">Colocar Créditos à Venda</h3>
           <p className="text-sm text-gray-400">
@@ -89,6 +79,16 @@ export default function MarketplacePage() {
             Vender
           </Button>
         </div>
+      </div>
+
+      <div className="mt-4">
+        <CreditFilterBar
+          onlyMine={onlyMine}
+          setOnlyMine={setOnlyMine}
+          onFilterChange={(value) => {
+            setOnlyMine(value === 'MY_CREDITS')
+          }}
+        />
       </div>
 
       {/* Lista de créditos disponíveis */}

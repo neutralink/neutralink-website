@@ -10,7 +10,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     <div className="flex flex-col min-h-screen bg-black text-white">
 
       {/* Conteúdo principal com padding condicional */}
-      <main className="flex-1 pt-0 md:pt-16 pb-20 px-4 overflow-y-auto">
+      <main className="flex-1 md:pt-16 pb-20 px-4 overflow-y-auto">
         {children}
       </main>
 

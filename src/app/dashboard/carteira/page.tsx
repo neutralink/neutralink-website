@@ -67,11 +67,16 @@ export default function WalletPage() {
   const comprados = credits.filter((c) => c.status === 'BOUGHT').reduce((acc, c) => acc + c.amount, 0)
 
   return (
-    <div className="px-4 pt-20 pb-28 space-y-8 text-white">
-      <h1 className="text-2xl font-bold">Carteira de Créditos</h1>
-      <p className="text-sm text-gray-400 max-w-md">
-        Gerencie seus créditos de carbono tokenizados. Aqui você pode acompanhar saldos, histórico de transações e realizar ações como certificação, compra ou venda.
-      </p>
+    <div className="px-4 pt-10 pb-28 space-y-8 text-white">
+      <div className="space-y-2">
+        <h1 className="text-2xl font-bold flex items-center gap-2">
+          <Wallet size={32} className="text-green-400" />
+          Carteira de Créditos
+        </h1>
+        <p className="text-sm text-gray-400 max-w-md">
+          Gerencie seus créditos de carbono tokenizados. Aqui você pode acompanhar saldos, histórico de transações e realizar ações como certificação, compra ou venda.
+        </p>
+      </div>
 
     
 
@@ -93,11 +98,23 @@ export default function WalletPage() {
         <CreditCard title="Comprados" value={`${comprados} NTL`} />
       </div>
 
+      {/* Filtros - visível apenas no mobile */}
+      <div className="block md:hidden mt-4">
+        <p className="text-sm text-gray-400">[Filtro de Créditos aqui]</p>
+      </div>
+
       {/* Ações */}
       <div className="grid grid-cols-3 gap-4">
         <Button className="bg-green-500 text-white">Certificar</Button>
         <Button className="bg-green-500 text-white">Vender</Button>
         <Button className="bg-green-500 text-white">Comprar</Button>
+      </div>
+
+      {/* Filtros - visível apenas no mobile */}
+      <div className="block md:hidden mt-4">
+        {/* Substitua 'CreditFilter' pelo nome real do componente de filtro, se houver */}
+        {/* <CreditFilter data={credits} onFilter={setCredits} /> */}
+        <p className="text-sm text-gray-400">[Filtro de Créditos aqui]</p>
       </div>
 
       {/* Histórico de créditos */}
