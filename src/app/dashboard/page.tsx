@@ -199,7 +199,7 @@ function Card({
   className = '',
   onClick,
 }: {
-  title: string
+  title: ReactNode
   value: string
   subtitle?: string
   icon?: ReactNode
